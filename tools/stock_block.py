@@ -4,8 +4,11 @@
 Runs inside the Higgsfield sandbox (it has internet). No API key needed.
 Usage:
   python3 tools/stock_block.py --query "rocket launch" [--query "launch pad"] --out work/stock/block03.mp4 \
-      [--shots 5] [--shot-seconds 2] [--width 1440] [--height 2560] [--fps 24] [--exclude-credit spacex]
+      [--shots 5] [--shot-seconds 2] [--width 1440] [--height 2560] [--fps 24] [--exclude-credit spacex] \
+      [--avoid-file stock_used.txt] [--seed 2026-10-02]
 Writes <out> plus <out>.json with the clips used (nasa_id, title, center, date) for the credit line.
+--avoid-file: nasa_ids already used on the channel (one per line); they are skipped and the new ones are appended,
+so the same launch doesn't show up every day. --seed shuffles the candidate order (use the episode date).
 
 Rules baked in:
 - Skips items whose metadata mentions copyright, (c), courtesy of a third party, or an excluded credit.
@@ -13,7 +16,7 @@ Rules baked in:
 - Centre-crops 16:9 footage to 9:16 (which also drops most corner graphics).
 - Picks shots from the middle of each clip and rejects near-black / flat frames.
 """
-import argparse, json, os, subprocess, sys, tempfile, urllib.parse, urllib.request
+import argparse, json, os, random, subprocess, sys, tempfile, urllib.parse, urllib.request
 
 API = "https://images-api.nasa.gov"
 BAD_WORDS = ("copyright", "©", "(c)", "courtesy of", "all rights reserved")
@@ -75,19 +78,26 @@ def main():
     ap.add_argument("--height", type=int, default=2560)
     ap.add_argument("--fps", type=int, default=24)
     ap.add_argument("--exclude-credit", action="append", default=["spacex"])
+    ap.add_argument("--avoid-file")
+    ap.add_argument("--seed")
     a = ap.parse_args()
+    avoid = set()
+    if a.avoid_file and os.path.exists(a.avoid_file):
+        avoid = {l.strip() for l in open(a.avoid_file) if l.strip()}
 
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     tmp = tempfile.mkdtemp()
     cands, seen = [], set()
     for q in a.query:
         for c in search(q):
-            if c["nasa_id"] in seen:
+            if c["nasa_id"] in seen or c["nasa_id"] in avoid:
                 continue
             seen.add(c["nasa_id"])
             if any(w in c["text"] for w in BAD_WORDS) or any(x.lower() in c["text"] for x in a.exclude_credit):
                 continue
             cands.append(c)
+    if a.seed:
+        random.Random(a.seed).shuffle(cands)
 
     shots, used = [], []
     for c in cands:
@@ -139,6 +149,10 @@ def main():
                     "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p",
                     "-c:a", "aac", "-shortest", a.out], check=True)
     json.dump({"source": "NASA Image and Video Library (public domain)", "clips": used}, open(a.out + ".json", "w"), indent=1)
+    if a.avoid_file:
+        with open(a.avoid_file, "a") as f:
+            for u in used:
+                f.write(u["nasa_id"] + "\n")
     print(f"OK {a.out} shots={a.shots} sources={len(used)}")
 
 
