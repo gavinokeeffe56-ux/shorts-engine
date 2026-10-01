@@ -6,7 +6,7 @@
       "line": "Rockets now launch every few days, and each flight carries more than the last."
     },
     "6": {
-      "queries": ["earth from space station", "earth orbit view"],
+      "queries": ["earth from space station", "earth time-lapse"],
       "shows": "Earth seen from orbit",
       "line": "From orbit, those satellites have to cover the whole planet."
     }

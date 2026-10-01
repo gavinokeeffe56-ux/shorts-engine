@@ -20,6 +20,13 @@ import argparse, json, os, random, subprocess, sys, tempfile, urllib.parse, urll
 
 API = "https://images-api.nasa.gov"
 BAD_WORDS = ("copyright", "©", "(c)", "courtesy of", "all rights reserved")
+# talking heads, news packages and visualisations rarely fit a narrated b-roll beat
+BAD_TITLE = ("administrator", "interview", "briefing", "conference", "remarks", "speaks", "talks", "discusses",
+             "explains", "highlights", "podcast", "panel", "ceremony", "award", "students", "livestream", "replay",
+             "this week @nasa", "what's up", "social", "q&a", "event", "visualiz", "animation", "graphic", "_ntv_",
+             "videofile", "sound bite", "soundbite", "message", "greeting", "hangout", "chat", "town hall")
+GOOD = ("b-roll", "broll", "footage", "time-lapse", "timelapse", "view")
+STOP = {"the", "a", "an", "of", "from", "in", "on", "at", "to", "and", "with", "for"}
 
 
 def get(url):
@@ -27,16 +34,28 @@ def get(url):
         return json.load(r)
 
 
-def search(query, n=25):
+def search(query, n=60):
     q = urllib.parse.urlencode({"q": query, "media_type": "video", "page_size": n})
     items = get(f"{API}/search?{q}")["collection"]["items"]
     out = []
     for it in items:
         d = it["data"][0]
         text = " ".join(str(d.get(k, "")) for k in ("description", "title", "photographer", "secondary_creator")).lower()
+        title = (d.get("title", "") + " " + d["nasa_id"]).lower()
+        terms = [w for w in query.lower().split() if w not in STOP]
+        hit_t = sum(w.rstrip("s") in title for w in terms)
+        hit_a = sum(w.rstrip("s") in text for w in terms)
         out.append({"nasa_id": d["nasa_id"], "title": d.get("title", ""), "center": d.get("center", ""),
-                    "date": d.get("date_created", "")[:10], "text": text})
+                    "date": d.get("date_created", "")[:10], "text": text, "ttl": title,
+                    "ok": hit_a * 3 >= len(terms) * 2,  # at least two thirds of the query words present
+                    "score": 2 * hit_t + hit_a + sum(g in text for g in GOOD)})
     return out
+
+
+def fix(u):
+    u = u.replace("http://", "https://")
+    p = urllib.parse.urlsplit(u)
+    return urllib.parse.urlunsplit(p._replace(path=urllib.parse.quote(urllib.parse.unquote(p.path))))
 
 
 def pick_mp4(nasa_id):
@@ -45,8 +64,8 @@ def pick_mp4(nasa_id):
     for tag in ("~medium.mp4", "~large.mp4", "~mobile.mp4", "~orig.mp4"):
         for h in mp4:
             if h.endswith(tag):
-                return h.replace("http://", "https://")
-    return mp4[0].replace("http://", "https://") if mp4 else None
+                return fix(h)
+    return fix(mp4[0]) if mp4 else None
 
 
 def probe(path):
@@ -95,9 +114,12 @@ def main():
             seen.add(c["nasa_id"])
             if any(w in c["text"] for w in BAD_WORDS) or any(x.lower() in c["text"] for x in a.exclude_credit):
                 continue
+            if not c["ok"] or any(b in c["ttl"] for b in BAD_TITLE):
+                continue
             cands.append(c)
     if a.seed:
         random.Random(a.seed).shuffle(cands)
+    cands.sort(key=lambda c: -c["score"])  # stable: random order kept within equal relevance
 
     shots, used = [], []
     for c in cands:
