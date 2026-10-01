@@ -27,7 +27,7 @@ for pair in $UPLOADS; do
     echo "BLOCK $n PUT $code"
   fi
   for t in 1 3 5 7 9; do
-    ffmpeg -nostdin -loglevel error -y -ss $t -i "$out" -frames:v 1 -vf scale=72:128 "/tmp/sq_${nn}_$t.png"
+    ffmpeg -nostdin -loglevel error -y -ss $t -i "$out" -frames:v 1 -vf scale=54:96 "/tmp/sq_${nn}_$t.png"
   done
   built+=("$nn")
 done
@@ -36,11 +36,11 @@ import sys, base64, io
 from PIL import Image
 rows = sys.argv[1:]
 if rows:
-    s = Image.new('RGB', (72 * 5, 128 * len(rows)))
+    s = Image.new('RGB', (54 * 5, 96 * len(rows)))
     for r, nn in enumerate(rows):
         for i, t in enumerate([1, 3, 5, 7, 9]):
-            s.paste(Image.open(f'/tmp/sq_{nn}_{t}.png'), (i * 72, r * 128))
-    b = io.BytesIO(); s.save(b, 'JPEG', quality=40)
+            s.paste(Image.open(f'/tmp/sq_{nn}_{t}.png'), (i * 54, r * 96))
+    b = io.BytesIO(); s.save(b, 'JPEG', quality=35)
     print('STOCK_QA_B64=' + base64.b64encode(b.getvalue()).decode())
 PY
 echo STOCK_DONE
