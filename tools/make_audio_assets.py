@@ -96,5 +96,13 @@ if __name__ == "__main__":
     os.makedirs(os.path.join(ROOT, "public", "music"), exist_ok=True)
     for name, fn in [("whoosh", whoosh), ("pop", pop), ("tick", tick), ("impact", impact)]:
         save(os.path.join(ROOT, "public", "sfx", f"{name}.wav"), fn())
-    save(os.path.join(ROOT, "public", "music", "bed.wav"), bed())
+    bed_path = os.path.join(ROOT, "public", "music", "bed.wav")
+    save(bed_path, bed())
+    # carve a pocket for the voice with EQ (not just volume): -7 dB across 250 Hz-2.5 kHz, extra -8 dB at 1.6 kHz
+    import shutil, subprocess
+    if shutil.which("ffmpeg"):
+        tmp = bed_path + ".eq.wav"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", bed_path, "-af",
+                        "equalizer=f=800:t=o:w=3.3:g=-7,equalizer=f=1600:t=q:w=1.4:g=-8", tmp], check=True)
+        os.replace(tmp, bed_path)
     print("audio assets written")

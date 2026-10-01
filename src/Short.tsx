@@ -44,8 +44,10 @@ export type Timeline = {
   sfx: {t: number; name: string; vol: number}[];
   endCard: {start: number; question: string; prompt: string; follow: string};
   hookClip?: {src: string; end: number};
-  shots?: {start: number; end: number; src: string; kind: string; motion: string; offset: number; missing?: boolean}[];
+  shots?: Shot[];
 };
+type Shot = {start: number; end: number; src: string; kind: string; motion: string; offset: number; missing?: boolean;
+  size?: 'wide' | 'medium' | 'close'; focus?: [number, number]; tin?: 'cut' | 'slide' | 'zoom' | 'inverse'; dir?: number};
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ease = (x: number) => Easing.bezier(0.22, 1, 0.36, 1)(clamp01(x));
@@ -139,7 +141,8 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
   // ----- captions -----
   const cap = T.captions.find((c) => t >= c.start && t < c.end);
   const capAge = cap ? t - cap.start : 0;
-  const capScale = spring({frame: Math.round(capAge * fps), fps, config: {damping: 14, stiffness: 220}, from: 0.82, to: 1});
+  // critically damped: smooth settle, no bounce
+  const capScale = spring({frame: Math.round(capAge * fps), fps, config: {damping: 200, stiffness: 320}, from: 0.86, to: 1});
 
   // music ducking
   const inSpeech = (x: number) => T.speech.some(([a, b]) => x >= a - 0.15 && x <= b + 0.15);
@@ -397,27 +400,122 @@ const Bars: React.FC<{T: Timeline; beats: Beat[]; past: Beat[]; t: number; frame
     );
   };
 
-const ShotLayer: React.FC<{T: Timeline; t: number; punch: number}> = ({T, t, punch}) => {
-  const shots = T.shots!;
-  const sh = shots.find((x) => t >= x.start && t < x.end) ?? shots[shots.length - 1];
-  const p = clamp01((t - sh.start) / Math.max(sh.end - sh.start, 0.1));
-  const m = sh.motion;
-  const sc = (m === 'pull' ? lerp(1.14, 1.02, p) : m === 'push' ? lerp(1.02, 1.14, p) : 1.12) * (1 + 0.06 * punch);
-  const tx = m === 'panL' ? lerp(50, -50, p) : m === 'panR' ? lerp(-50, 50, p) : m === 'drift' ? lerp(-20, 20, p) : 0;
-  const ty = m === 'drift' ? lerp(20, -20, p) : 0;
+// ---------- AI shot layer ----------
+// Framing changes by shot size (wide -> close -> medium) instead of Ken Burns drifts; holds are near-still with a
+// low-amplitude handheld float. Transitions are chosen by story job: hard cut for a re-frame of the same image,
+// whip (cut-the-curve) while an idea continues, zoom-through at a new segment, inverse zoom for the payoff.
+const SIZE: Record<string, number> = {wide: 1.04, medium: 1.2, close: 1.38};
+const VSIZE: Record<string, number> = {wide: 1.02, medium: 1.12, close: 1.22};
+const expoOut = Easing.bezier(0.16, 1, 0.3, 1);
+const pow3In = Easing.bezier(0.32, 0, 0.67, 0);
+const quartInOut = Easing.bezier(0.76, 0, 0.24, 1);
+const WHIP = 0.16; // half-window of a whip transition (s)
+const PRE = 8; // frames a shot is mounted early so it can appear during a transition
+
+type Fx = {x: number; mul: number; blur: number; op: number};
+const NOFX: Fx = {x: 0, mul: 1, blur: 0, op: 1};
+
+const ShotFrame: React.FC<{sh: Shot; idx: number; t: number; fx: Fx; punch: number; fps: number}> = ({sh, idx, t, fx, punch, fps}) => {
+  const dur = Math.max(sh.end - sh.start, 0.1);
+  const p = clamp01((t - sh.start) / dur);
+  const isVid = sh.kind === 'video';
+  // clips are 720p upscaled, so they are re-framed less aggressively than stills
+  const base = (isVid ? VSIZE : SIZE)[sh.size ?? 'wide'] ?? 1.04;
+  const scale = Math.max(1, base * (1 + (isVid ? 0.01 : 0.018) * p) * fx.mul) * (1 + 0.05 * punch);
+  // keep the focus point centred when framed tighter
+  const [fxp, fyp] = sh.focus ?? [0, 0];
+  const ox = -fxp * (scale - 1) * 540, oy = -fyp * (scale - 1) * 960;
+  // handheld float, a few px only
+  const jx = isVid ? 0 : 5 * Math.sin(t * 0.83 + idx * 1.7), jy = isVid ? 0 : 4 * Math.cos(t * 0.61 + idx * 2.3);
   const style: React.CSSProperties = {width: '100%', height: '100%', objectFit: 'cover',
-    transform: `translate(${tx}px, ${ty}px) scale(${sc})`};
+    transform: `translate(${ox + jx}px, ${oy + jy}px) scale(${scale})`};
+  const from = Math.max(0, Math.round(sh.start * fps) - PRE);
+  const lead = Math.round(sh.start * fps) - from;
+  return (
+    <AbsoluteFill style={{transform: `translateX(${fx.x}px)`, filter: fx.blur > 0.2 ? `blur(${fx.blur}px)` : undefined,
+      opacity: fx.op, overflow: 'hidden'}}>
+      <Sequence from={from} layout="none">
+        {sh.missing ? (
+          <AbsoluteFill style={{background: 'linear-gradient(160deg,#1b2a4a,#3b1f2b)', ...style, justifyContent: 'center', alignItems: 'center',
+            color: '#ffffff55', fontSize: 40, fontWeight: 800}}>{sh.src.split('/').pop()}</AbsoluteFill>
+        ) : isVid ? (
+          // the clip's own clock starts when its Sequence mounts, so it actually plays (not a frozen last frame)
+          <OffthreadVideo src={staticFile(sh.src)} muted startFrom={Math.max(0, Math.round(sh.offset * fps) - lead)} style={style} />
+        ) : (
+          <Img src={staticFile(sh.src)} style={style} />
+        )}
+      </Sequence>
+    </AbsoluteFill>
+  );
+};
+
+const ShotLayer: React.FC<{T: Timeline; t: number; punch: number}> = ({T, t, punch}) => {
+  const {fps} = useVideoConfig();
+  const shots = T.shots!;
+  let i = shots.findIndex((x) => t >= x.start && t < x.end);
+  if (i < 0) i = t < shots[0].start ? 0 : shots.length - 1;
+  const cur = shots[i], nxt = shots[i + 1], prv = shots[i - 1];
+  const layers: {sh: Shot; idx: number; fx: Fx}[] = [];
+  let curFx: Fx = {...NOFX};
+  // outgoing side of the next boundary
+  if (nxt) {
+    const tb = nxt.start, kind = nxt.tin ?? 'cut', dir = nxt.dir ?? 1;
+    if (kind === 'slide' && t >= tb - WHIP) {
+      const e = quartInOut(clamp01((t - (tb - WHIP)) / (2 * WHIP)));
+      const b = 20 * Math.sin(Math.PI * e);
+      curFx = {x: -dir * 1080 * e, mul: 1, blur: b, op: 1};
+      layers.push({sh: nxt, idx: i + 1, fx: {x: dir * 1080 * (1 - e), mul: 1, blur: b, op: 1}});
+    } else if (kind === 'zoom' && t >= tb - 0.2) {
+      const e = pow3In(clamp01((t - (tb - 0.2)) / 0.2));
+      curFx = {x: 0, mul: 1 + 0.2 * e, blur: 10 * e, op: 1 - 0.85 * e};
+    } else if (kind === 'inverse' && t >= tb - 0.2) {
+      const e = pow3In(clamp01((t - (tb - 0.2)) / 0.2));
+      curFx = {x: 0, mul: 1 - 0.12 * e, blur: 10 * e, op: 1 - 0.6 * e};
+    }
+  }
+  // incoming side of the previous boundary
+  if (prv) {
+    const age = t - cur.start, kind = cur.tin ?? 'cut', dir = cur.dir ?? 1;
+    if (kind === 'slide' && age < WHIP) {
+      const e = quartInOut(clamp01((age + WHIP) / (2 * WHIP)));
+      const b = 20 * Math.sin(Math.PI * e);
+      curFx = {...curFx, x: dir * 1080 * (1 - e), blur: Math.max(curFx.blur, b)};
+      layers.push({sh: prv, idx: i - 1, fx: {x: -dir * 1080 * e, mul: 1, blur: b, op: 1}});
+    } else if (kind === 'zoom' && age < 0.5) {
+      const e = expoOut(clamp01(age / 0.5));
+      curFx = {...curFx, mul: curFx.mul * lerp(0.86, 1, e), blur: Math.max(curFx.blur, 10 * (1 - e))};
+    } else if (kind === 'inverse' && age < 0.5) {
+      const e = expoOut(clamp01(age / 0.5));
+      curFx = {...curFx, mul: curFx.mul * lerp(1.25, 1, e), blur: Math.max(curFx.blur, 10 * (1 - e))};
+    } else if (kind === 'cut' && age < 0.25) {
+      // tiny settle so a re-frame cut lands rather than pops
+      curFx = {...curFx, mul: curFx.mul * lerp(1.025, 1, expoOut(clamp01(age / 0.25)))};
+    }
+  }
+  layers.push({sh: cur, idx: i, fx: curFx});
   return (
     <AbsoluteFill style={{backgroundColor: C.bg, overflow: 'hidden'}}>
-      {sh.missing ? (
-        <AbsoluteFill style={{background: 'linear-gradient(160deg,#1b2a4a,#3b1f2b)', ...style, justifyContent: 'center', alignItems: 'center',
-          color: '#ffffff55', fontSize: 40, fontWeight: 800}}>{sh.src.split('/').pop()}</AbsoluteFill>
-      ) : sh.kind === 'video' ? (
-        <OffthreadVideo key={sh.src + sh.start} src={staticFile(sh.src)} muted startFrom={Math.round(sh.offset * 30)} style={style} />
-      ) : (
-        <Img src={staticFile(sh.src)} style={style} />
-      )}
-      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,10,16,.70) 0%, rgba(8,10,16,.10) 28%, rgba(8,10,16,.05) 55%, rgba(8,10,16,.70) 100%)'}} />
+      <AbsoluteFill style={{filter: 'contrast(1.06) saturate(1.08)'}}>
+        {layers.map((l) => (
+          <ShotFrame key={l.idx} sh={l.sh} idx={l.idx} t={t} fx={l.fx} punch={l.sh === cur ? punch : 0} fps={fps} />
+        ))}
+      </AbsoluteFill>
+      <Grade t={t} />
     </AbsoluteFill>
+  );
+};
+
+// One grade over everything so stills, clips and chart read as one film: legibility gradient, vignette, fine grain.
+const Grade: React.FC<{t: number}> = ({t}) => {
+  const seed = Math.floor(t * 12) % 16;
+  return (
+    <>
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,10,16,.68) 0%, rgba(8,10,16,.10) 26%, rgba(8,10,16,.04) 55%, rgba(8,10,16,.66) 100%)'}} />
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse 85% 70% at 50% 46%, rgba(0,0,0,0) 55%, rgba(0,0,0,.42) 100%)'}} />
+      <svg width={1080} height={1920} style={{position: 'absolute', opacity: 0.07, mixBlendMode: 'overlay'}}>
+        <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={seed} stitchTiles="stitch" /></filter>
+        <rect width="100%" height="100%" filter="url(#grain)" />
+      </svg>
+    </>
   );
 };

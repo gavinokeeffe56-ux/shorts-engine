@@ -26,4 +26,9 @@ probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec
 loud = subprocess.run(["ffmpeg", "-i", mp4, "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
 I = [l.strip() for l in loud.splitlines() if l.strip().startswith("I:")]
 print(probe.strip()); print("loudness", I[-1] if I else "?")
+# dead-air gate: any stretch of 0.8 s+ where the picture does not change
+fz = subprocess.run(["ffmpeg", "-hide_banner", "-i", mp4, "-vf", "scale=270:480,freezedetect=n=0.003:d=0.8",
+                     "-map", "0:v", "-f", "null", "-"], capture_output=True, text=True).stderr
+starts = [l.split("freeze_start:")[1].strip() for l in fz.splitlines() if "freeze_start:" in l]
+print("freezes:", ", ".join(starts) if starts else "none")
 print(f"contact sheet: out/{slug}/contact.png  (LOOK AT IT before sending)")

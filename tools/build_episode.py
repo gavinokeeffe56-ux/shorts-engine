@@ -144,6 +144,7 @@ def external_segment(whisper, path, toks):
 
 
 MOTIONS = ["push", "panL", "pull", "panR", "drift"]
+SIZES = ["wide", "close", "medium"]
 
 
 def build_shots(ep, ep_dir, segs, out_dir, slug, total, max_len=2.8):
@@ -153,7 +154,7 @@ def build_shots(ep, ep_dir, segs, out_dir, slug, total, max_len=2.8):
     if not os.path.exists(apath) or not any(s_.get("shots") for s_ in ep["segments"]):
         return []
     assets = json.load(open(apath))["assets"]
-    shots, mi = [], 0
+    shots, mi, framed = [], 0, {}
     for si, seg in enumerate(ep["segments"]):
         ids = seg.get("shots") or []
         if not ids:
@@ -170,6 +171,15 @@ def build_shots(ep, ep_dir, segs, out_dir, slug, total, max_len=2.8):
             k[i] += 1
         seq = [aid for aid, kk in zip(ids, k) for _ in range(kk)]
         dur = span / len(seq)
+        # cut on the voice: snap each internal boundary to the nearest word onset (gives uneven, motivated cuts)
+        onsets = [w["start"] for w in segs[si]["words"]]
+        edges = [t0]
+        for j in range(1, len(seq)):
+            ideal = t0 + j * dur
+            near = min(onsets, key=lambda o: abs(o - ideal), default=ideal)
+            cand = near - 0.04 if abs(near - ideal) < 0.6 else ideal
+            edges.append(min(max(cand, edges[-1] + 1.2), t1 - 1.2 * (len(seq) - j)))
+        edges.append(t1)
         used, cnt = {}, {a_: seq.count(a_) for a_ in set(seq)}
         for j, aid in enumerate(seq):
             a = assets[aid]
@@ -177,15 +187,27 @@ def build_shots(ep, ep_dir, segs, out_dir, slug, total, max_len=2.8):
             rel = f"ep/{slug}/assets/{aid}.{ext}"
             occ = used.get(aid, 0)
             used[aid] = occ + 1
-            offset = occ * dur
+            s0, s1 = edges[j], edges[j + 1]
+            offset = 0.0
             if a["kind"] == "video":
-                room = max(a.get("seconds", 5.0) - dur, 0.0)
+                room = max(a.get("seconds", 5.0) - (s1 - s0) - 0.3, 0.0)
                 offset = room * occ / (cnt[aid] - 1) if cnt[aid] > 1 else 0.0
-                motion = ["push", "pull", "drift"][mi % 3]
+                motion = "clip"
             else:
                 motion = a.get("motion") or MOTIONS[mi % len(MOTIONS)]
-            shots.append({"start": t0 + j * dur, "end": t0 + (j + 1) * dur, "src": rel, "kind": a["kind"],
-                          "motion": motion, "offset": round(offset, 3),
+            # framing: each reuse of an asset (across the whole video) is re-framed wide -> close -> medium
+            fo = framed.get(aid, 0)
+            framed[aid] = fo + 1
+            size = a.get("size") or SIZES[fo % len(SIZES)]
+            if j == 0:
+                tin = seg.get("transition") or ("zoom" if si > 0 else "cut")
+            elif seq[j - 1] == aid:
+                tin = "cut"
+            else:
+                tin = "slide"
+            shots.append({"start": round(s0, 3), "end": round(s1, 3), "src": rel, "kind": a["kind"],
+                          "motion": motion, "offset": round(offset, 3), "size": size,
+                          "focus": a.get("focus", [0, 0]), "tin": tin, "dir": 1 if mi % 2 == 0 else -1,
                           "missing": not os.path.exists(os.path.join(out_dir, "assets", f"{aid}.{ext}"))})
             mi += 1
     return shots
@@ -304,7 +326,24 @@ def main(ep_path, audio_dir=None):
                 sfx.append({"t": b["t"] + 0.1, "name": "tick", "vol": 0.35})
             if "big" in b or "cardAccent" in b:
                 sfx.append({"t": b["t"] + 0.25, "name": "impact", "vol": 0.6})
-    sfx.append({"t": end_start - 0.1, "name": "whoosh", "vol": 0.3})
+    if ep.get("endCard"):
+        sfx.append({"t": end_start - 0.1, "name": "whoosh", "vol": 0.3})
+    shots = build_shots(ep, ep_dir, segs, out_dir, slug, total)
+    # transitions get sound by function: whoosh for motion (whip / zoom-through), impact for the payoff
+    for sh in shots[1:]:
+        if sh["tin"] == "slide":
+            sfx.append({"t": max(0, sh["start"] - 0.14), "name": "whoosh", "vol": 0.22, "low": 1})
+        elif sh["tin"] == "zoom":
+            sfx.append({"t": max(0, sh["start"] - 0.22), "name": "whoosh", "vol": 0.28, "low": 1})
+        elif sh["tin"] == "inverse":
+            sfx.append({"t": sh["start"], "name": "impact", "vol": 0.55})
+    # density cap: informational cues always play; motion whooshes need 2.5 s of air around other cues
+    sfx.sort(key=lambda x: x["t"])
+    keep = [x for x in sfx if not x.get("low")]
+    for x in [x for x in sfx if x.get("low")]:
+        if all(abs(x["t"] - k_["t"]) >= 2.5 for k_ in keep):
+            keep.append(x)
+    sfx = sorted(({k_: v for k_, v in x.items() if k_ != "low"} for x in keep), key=lambda x: x["t"])
 
     pts = []
     with open(os.path.join(ep_dir, ep["dataset"]["file"])) as f:
@@ -324,7 +363,7 @@ def main(ep_path, audio_dir=None):
         "segments": segs, "captions": make_captions(all_words),
         "speech": speech, "sfx": sfx,
         "endCard": {**(ep.get("endCard") or {}), "start": end_start if ep.get("endCard") else total + 99},
-        "shots": build_shots(ep, ep_dir, segs, out_dir, slug, total),
+        "shots": shots,
         **({"hookClip": {"src": f"ep/{slug}/hook.mp4", "end": segs[0]["end"] + 0.2}}
            if os.path.exists(os.path.join(out_dir, "hook.mp4")) else {}),
     }
