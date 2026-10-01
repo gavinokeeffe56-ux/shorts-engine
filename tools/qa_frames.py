@@ -4,7 +4,12 @@ from PIL import Image
 slug = sys.argv[1]
 t = json.load(open(f"public/ep/{slug}/timeline.json"))
 mp4 = f"out/{slug}/{slug}.mp4"
-times = [b["t"] + 0.9 for s in t["segments"] for b in s["beats"]] + [t["endCard"]["start"] + 1.0]
+dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", mp4],
+                           capture_output=True, text=True).stdout.strip() or 0)
+times = [b["t"] + 0.9 for s in t["segments"] for b in s["beats"]]
+times += [s["start"] + 0.6 for s in t.get("shots", [])][::3]  # every third AI shot
+times.append((t.get("endCard") or {}).get("start", 1e9) + 1.0)
+times = sorted({round(x, 2) for x in times if x < dur - 0.1})  # loop mode has no end card
 thumbs = []
 for i, x in enumerate(times):
     p = f"out/{slug}/qa_{i:02d}.png"

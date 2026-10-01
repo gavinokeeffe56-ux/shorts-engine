@@ -72,6 +72,8 @@ from PIL import Image
 im = Image.open("out/$SLUG/contact.png").convert("RGB")
 im = im.resize((im.width * 2 // 3, im.height * 2 // 3))
 im.save("/home/user/qa.jpg", quality=55)
+# tiny strip for the workspace to view via base64 (it cannot download from cloudfront)
+small = im.resize((im.width // 4, im.height // 4)); small.save("/home/user/qa_small.jpg", quality=40)
 EOF
 
 if [ -n "${UPLOAD_URL:-}" ]; then

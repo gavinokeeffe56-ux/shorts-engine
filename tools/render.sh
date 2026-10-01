@@ -14,7 +14,7 @@ python3 tools/build_episode.py "$EP" $AUDIO_ARG
 python3 -c "import json,sys; t=json.load(open('public/ep/$SLUG/timeline.json')); json.dump({'timeline':t},open('out/$SLUG/props.json','w'))"
 CORES=$(nproc); CONC=$(( CORES < 6 ? CORES : 6 ))
 npx remotion render src/index.ts Short out/$SLUG/raw.mp4 --props=out/$SLUG/props.json \
-  $BROWSER_ARG --concurrency=$CONC --crf=18 --log=error
+  $BROWSER_ARG --concurrency=$CONC --crf=${CRF:-21} --log=error
 ffmpeg -y -loglevel error -i out/$SLUG/raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 \
   -c:a aac -b:a 192k -movflags +faststart out/$SLUG/$SLUG.mp4
 python3 tools/qa_frames.py "$SLUG"
