@@ -14,7 +14,7 @@ RAW=https://raw.githubusercontent.com/gavinokeeffe56-ux/shorts-engine/$COMMIT
 curl -fsSL "$RAW/tools/stock_block.py" -o stock_block.py || { echo "no stock_block.py"; exit 1; }
 curl -fsSL "${STOCK_URL:-$RAW/episodes/$EP/faceless/stock.json}" -o stock.json || { echo "no stock.json"; exit 1; }
 curl -fsSL "$RAW/stock_used.txt" -o stock_used.txt 2>/dev/null || : > stock_used.txt
-pip install -q opencv-python-headless >/dev/null 2>&1 || echo "WARN no opencv: face filter off"
+pip install -q "opencv-python-headless<5" >/dev/null 2>&1 || echo "WARN no opencv: face filter off"
 mkdir -p work/stock && rm -f /tmp/sq_*.png
 built=()
 for pair in $UPLOADS; do

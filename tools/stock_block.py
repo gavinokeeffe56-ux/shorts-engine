@@ -80,8 +80,11 @@ def probe(path):
 try:
     import cv2
     _FACE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-except Exception:  # opencv missing: stock_blocks.sh installs opencv-python-headless
+    if _FACE.empty():
+        raise RuntimeError("no haar cascade")
+except Exception:  # opencv missing or 5.x (no Haar): stock_blocks.sh installs opencv-python-headless<5
     cv2 = _FACE = None
+    print("WARN face filter off (need opencv-python-headless<5)", file=sys.stderr)
 
 
 def has_face(path, t):
