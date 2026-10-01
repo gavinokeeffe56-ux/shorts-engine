@@ -10,11 +10,23 @@
     "progression": "a short stack of small satellites on the slim rocket, then a half-filled bay of big flat satellites, then a bay packed to the top",
     "resolution": "the packed stack fans out into orbit and the loop returns to the half-full bay"
   },
-  "arc": {"hook": 1, "build": [2, 3, 4, 5], "turn": 6, "payoff": 8},
+  "arc": {
+    "hook": 1,
+    "build": [
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "turn": 6,
+    "payoff": 8
+  },
   "blocks": [
     {
-      "n": 1, "arc_role": "hook",
-      "vo_line": "Starship flew less than half full. It still carried about ten times the internet capacity of a Falcon 9 launch.",
+      "n": 1,
+      "arc_role": "hook",
+      "vo_line": "Starship flew less than half full. It still carried about ten times the internet capacity of a Falcon Nine launch.",
       "location": "loc_orbit_high",
       "through_line_state": "half-filled bay of big flat satellites beside the slim rocket's tiny stack",
       "shots": [
@@ -24,11 +36,17 @@
         "CLOSE-UP, low angle: the first flat satellite slides out and snaps its solar wing open",
         "OVERHEAD, whip: a row of flat satellites fans out into orbit and settles into a glowing line"
       ],
-      "assets_used": ["loc_orbit_high", "prop_steel_ship", "prop_v3_satellite", "prop_white_rocket"]
+      "assets_used": [
+        "loc_orbit_high",
+        "prop_steel_ship",
+        "prop_v3_satellite",
+        "prop_white_rocket"
+      ]
     },
     {
-      "n": 2, "arc_role": "build",
-      "vo_line": "On September twenty-eighth, SpaceX's Flight 14 reached orbit for the first time and released twenty-six new Starlink V3 internet satellites.",
+      "n": 2,
+      "arc_role": "build",
+      "vo_line": "On September twenty-eighth, SpaceX's Flight Fourteen reached orbit for the first time and released twenty-six new Starlink V three internet satellites.",
       "location": "loc_launch_pad",
       "through_line_state": "the half-filled stack rides up inside the steel ship",
       "shots": [
@@ -38,11 +56,16 @@
         "EXTREME CLOSE-UP, static: a counter ring of twenty-six small lights clicks on one by one on the stacked satellites",
         "HIGH ANGLE WIDE, slow push-in: the ship arcs over the horizon and the sky darkens into space"
       ],
-      "assets_used": ["loc_launch_pad", "prop_steel_ship", "prop_v3_satellite"]
+      "assets_used": [
+        "loc_launch_pad",
+        "prop_steel_ship",
+        "prop_v3_satellite"
+      ]
     },
     {
-      "n": 3, "arc_role": "build",
-      "vo_line": "Each V3 is designed for about one terabit per second of downlink. SpaceX says that's more than ten times an older V2 Mini.",
+      "n": 3,
+      "arc_role": "build",
+      "vo_line": "Each V three is designed for about one terabit per second of downlink. SpaceX says that's more than ten times an older V two Mini.",
       "location": "loc_payload_bay",
       "through_line_state": "one big flat satellite lifted out of the half-filled stack for inspection",
       "shots": [
@@ -52,11 +75,16 @@
         "EXTREME CLOSE-UP, push-in: the small satellite's thin beam flickers next to the big satellite's wide beam",
         "LOW ANGLE MEDIUM, static: ten thin beams stack up and finally match the single wide beam, landing with a stamp"
       ],
-      "assets_used": ["loc_payload_bay", "prop_v3_satellite", "prop_small_satellite"]
+      "assets_used": [
+        "loc_payload_bay",
+        "prop_v3_satellite",
+        "prop_small_satellite"
+      ]
     },
     {
-      "n": 4, "arc_role": "build",
-      "vo_line": "A Falcon 9 carries up to about twenty-nine of those smaller V2 Minis, adding only a few terabits per launch.",
+      "n": 4,
+      "arc_role": "build",
+      "vo_line": "A Falcon Nine carries up to about twenty-nine of those smaller V two Minis, adding only a few terabits per launch.",
       "location": "loc_orbit_limb",
       "through_line_state": "the slim rocket's short stack of small satellites",
       "shots": [
@@ -66,11 +94,17 @@
         "EXTREME CLOSE-UP, static: three thin blue beams switch on and point down at the planet",
         "HIGH ANGLE WIDE, crane pull-back: the little cluster looks tiny against the huge planet below"
       ],
-      "assets_used": ["loc_orbit_limb", "prop_white_rocket", "prop_small_satellite"]
+      "assets_used": [
+        "loc_orbit_limb",
+        "prop_white_rocket",
+        "prop_small_satellite",
+        "prop_v3_satellite"
+      ]
     },
     {
-      "n": 5, "arc_role": "build",
-      "vo_line": "So Flight 14's satellites add up to roughly twenty-six terabits. At full capacity, Starship is designed to carry sixty of them.",
+      "n": 5,
+      "arc_role": "build",
+      "vo_line": "So Flight Fourteen's satellites add up to roughly twenty-six terabits. At full capacity, Starship is designed to carry sixty of them.",
       "location": "loc_payload_bay",
       "through_line_state": "the stack grows from half full to packed to the ceiling",
       "shots": [
@@ -80,10 +114,15 @@
         "MEDIUM, orbit: the packed stack glows brighter as all its lights turn on together",
         "LOW ANGLE WIDE, static: the payload door closes over the full stack and settles shut"
       ],
-      "assets_used": ["loc_payload_bay_reverse", "prop_v3_satellite", "prop_steel_ship"]
+      "assets_used": [
+        "loc_payload_bay_reverse",
+        "prop_v3_satellite",
+        "prop_steel_ship"
+      ]
     },
     {
-      "n": 6, "arc_role": "turn",
+      "n": 6,
+      "arc_role": "turn",
       "vo_line": "It wasn't flawless. The ship lost an engine on the way up, and SpaceX brought it down early, about three hours after liftoff.",
       "location": "loc_ocean",
       "through_line_state": "the emptied bay after the satellites are gone",
@@ -94,10 +133,16 @@
         "MEDIUM, low angle: the ship glows as it drops through fluffy clouds, flaps waving",
         "HIGH ANGLE WIDE, slow push-in: the ship hovers low over the waves just before touching the water"
       ],
-      "assets_used": ["loc_ocean", "prop_steel_ship", "prop_engine_ring", "prop_v3_satellite"]
+      "assets_used": [
+        "loc_ocean",
+        "prop_steel_ship",
+        "prop_engine_ring",
+        "prop_v3_satellite"
+      ]
     },
     {
-      "n": 7, "arc_role": "build",
+      "n": 7,
+      "arc_role": "build",
       "vo_line": "It exploded after splashing down. But roughly ten times the capacity per launch changes how fast the whole network can grow.",
       "location": "loc_network_globe",
       "through_line_state": "the released satellites multiply into a web around the planet",
@@ -108,22 +153,34 @@
         "EXTREME CLOSE-UP, push-in: a tiny house on the planet lights up as a beam reaches it",
         "HIGH ANGLE WIDE, crane pull-back: the whole planet is wrapped in a bright woven web of links"
       ],
-      "assets_used": ["loc_network_globe", "prop_v3_satellite", "prop_small_satellite"]
+      "assets_used": [
+        "loc_network_globe",
+        "prop_v3_satellite",
+        "prop_small_satellite"
+      ]
     },
     {
-      "n": 8, "arc_role": "payoff",
-      "vo_line": "Fully loaded, that's about sixty terabits per launch. SpaceX says more than twenty times a Falcon 9. Which is wild, because",
+      "n": 8,
+      "arc_role": "payoff",
+      "vo_line": "Fully loaded, that's about sixty terabits per launch, which SpaceX says is more than twenty times a Falcon Nine. Which is wild, because",
       "location": "loc_orbit_high",
       "through_line_state": "the packed stack beside the slim rocket's tiny stack, then back to the half-filled bay",
       "shots": [
-        "MEDIUM, gentle drift: the steel ship's door opens on a stack packed to the top",
-        "EXTREME CLOSE-UP, static: sixty glowing lights blink on down the full stack",
+        "CLOSE-UP, gentle drift: the steel ship's door swings open on a stack packed to the top",
         "WIDE, slow push-in: the slim white rocket's tiny stack floats beside the huge full stack for scale",
-        "CLOSE-UP, low angle: the full stack fans out in a long sweeping ribbon of satellites",
+        "EXTREME CLOSE-UP, static: sixty glowing lights blink on down the full stack",
+        "MEDIUM, low angle: the full stack fans out in a long sweeping ribbon of satellites",
         "OVERHEAD, static: the door eases back to a half-filled stack, settling into the opening view"
       ],
-      "assets_used": ["loc_orbit_high", "prop_steel_ship", "prop_v3_satellite", "prop_white_rocket"]
+      "assets_used": [
+        "loc_orbit_high",
+        "prop_v3_satellite",
+        "prop_white_rocket",
+        "prop_steel_ship"
+      ]
     }
   ],
-  "sources": ["https://www.nasaspaceflight.com/2026/09/starship-flight-14-orbit/"]
+  "sources": [
+    "https://www.nasaspaceflight.com/2026/09/starship-flight-14-orbit/"
+  ]
 }
