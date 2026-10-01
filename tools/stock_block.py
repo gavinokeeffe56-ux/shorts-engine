@@ -93,7 +93,7 @@ def has_face(path, t):
         return False
     tmp = path + f".f{t:.1f}.png"
     subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-y", "-ss", f"{t:.2f}", "-i", path, "-frames:v", "1",
-                    "-vf", "scale=480:-2", tmp])
+                    "-vf", "scale=480:854:force_original_aspect_ratio=increase,crop=480:854", tmp])  # same crop as output
     img = cv2.imread(tmp, cv2.IMREAD_GRAYSCALE) if os.path.exists(tmp) else None
     if img is None:
         return False
