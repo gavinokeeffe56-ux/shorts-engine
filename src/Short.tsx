@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig,
+  AbsoluteFill, Audio, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
   interpolate, spring, Easing, continueRender, delayRender,
 } from 'remotion';
 
@@ -29,25 +29,27 @@ const LAYOUTS: Record<string, {rect: {x0: number; x1: number; y0: number; y1: nu
 // ---------- types ----------
 type Word = {text: string; start: number; end: number; emph: boolean};
 type Beat = {t: number; target?: string; pan?: number; overview?: boolean; zoom?: number; headline?: string;
-  label?: string; counter?: number; chip?: string; big?: string; bigSub?: string; connector?: string[];
+  label?: string; counter?: number; prefix?: string; suffix?: string; chip?: string; big?: string; bigSub?: string; connector?: string[];
   card?: boolean; cardLine?: string; cardAccent?: string};
-type Point = {name: string; year: number; cost: number};
+type Point = {name: string; year: number; cost: number; value?: number};
 export type Timeline = {
   slug: string; series: string; layout?: string; fps: number; width: number; height: number; duration: number;
   narration: string; music: string;
-  chart: {xMin: number; xMax: number; yMin: number; yMax: number; yTicks: number[]; yTickLabels: string[]; xTicks: number[]; yLabel: string};
-  dataset: {source: string; units: string};
+  chart: {type?: string; valueSuffix?: string; xMin: number; xMax: number; yMin: number; yMax: number; yTicks: number[]; yTickLabels: string[]; xTicks: number[]; yLabel: string};
+  dataset: {source: string; units: string; note?: string};
   points: Point[];
   segments: {start: number; end: number; words: Word[]; beats: Beat[]}[];
   captions: {start: number; end: number; words: Word[]}[];
   speech: [number, number][];
   sfx: {t: number; name: string; vol: number}[];
   endCard: {start: number; question: string; prompt: string; follow: string};
+  hookClip?: {src: string; end: number};
 };
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ease = (x: number) => Easing.bezier(0.22, 1, 0.36, 1)(clamp01(x));
 const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+const fmtNum = (v: number) => (v < 10 && Math.abs(v - Math.round(v)) > 0.05 ? v.toFixed(1) : Math.round(v).toLocaleString('en-US'));
 
 type Cam = {cx: number; cy: number; z: number};
 
@@ -68,7 +70,8 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
   const lyMin = Math.log10(ch.yMin), lyMax = Math.log10(ch.yMax);
   const home: Cam = {cx: (ch.xMin + ch.xMax) / 2, cy: (lyMin + lyMax) / 2, z: 1};
   const camKeys: {t: number; cam: Cam}[] = [{t: 0, cam: home}];
-  for (const b of beats) {
+  const isBars = ch.type === 'bars';
+  for (const b of (isBars ? [] : beats)) {
     if (b.target && byName.get(b.target)) {
       const p = byName.get(b.target)!;
       camKeys.push({t: b.t, cam: {cx: lerp(home.cx, p.year, 0.7), cy: lerp(home.cy, Math.log10(p.cost), 0.7), z: b.zoom ?? 1.35}});
@@ -96,13 +99,15 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
   const lastWith = (k: keyof Beat) => [...past].reverse().find((b) => b[k] !== undefined);
   const cardBeat = lastWith('card');
   const cardOn = !!cardBeat;
-  const chartOpacity = cardOn ? 1 - clamp01((t - cardBeat!.t) / 0.4) : clamp01(t / 0.5);
+  const chartStart = T.hookClip ? T.hookClip.end : 0;
+  const chartOpacity = cardOn ? 1 - clamp01((t - cardBeat!.t) / 0.4) : clamp01((t - chartStart) / 0.5);
   const endOn = t >= T.endCard.start;
   const currentTarget = lastWith('target')?.target;
 
   // counter animation
   const counterBeats = beats.filter((b) => b.counter !== undefined);
   const ci = counterBeats.filter((b) => b.t <= t).length - 1;
+  const overlayBeatCounter = ci >= 0 ? counterBeats[ci] : undefined;
   let counterVal = 0;
   if (ci >= 0) {
     const cb = counterBeats[ci];
@@ -132,13 +137,20 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
   return (
     <AbsoluteFill style={{backgroundColor: C.bg, fontFamily: FONT}}>
       <Stars t={t} cam={cam} />
+      {T.hookClip && t < T.hookClip.end + 0.6 && (
+        <AbsoluteFill style={{opacity: 1 - clamp01((t - T.hookClip.end) / 0.6)}}>
+          <OffthreadVideo src={staticFile(T.hookClip.src)} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+          <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(13,14,17,.55) 0%, rgba(13,14,17,.15) 35%, rgba(13,14,17,.35) 60%, rgba(13,14,17,.85) 100%)'}} />
+          <div style={{position: 'absolute', top: 150, right: 60, color: C.ink2, fontSize: 24, fontWeight: 700, letterSpacing: 3, opacity: 0.8}}>AI ILLUSTRATION</div>
+        </AbsoluteFill>
+      )}
 
       {/* ---------- chart ---------- */}
       <svg width={1080} height={1920} style={{position: 'absolute', opacity: chartOpacity * (endOn ? 0.25 : 1)}}>
         <defs>
           <clipPath id="plot"><rect x={RECT.x0 - 140} y={RECT.y0 - 80} width={RECT.x1 - RECT.x0 + 240} height={RECT.y1 - RECT.y0 + 110} /></clipPath>
         </defs>
-        {ch.yTicks.map((v, i) => {
+        {!isBars && (ch.yTicks ?? []).map((v, i) => {
           const y = sy(v);
           if (y < RECT.y0 - 40 || y > RECT.y1 + 20) return null;
           return (
@@ -148,12 +160,13 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
             </g>
           );
         })}
-        {ch.xTicks.map((v) => {
+        {!isBars && (ch.xTicks ?? []).map((v) => {
           const x = sx(v);
           if (x < RECT.x0 - 10 || x > RECT.x1 + 10) return null;
           return <text key={v} x={x} y={RECT.y1 + 52} fill={C.muted} fontSize={28} fontWeight={600} textAnchor="middle">{v}</text>;
         })}
-        <g clipPath="url(#plot)">
+        {isBars && <Bars T={T} beats={beats} past={past} t={t} frame={frame} fps={fps} rect={RECT} chartStart={chartStart} currentTarget={currentTarget} />}
+        {!isBars && <g clipPath="url(#plot)">
           {T.points.filter((p) => !highlightNames.includes(p.name)).map((p, i) => {
             const s = spring({frame: frame - Math.round((0.15 + i * 0.012) * fps), fps, config: {damping: 12, stiffness: 180}});
             return <circle key={p.name} cx={sx(p.year)} cy={sy(p.cost)} r={9 * s * Math.sqrt(cam.z)} fill={C.dot} stroke={C.bg} strokeWidth={3} />;
@@ -179,9 +192,9 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
               </g>
             );
           })}
-        </g>
+        </g>}
         <text x={RECT.x0} y={RECT.y1 + 104} fill={C.muted} fontSize={22} fontWeight={500}>
-          {`Source: ${T.dataset.source} · 2021 dollars · log scale`}
+          {`Source: ${T.dataset.source}${T.dataset.note ? ' · ' + T.dataset.note : ''}`}
         </text>
       </svg>
 
@@ -198,8 +211,8 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
             <>
               <div style={{color: C.ink2, fontSize: 40, fontWeight: 700, letterSpacing: 1}}>{overlayBeat.label}</div>
               <div style={{color: C.ink, fontSize: 132, fontWeight: 900, letterSpacing: -3, lineHeight: 1.1, fontVariantNumeric: 'tabular-nums'}}>
-                ${Math.round(counterVal).toLocaleString('en-US')}
-                <span style={{fontSize: 52, color: C.ink2, fontWeight: 700, letterSpacing: 0}}> /kg</span>
+                {(overlayBeatCounter?.prefix ?? '$')}{fmtNum(counterVal)}
+                <span style={{fontSize: 52, color: C.ink2, fontWeight: 700, letterSpacing: 0}}>{overlayBeatCounter?.suffix ?? ' /kg'}</span>
               </div>
             </>
           )}
@@ -316,3 +329,51 @@ const Stars: React.FC<{t: number; cam: Cam}> = ({t, cam}) => (
     ))}
   </svg>
 );
+
+const Bars: React.FC<{T: Timeline; beats: Beat[]; past: Beat[]; t: number; frame: number; fps: number;
+  rect: {x0: number; x1: number; y0: number; y1: number}; chartStart: number; currentTarget?: string}> =
+  ({T, beats, past, t, frame, fps, rect, chartStart, currentTarget}) => {
+    const pts = T.points;
+    const max = Math.max(...pts.map((p) => p.value ?? 0)) || 1;
+    const n = pts.length, gap = 40;
+    const bw = (rect.x1 - rect.x0 - gap * (n - 1)) / n;
+    const base = rect.y1 - 40, top = rect.y0 + 60;
+    const first = (name: string) => beats.find((b) => b.target === name)?.t;
+    return (
+      <g>
+        <line x1={rect.x0} x2={rect.x1} y1={base} y2={base} stroke={C.grid} strokeWidth={3} />
+        {pts.map((p, i) => {
+          const t0 = first(p.name) ?? chartStart + 0.2 + i * 0.15;
+          const x0 = rect.x0 + i * (bw + gap);
+          if (t < t0) {
+            // teaser: dashed outline with a question mark until the bar is revealed
+            if (t < chartStart) return null;
+            const hf = ((p.value ?? 0) / max) * (base - top);
+            const [m1, m2] = p.name.split(' · ');
+            return (
+              <g key={p.name} opacity={0.45 * clamp01((t - chartStart) / 0.5)}>
+                <rect x={x0} y={base - hf} width={bw} height={hf} rx={10} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="10 10" />
+                <text x={x0 + bw / 2} y={base - hf - 18} fill={C.muted} fontSize={40} fontWeight={900} textAnchor="middle">?</text>
+                <text x={x0 + bw / 2} y={base + 42} fill={C.muted} fontSize={28} fontWeight={800} textAnchor="middle">{m1}</text>
+                {m2 && <text x={x0 + bw / 2} y={base + 76} fill={C.muted} fontSize={24} fontWeight={600} textAnchor="middle">{m2}</text>}
+              </g>
+            );
+          }
+          const g = spring({frame: frame - Math.round(t0 * fps), fps, config: {damping: 14, stiffness: 90}});
+          const h = ((p.value ?? 0) / max) * (base - top) * g;
+          const x = rect.x0 + i * (bw + gap);
+          const active = p.name === currentTarget;
+          const [l1, l2] = p.name.split(' · ');
+          return (
+            <g key={p.name}>
+              <rect x={x} y={base - h} width={bw} height={Math.max(h, 2)} rx={10} fill={active ? C.accent : C.dot} opacity={active ? 1 : 0.85} />
+              <text x={x + bw / 2} y={base - h - 18} fill={active ? C.ink : C.ink2} fontSize={active ? 44 : 36} fontWeight={900}
+                textAnchor="middle">{`${fmtNum((p.value ?? 0) * g)}${T.chart.valueSuffix ?? ''}`}</text>
+              <text x={x + bw / 2} y={base + 42} fill={active ? C.ink : C.ink2} fontSize={28} fontWeight={800} textAnchor="middle">{l1}</text>
+              {l2 && <text x={x + bw / 2} y={base + 76} fill={C.muted} fontSize={24} fontWeight={600} textAnchor="middle">{l2}</text>}
+            </g>
+          );
+        })}
+      </g>
+    );
+  };

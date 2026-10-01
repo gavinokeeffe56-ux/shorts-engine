@@ -87,6 +87,62 @@ def synth_segment(k, toks, voice, speed):
     return np.asarray(audio, np.float32), words, mode
 
 
+# ---------- external voice (e.g. ElevenLabs via Higgsfield) ----------
+def _norm(w):
+    return re.sub(r"[^a-z0-9]", "", w.lower())
+
+
+def load_wav(path):
+    with wave.open(path) as w:
+        assert w.getframerate() == SR and w.getnchannels() == 1, "expect 24 kHz mono wav"
+        return np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+
+
+def external_segment(whisper, path, toks):
+    """Use a pre-made narration file; word timings from faster-whisper, aligned to script tokens."""
+    import difflib
+    audio = load_wav(path)
+    segs, _ = whisper.transcribe(path, word_timestamps=True, language="en")
+    ww = [(w.word.strip(), w.start, w.end) for s in segs for w in s.words]
+    # expand script tokens into spoken words, remembering which token each came from
+    sp, owner = [], []
+    for ti, t in enumerate(toks):
+        for w in re.split(r"[\s-]+", t["speak"]):
+            if _norm(w):
+                sp.append(_norm(w)); owner.append(ti)
+    wn = [_norm(w[0]) for w in ww]
+    times = [None] * len(sp)
+    sm = difflib.SequenceMatcher(a=sp, b=wn, autojunk=False)
+    for a, b, n in sm.get_matching_blocks():
+        for k_ in range(n):
+            times[a + k_] = (ww[b + k_][1], ww[b + k_][2])
+    # fill unmatched spoken words by interpolating between known neighbours
+    total = len(audio) / SR
+    i = 0
+    while i < len(sp):
+        if times[i] is not None:
+            i += 1; continue
+        j = i
+        while j < len(sp) and times[j] is None:
+            j += 1
+        t0 = times[i - 1][1] if i > 0 else (ww[0][1] if ww else 0.0)
+        t1 = times[j][0] if j < len(sp) else (ww[-1][2] if ww else total)
+        step = max(t1 - t0, 0.05) / (j - i)
+        for k_ in range(i, j):
+            times[k_] = (t0 + (k_ - i) * step, t0 + (k_ - i + 1) * step)
+        i = j
+    words = []
+    for ti, t in enumerate(toks):
+        idx = [k_ for k_, o in enumerate(owner) if o == ti]
+        if not idx:
+            if words: words[-1]["text"] += " " + t["display"]
+            continue
+        words.append({"text": t["display"], "start": float(times[idx[0]][0]),
+                      "end": float(times[idx[-1]][1]), "emph": t["emph"]})
+    matched = sum(n for _, _, n in sm.get_matching_blocks())
+    return audio, words, f"whisper-aligned ({matched}/{len(sp)} words matched)"
+
+
 def make_captions(words, max_words=3, max_chars=18):
     caps, cur = [], []
     def flush():
@@ -137,8 +193,7 @@ def write_wav(path, audio):
         w.writeframes(pcm.tobytes())
 
 
-def main(ep_path):
-    from kokoro_onnx import Kokoro
+def main(ep_path, audio_dir=None):
     if os.path.isdir(ep_path):
         ep_dir, ep_file = ep_path, os.path.join(ep_path, "episode.json")
     else:
@@ -147,7 +202,12 @@ def main(ep_path):
     slug = ep["slug"]
     out_dir = os.path.join(ROOT, "public", "ep", slug)
     os.makedirs(out_dir, exist_ok=True)
-    k = Kokoro(MODEL, VOICES)
+    if audio_dir:
+        from faster_whisper import WhisperModel
+        whisper = WhisperModel("base.en", device="cpu", compute_type="int8")
+    else:
+        from kokoro_onnx import Kokoro
+        k = Kokoro(MODEL, VOICES)
 
     lead, gap = 0.35, 0.32
     t = lead
@@ -155,7 +215,10 @@ def main(ep_path):
     segs, all_words, speech, sfx = [], [], [], []
     for si, seg in enumerate(ep["segments"]):
         toks = parse_tokens(seg["text"])
-        audio, words, mode = synth_segment(k, toks, ep.get("voice", "am_michael"), ep.get("speed", 1.05))
+        if audio_dir:
+            audio, words, mode = external_segment(whisper, os.path.join(audio_dir, f"seg_{si:02d}.wav"), toks)
+        else:
+            audio, words, mode = synth_segment(k, toks, ep.get("voice", "am_michael"), ep.get("speed", 1.05))
         print(f"segment {si}: {len(audio)/SR:.2f}s, timing {mode}")
         for w in words:
             w["start"] += t; w["end"] += t
@@ -198,7 +261,10 @@ def main(ep_path):
     pts = []
     with open(os.path.join(ep_dir, ep["dataset"]["file"])) as f:
         for r in csv.DictReader(f):
-            pts.append({"name": r["Entity"], "year": int(r["Year"]), "cost": float(r["Cost"])})
+            if ep["chart"].get("type") == "bars":
+                pts.append({"name": r["name"], "year": 0, "cost": 1, "value": float(r["value"])})
+            else:
+                pts.append({"name": r["Entity"], "year": int(r["Year"]), "cost": float(r["Cost"])})
 
     timeline = {
         "slug": slug, "series": ep.get("series", ""), "layout": ep.get("layout", "youtube"), "fps": 30,
@@ -210,10 +276,16 @@ def main(ep_path):
         "segments": segs, "captions": make_captions(all_words),
         "speech": speech, "sfx": sfx,
         "endCard": {**ep.get("endCard", {}), "start": end_start},
+        **({"hookClip": {"src": f"ep/{slug}/hook.mp4", "end": segs[0]["end"] + 0.2}}
+           if os.path.exists(os.path.join(out_dir, "hook.mp4")) else {}),
     }
     json.dump(timeline, open(os.path.join(out_dir, "timeline.json"), "w"), indent=1)
     print(f"total {total:.2f}s, {len(all_words)} words, {len(timeline['captions'])} caption groups")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    args = sys.argv[1:]
+    audio_dir = None
+    if "--audio-dir" in args:
+        i = args.index("--audio-dir"); audio_dir = args[i + 1]; del args[i:i + 2]
+    main(args[0], audio_dir)

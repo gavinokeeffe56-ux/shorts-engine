@@ -9,7 +9,8 @@
     "units": "USD per kg, 2021 dollars, by first launch year",
     "source": "CSIS Aerospace Security Project",
     "source_url": "https://aerospace.csis.org/data/space-launch-to-low-earth-orbit-how-much-does-it-cost/",
-    "file": "data.csv"
+    "file": "data.csv",
+    "note": "2021 dollars · log scale"
   },
   "chart": {
     "type": "timeline-scatter",
