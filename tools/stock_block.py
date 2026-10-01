@@ -185,7 +185,7 @@ def main():
             t = dur * (0.15 + 0.7 * (k + 0.5) / 6)
             if t + a.shot_seconds > dur or not frame_ok(src, t + a.shot_seconds / 2):
                 continue
-            if any(has_face(src, t + f * a.shot_seconds) for f in (0.1, 0.5, 0.9)):
+            if any(has_face(src, t + f * a.shot_seconds) for f in (0.05, 0.3, 0.5, 0.7, 0.95)):
                 continue
             seg = os.path.join(tmp, f"shot{len(shots)}.mp4")
             vf = (f"scale={a.width}:{a.height}:force_original_aspect_ratio=increase,"
