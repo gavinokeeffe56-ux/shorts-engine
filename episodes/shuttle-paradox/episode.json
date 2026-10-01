@@ -1,6 +1,6 @@
 {
   "slug": "shuttle-paradox",
-  "series": "Orbit Math",
+  "series": "Upload Knowledge",
   "title": "The reusable spaceship that made space MORE expensive",
   "voice": "am_michael",
   "speed": 1.2,
@@ -150,7 +150,7 @@
   "endCard": {
     "question": "Was the Shuttle worth it?",
     "prompt": "Tell me in the comments",
-    "follow": "Follow for daily space math",
+    "follow": "Follow for more space & tech",
     "seconds": 2.6
   }
 }

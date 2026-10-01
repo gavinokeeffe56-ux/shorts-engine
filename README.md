@@ -1,4 +1,4 @@
-# Orbit Math — Shorts engine
+# Upload Knowledge — Shorts engine
 Data-driven, narrated YouTube Shorts. One episode = `episodes/<slug>/episode.json` + `data.csv`.
 
     tools/setup.sh                        # fresh workspace
@@ -9,3 +9,6 @@ Beats: `at`/`atWord`, `target`, `label`, `counter`, `chip`, `headline`, `pan`, `
 Voice: free Kokoro model (am_michael). Premium voice (Higgsfield) replaces `narration.wav` once connected.
 Music: `public/music/bed.wav` placeholder — replace with YouTube Audio Library tracks in `public/music/`.
 Log every run in `runlog.csv`; pick topics from `topics.md`.
+
+Publishing: finished MP4s go to the `media` branch (`videos/<slug>.mp4`); Metricool fetches them from
+https://raw.githubusercontent.com/gavinokeeffe56-ux/shorts-engine/media/videos/<slug>.mp4
