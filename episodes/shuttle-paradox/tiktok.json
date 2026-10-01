@@ -1,0 +1,189 @@
+{
+  "slug": "shuttle-paradox-tiktok",
+  "series": "Orbit Math",
+  "title": "The reusable spaceship that made space MORE expensive",
+  "voice": "am_michael",
+  "speed": 1.2,
+  "dataset": {
+    "name": "Cost to launch 1 kg to low Earth orbit",
+    "units": "USD per kg, 2021 dollars, by first launch year",
+    "source": "CSIS Aerospace Security Project",
+    "source_url": "https://aerospace.csis.org/data/space-launch-to-low-earth-orbit-how-much-does-it-cost/",
+    "file": "data.csv"
+  },
+  "chart": {
+    "type": "timeline-scatter",
+    "xLabel": "First launch year",
+    "yLabel": "Cost per kg to orbit (2021 $, log scale)",
+    "xMin": 1958,
+    "xMax": 2023,
+    "yMin": 900,
+    "yMax": 320000,
+    "yTicks": [
+      1000,
+      10000,
+      100000
+    ],
+    "yTickLabels": [
+      "$1K",
+      "$10K",
+      "$100K"
+    ],
+    "xTicks": [
+      1960,
+      1980,
+      2000,
+      2020
+    ]
+  },
+  "segments": [
+    {
+      "text": "NASA built a reusable spaceship, and it cost ^more per kilo than the throwaway rockets it replaced.",
+      "beats": [
+        {
+          "at": 0,
+          "target": "Space Shuttle",
+          "headline": "Reusable ≠ cheap?",
+          "zoom": 1.45
+        }
+      ]
+    },
+    {
+      "text": "A {1965|nineteen sixty-five} Delta~E rocket? About {$178,000|a hundred seventy-eight thousand dollars} per kilo.",
+      "beats": [
+        {
+          "atWord": "Delta",
+          "target": "Delta E",
+          "label": "1965 · Delta E",
+          "counter": 177900,
+          "zoom": 1.35
+        }
+      ]
+    },
+    {
+      "text": "The giant {Saturn V|Saturn Five}? About {$5,400|fifty-four hundred}. Bigger rockets tended to be ^cheaper per kilo.",
+      "beats": [
+        {
+          "atWord": "Saturn",
+          "target": "Saturn V",
+          "label": "1967 · Saturn V",
+          "counter": 5400,
+          "zoom": 1.35
+        },
+        {
+          "atWord": "Bigger",
+          "chip": "Bigger rockets tend to cost less per kg"
+        }
+      ]
+    },
+    {
+      "text": "Then came the ^reusable Shuttle: about {$65,000|sixty-five thousand} a kilo, counting the whole program.",
+      "beats": [
+        {
+          "atWord": "Shuttle",
+          "target": "Space Shuttle",
+          "label": "1981 · Space Shuttle",
+          "counter": 65400,
+          "zoom": 1.35
+        },
+        {
+          "atWord": "counting",
+          "chip": "Includes full program cost"
+        }
+      ]
+    },
+    {
+      "text": "Even per flight, it lost. In {2010|twenty-ten}, one Shuttle launch worked out to about {$14,000|fourteen thousand} a kilo. Russia's throwaway Soyuz? About {$6,700|sixty-seven hundred}.",
+      "beats": [
+        {
+          "atWord": "In",
+          "overview": true,
+          "label": "2010 · Shuttle, per flight",
+          "counter": 14186,
+          "chip": "2010 dollars"
+        },
+        {
+          "atWord": "Russia's",
+          "label": "2010 · Soyuz 2.1, per flight",
+          "counter": 6665,
+          "chip": "2010 dollars"
+        }
+      ]
+    },
+    {
+      "text": "The real drop came from rockets designed around ^cost. Today's {Falcon 9|Falcon Nine}: {$2,600|twenty-six hundred}. Falcon~Heavy, at list price: {$1,500|fifteen hundred}.",
+      "beats": [
+        {
+          "at": 0,
+          "pan": 2012,
+          "zoom": 1.1
+        },
+        {
+          "atWord": "Today's",
+          "target": "Falcon 9",
+          "label": "Falcon 9 · today's version",
+          "counter": 2600,
+          "zoom": 1.4
+        },
+        {
+          "atWord": "Falcon Heavy",
+          "target": "Falcon Heavy",
+          "label": "2018 · Falcon Heavy",
+          "counter": 1500,
+          "zoom": 1.4,
+          "chip": "List price"
+        }
+      ]
+    },
+    {
+      "text": "And Falcon~9 lands its boosters and flies them again. SpaceX says that cuts its costs ^dramatically.",
+      "beats": [
+        {
+          "at": 0,
+          "target": "Falcon 9",
+          "label": "Falcon 9 · today's version",
+          "counter": 2600,
+          "chip": "Boosters land and fly again",
+          "zoom": 1.4
+        }
+      ]
+    },
+    {
+      "text": "Falcon~Heavy: {99%|ninety-nine percent} cheaper per kilo than a {1960s|nineteen-sixties} Delta. Cheap launch is a big reason the satellite boom is happening now.",
+      "beats": [
+        {
+          "at": 0,
+          "overview": true,
+          "connector": [
+            "Delta E",
+            "Falcon Heavy"
+          ],
+          "big": "−99%",
+          "bigSub": "per kg vs. the 1965 Delta E"
+        }
+      ]
+    },
+    {
+      "text": "Reusable was never the magic word. ^Cheap ^reuse ^was.",
+      "beats": [
+        {
+          "at": 0,
+          "card": true,
+          "cardLine": "Reusable was never the magic word."
+        },
+        {
+          "atWord": "Cheap",
+          "cardAccent": "Cheap reuse was."
+        }
+      ]
+    }
+  ],
+  "endCard": {
+    "question": "Was the Shuttle worth it?",
+    "prompt": "Tell me in the comments",
+    "follow": "Follow for more space math",
+    "seconds": 2.6
+  },
+  "layout": "tiktok",
+  "platform": "tiktok"
+}

@@ -1,0 +1,318 @@
+import React from 'react';
+import {
+  AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig,
+  interpolate, spring, Easing, continueRender, delayRender,
+} from 'remotion';
+
+// ---------- fonts (local files, loaded before first frame) ----------
+const fontHandle = delayRender('fonts');
+Promise.all(
+  [500, 700, 800, 900].map((w) =>
+    new FontFace('Inter', `url(${staticFile(`fonts/inter-latin-${w}-normal.woff2`)})`, {weight: String(w)})
+      .load()
+      .then((f) => document.fonts.add(f)),
+  ),
+).then(() => continueRender(fontHandle)).catch(() => continueRender(fontHandle));
+
+// ---------- tokens ----------
+const C = {
+  bg: '#0d0e11', ink: '#ffffff', ink2: '#c3c2b7', muted: '#7d7c75', grid: '#23252a',
+  dot: '#55544f', accent: '#3987e5', warm: '#ffc857',
+};
+const FONT = 'Inter, "Liberation Sans", sans-serif';
+// Layout per platform. TikTok keeps clear of its UI: top 130px, bottom 484px, right 140px.
+const LAYOUTS: Record<string, {rect: {x0: number; x1: number; y0: number; y1: number}; overlayTop: number; capTop: number}> = {
+  youtube: {rect: {x0: 150, x1: 930, y0: 660, y1: 1240}, overlayTop: 250, capTop: 1390},
+  tiktok: {rect: {x0: 150, x1: 920, y0: 570, y1: 1050}, overlayTop: 190, capTop: 1200},
+};
+
+// ---------- types ----------
+type Word = {text: string; start: number; end: number; emph: boolean};
+type Beat = {t: number; target?: string; pan?: number; overview?: boolean; zoom?: number; headline?: string;
+  label?: string; counter?: number; chip?: string; big?: string; bigSub?: string; connector?: string[];
+  card?: boolean; cardLine?: string; cardAccent?: string};
+type Point = {name: string; year: number; cost: number};
+export type Timeline = {
+  slug: string; series: string; layout?: string; fps: number; width: number; height: number; duration: number;
+  narration: string; music: string;
+  chart: {xMin: number; xMax: number; yMin: number; yMax: number; yTicks: number[]; yTickLabels: string[]; xTicks: number[]; yLabel: string};
+  dataset: {source: string; units: string};
+  points: Point[];
+  segments: {start: number; end: number; words: Word[]; beats: Beat[]}[];
+  captions: {start: number; end: number; words: Word[]}[];
+  speech: [number, number][];
+  sfx: {t: number; name: string; vol: number}[];
+  endCard: {start: number; question: string; prompt: string; follow: string};
+};
+
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
+const ease = (x: number) => Easing.bezier(0.22, 1, 0.36, 1)(clamp01(x));
+const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+
+type Cam = {cx: number; cy: number; z: number};
+
+export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const t = frame / fps;
+  const ch = T.chart;
+  const L = LAYOUTS[T.layout ?? 'youtube'] ?? LAYOUTS.youtube;
+  const RECT = L.rect;
+  const beats: Beat[] = T.segments.flatMap((s) => s.beats).sort((a, b) => a.t - b.t);
+  const byName = new Map(T.points.map((p) => [p.name, p]));
+  const highlightNames = Array.from(new Set(beats.filter((b) => b.target).map((b) => b.target!)));
+  const firstSeen = new Map<string, number>();
+  beats.forEach((b) => b.target && !firstSeen.has(b.target) && firstSeen.set(b.target, b.t));
+
+  // ----- camera -----
+  const lyMin = Math.log10(ch.yMin), lyMax = Math.log10(ch.yMax);
+  const home: Cam = {cx: (ch.xMin + ch.xMax) / 2, cy: (lyMin + lyMax) / 2, z: 1};
+  const camKeys: {t: number; cam: Cam}[] = [{t: 0, cam: home}];
+  for (const b of beats) {
+    if (b.target && byName.get(b.target)) {
+      const p = byName.get(b.target)!;
+      camKeys.push({t: b.t, cam: {cx: lerp(home.cx, p.year, 0.7), cy: lerp(home.cy, Math.log10(p.cost), 0.7), z: b.zoom ?? 1.35}});
+    } else if (b.pan !== undefined) {
+      camKeys.push({t: b.t, cam: {cx: lerp(home.cx, b.pan, 0.6), cy: home.cy - 0.25, z: b.zoom ?? 1.1}});
+    } else if (b.overview) {
+      camKeys.push({t: b.t, cam: home});
+    }
+  }
+  let cam = home;
+  for (let i = 1; i < camKeys.length; i++) {
+    if (t < camKeys[i].t) break;
+    const p = ease((t - camKeys[i].t) / 0.9);
+    const from = cam; // value at the moment this move began (approx: previous resolved)
+    cam = {cx: lerp(from.cx, camKeys[i].cam.cx, p), cy: lerp(from.cy, camKeys[i].cam.cy, p), z: lerp(from.z, camKeys[i].cam.z, p)};
+  }
+  const pxPerYear = (RECT.x1 - RECT.x0) / (ch.xMax - ch.xMin);
+  const pxPerDec = (RECT.y1 - RECT.y0) / (lyMax - lyMin);
+  const rcx = (RECT.x0 + RECT.x1) / 2, rcy = (RECT.y0 + RECT.y1) / 2;
+  const sx = (year: number) => rcx + (year - cam.cx) * pxPerYear * cam.z;
+  const sy = (cost: number) => rcy - (Math.log10(cost) - cam.cy) * pxPerDec * cam.z;
+
+  // ----- state from beats -----
+  const past = beats.filter((b) => b.t <= t);
+  const lastWith = (k: keyof Beat) => [...past].reverse().find((b) => b[k] !== undefined);
+  const cardBeat = lastWith('card');
+  const cardOn = !!cardBeat;
+  const chartOpacity = cardOn ? 1 - clamp01((t - cardBeat!.t) / 0.4) : clamp01(t / 0.5);
+  const endOn = t >= T.endCard.start;
+  const currentTarget = lastWith('target')?.target;
+
+  // counter animation
+  const counterBeats = beats.filter((b) => b.counter !== undefined);
+  const ci = counterBeats.filter((b) => b.t <= t).length - 1;
+  let counterVal = 0;
+  if (ci >= 0) {
+    const cb = counterBeats[ci];
+    const prev = ci > 0 ? counterBeats[ci - 1].counter! : cb.counter! * 0.1;
+    const p = ease((t - cb.t) / 0.75);
+    counterVal = Math.exp(lerp(Math.log(prev), Math.log(cb.counter!), p));
+  }
+
+  // top overlay: the latest beat carrying overlay content
+  // a pan with no overlay of its own clears the previous number off screen
+  const lastAny = past[past.length - 1];
+  const panClears = !!lastAny && lastAny.pan !== undefined && !lastAny.label && !lastAny.big && !lastAny.headline;
+  const overlayBeat = panClears ? undefined : [...past].reverse().find((b) => b.headline || b.label || b.big);
+  const chipBeat = [...past].reverse().find((b) => b.chip || b.label || b.big);
+  const overlayAge = overlayBeat ? t - overlayBeat.t : 0;
+  // the hook overlay is on screen from the very first frame
+  const overlayIn = overlayBeat && overlayBeat === beats[0] ? 1 : ease(overlayAge / 0.35);
+
+  // ----- captions -----
+  const cap = T.captions.find((c) => t >= c.start && t < c.end);
+  const capAge = cap ? t - cap.start : 0;
+  const capScale = spring({frame: Math.round(capAge * fps), fps, config: {damping: 14, stiffness: 220}, from: 0.82, to: 1});
+
+  // music ducking
+  const inSpeech = (x: number) => T.speech.some(([a, b]) => x >= a - 0.15 && x <= b + 0.15);
+
+  return (
+    <AbsoluteFill style={{backgroundColor: C.bg, fontFamily: FONT}}>
+      <Stars t={t} cam={cam} />
+
+      {/* ---------- chart ---------- */}
+      <svg width={1080} height={1920} style={{position: 'absolute', opacity: chartOpacity * (endOn ? 0.25 : 1)}}>
+        <defs>
+          <clipPath id="plot"><rect x={RECT.x0 - 140} y={RECT.y0 - 80} width={RECT.x1 - RECT.x0 + 240} height={RECT.y1 - RECT.y0 + 110} /></clipPath>
+        </defs>
+        {ch.yTicks.map((v, i) => {
+          const y = sy(v);
+          if (y < RECT.y0 - 40 || y > RECT.y1 + 20) return null;
+          return (
+            <g key={v}>
+              <line x1={RECT.x0} x2={RECT.x1} y1={y} y2={y} stroke={C.grid} strokeWidth={2} />
+              <text x={RECT.x0 - 16} y={y + 10} fill={C.muted} fontSize={28} fontWeight={600} textAnchor="end">{ch.yTickLabels[i]}</text>
+            </g>
+          );
+        })}
+        {ch.xTicks.map((v) => {
+          const x = sx(v);
+          if (x < RECT.x0 - 10 || x > RECT.x1 + 10) return null;
+          return <text key={v} x={x} y={RECT.y1 + 52} fill={C.muted} fontSize={28} fontWeight={600} textAnchor="middle">{v}</text>;
+        })}
+        <g clipPath="url(#plot)">
+          {T.points.filter((p) => !highlightNames.includes(p.name)).map((p, i) => {
+            const s = spring({frame: frame - Math.round((0.15 + i * 0.012) * fps), fps, config: {damping: 12, stiffness: 180}});
+            return <circle key={p.name} cx={sx(p.year)} cy={sy(p.cost)} r={9 * s * Math.sqrt(cam.z)} fill={C.dot} stroke={C.bg} strokeWidth={3} />;
+          })}
+          <Connector beats={past} byName={byName} sx={sx} sy={sy} t={t} />
+          {highlightNames.map((n) => {
+            const p = byName.get(n);
+            const t0 = firstSeen.get(n)!;
+            if (!p || t < t0) return null;
+            const s = spring({frame: frame - Math.round(t0 * fps), fps, config: {damping: 9, stiffness: 200}});
+            const lt = lastWith('target'), lo = lastWith('overview');
+            const active = n === currentTarget && !!lt && lt.t > (lo?.t ?? -1);
+            const x = sx(p.year), y = sy(p.cost);
+            const right = x < rcx + 140;
+            const pulse = active ? 1 + 0.5 * ((t * 1.4) % 1) : 0;
+            return (
+              <g key={n}>
+                {active && <circle cx={x} cy={y} r={18 * pulse + 8} fill="none" stroke={C.accent} strokeWidth={3} opacity={1 - ((t * 1.4) % 1)} />}
+                <circle cx={x} cy={y} r={15 * s} fill={C.accent} stroke={C.bg} strokeWidth={4} />
+                <text x={x + (right ? 30 : -30)} y={y + 12} fill={active ? C.ink : C.ink2} fontSize={active ? 36 : 30}
+                  fontWeight={800} textAnchor={right ? 'start' : 'end'} opacity={clamp01((t - t0) / 0.3)}
+                  style={{paintOrder: 'stroke'}} stroke={C.bg} strokeWidth={8}>{n}</text>
+              </g>
+            );
+          })}
+        </g>
+        <text x={RECT.x0} y={RECT.y1 + 104} fill={C.muted} fontSize={22} fontWeight={500}>
+          {`Source: ${T.dataset.source} · 2021 dollars · log scale`}
+        </text>
+      </svg>
+
+      {/* ---------- top overlay ---------- */}
+      {!cardOn && !endOn && overlayBeat && (
+        <div style={{position: 'absolute', top: L.overlayTop, left: 60, right: 60, textAlign: 'center',
+          opacity: overlayIn, transform: `translateY(${(1 - overlayIn) * 24}px)`}}>
+          {overlayBeat.headline && (
+            <div style={{color: C.ink, fontSize: 104, fontWeight: 900, letterSpacing: -2, lineHeight: 1.05}}>
+              {overlayBeat.headline}
+            </div>
+          )}
+          {overlayBeat.label && (
+            <>
+              <div style={{color: C.ink2, fontSize: 40, fontWeight: 700, letterSpacing: 1}}>{overlayBeat.label}</div>
+              <div style={{color: C.ink, fontSize: 132, fontWeight: 900, letterSpacing: -3, lineHeight: 1.1, fontVariantNumeric: 'tabular-nums'}}>
+                ${Math.round(counterVal).toLocaleString('en-US')}
+                <span style={{fontSize: 52, color: C.ink2, fontWeight: 700, letterSpacing: 0}}> /kg</span>
+              </div>
+            </>
+          )}
+          {overlayBeat.big && (
+            <>
+              <div style={{color: C.accent, fontSize: 200, fontWeight: 900, letterSpacing: -6, lineHeight: 1,
+                transform: `scale(${spring({frame: Math.round(overlayAge * fps), fps, config: {damping: 10}, from: 0.6, to: 1})})`}}>
+                {overlayBeat.big}
+              </div>
+              <div style={{color: C.ink2, fontSize: 40, fontWeight: 700, marginTop: 10}}>{overlayBeat.bigSub}</div>
+            </>
+          )}
+          {chipBeat?.chip && (
+            <div style={{display: 'inline-block', marginTop: 18, padding: '10px 26px', borderRadius: 40,
+              border: `3px solid ${C.accent}`, color: C.ink, fontSize: 34, fontWeight: 700,
+              opacity: ease((t - chipBeat.t) / 0.3), transform: `scale(${lerp(0.8, 1, ease((t - chipBeat.t) / 0.3))})`}}>
+              {chipBeat.chip}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ---------- statement card ---------- */}
+      {cardOn && !endOn && (
+        <div style={{position: 'absolute', top: 560, left: 80, right: 80, textAlign: 'center'}}>
+          <div style={{color: C.ink, fontSize: 84, fontWeight: 800, lineHeight: 1.15, letterSpacing: -1,
+            opacity: ease((t - cardBeat!.t) / 0.4)}}>{cardBeat!.cardLine}</div>
+          {(() => {
+            const ab = lastWith('cardAccent');
+            if (!ab) return null;
+            const s = spring({frame: Math.round((t - ab.t) * fps), fps, config: {damping: 9, stiffness: 160}, from: 0.5, to: 1});
+            return <div style={{color: C.accent, fontSize: 132, fontWeight: 900, letterSpacing: -4, lineHeight: 1.05, marginTop: 40, transform: `scale(${s})`}}>{ab.cardAccent}</div>;
+          })()}
+        </div>
+      )}
+
+      {/* ---------- end card ---------- */}
+      {endOn && (() => {
+        const p = ease((t - T.endCard.start) / 0.4);
+        return (
+          <div style={{position: 'absolute', top: 520, left: 70, right: 70, textAlign: 'center', opacity: p,
+            transform: `translateY(${(1 - p) * 30}px)`}}>
+            <div style={{color: C.ink, fontSize: 92, fontWeight: 900, lineHeight: 1.1, letterSpacing: -2}}>{T.endCard.question}</div>
+            <div style={{color: C.accent, fontSize: 46, fontWeight: 700, marginTop: 30}}>{T.endCard.prompt} ↓</div>
+            <div style={{marginTop: 120, color: C.ink, fontSize: 54, fontWeight: 900, letterSpacing: 6}}>{T.series.toUpperCase()}</div>
+            <div style={{color: C.ink2, fontSize: 36, fontWeight: 600, marginTop: 12}}>{T.endCard.follow}</div>
+          </div>
+        );
+      })()}
+
+      {/* ---------- captions ---------- */}
+      {cap && !cardOn && !endOn && (
+        <div style={{position: 'absolute', top: L.capTop, left: 50, right: 50, display: 'flex', justifyContent: 'center',
+          flexWrap: 'wrap', gap: '6px 18px', transform: `scale(${capScale})`}}>
+          {cap.words.map((w, i) => {
+            const next = cap.words[i + 1];
+            const on = t >= w.start - 0.03 && t < (next ? next.start : cap.end);
+            return (
+              <span key={i} style={{
+                fontSize: 82, fontWeight: 900, letterSpacing: -1, lineHeight: 1.15,
+                color: on ? C.ink : w.emph ? C.warm : C.ink,
+                background: on ? C.accent : 'transparent', borderRadius: 18, padding: '0 14px',
+                textShadow: on ? 'none' : '0 4px 0 #000, 0 0 18px rgba(0,0,0,.8)',
+                transform: on ? 'scale(1.06)' : 'scale(1)',
+              }}>{w.text}</span>
+            );
+          })}
+        </div>
+      )}
+
+      {/* brand bug */}
+      {!endOn && (
+        <div style={{position: 'absolute', top: 150, left: 60, color: C.ink2, fontSize: 28, fontWeight: 800,
+          letterSpacing: 5, opacity: 0.55}}>{T.series.toUpperCase()}</div>
+      )}
+
+      {/* ---------- audio ---------- */}
+      <Audio src={staticFile(T.narration)} />
+      <Audio src={staticFile(T.music)} loop volume={(f) => {
+        const x = f / fps;
+        const fadeIn = clamp01(x / 0.6), fadeOut = clamp01((T.duration - x) / 1.4);
+        return (inSpeech(x) ? 0.075 : 0.2) * fadeIn * fadeOut;
+      }} />
+      {T.sfx.map((s, i) => (
+        <Sequence key={i} from={Math.round(s.t * fps)} durationInFrames={Math.round(1.3 * fps)}>
+          <Audio src={staticFile(`sfx/${s.name}.wav`)} volume={s.vol} />
+        </Sequence>
+      ))}
+    </AbsoluteFill>
+  );
+};
+
+const Connector: React.FC<{beats: Beat[]; byName: Map<string, Point>; sx: (y: number) => number; sy: (c: number) => number; t: number}> =
+  ({beats, byName, sx, sy, t}) => {
+    const b = [...beats].reverse().find((x) => x.connector);
+    if (!b) return null;
+    const [a, c] = b.connector!.map((n) => byName.get(n)!);
+    const p = ease((t - b.t - 0.3) / 1.0);
+    const x1 = sx(a.year), y1 = sy(a.cost), x2 = sx(c.year), y2 = sy(c.cost);
+    return <line x1={x1} y1={y1} x2={lerp(x1, x2, p)} y2={lerp(y1, y2, p)} stroke={C.accent} strokeWidth={6}
+      strokeDasharray="4 14" strokeLinecap="round" />;
+  };
+
+// deterministic star field with slight parallax
+const STARS = Array.from({length: 90}, (_, i) => {
+  const r = (n: number) => { const x = Math.sin(i * 12.9898 + n * 78.233) * 43758.5453; return x - Math.floor(x); };
+  return {x: r(1) * 1080, y: r(2) * 1920, s: 1 + r(3) * 2.2, o: 0.06 + r(4) * 0.22, d: 0.3 + r(5)};
+});
+const Stars: React.FC<{t: number; cam: Cam}> = ({t, cam}) => (
+  <svg width={1080} height={1920} style={{position: 'absolute'}}>
+    {STARS.map((s, i) => (
+      <circle key={i} cx={(s.x - (cam.cx - 1990) * 3 * s.d + 1080) % 1080} cy={(s.y + t * 6 * s.d) % 1920} r={s.s}
+        fill="#fff" opacity={s.o * (0.7 + 0.3 * Math.sin(t * 2 + i))} />
+    ))}
+  </svg>
+);
