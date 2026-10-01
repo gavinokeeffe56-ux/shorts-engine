@@ -104,7 +104,7 @@
     {
       "n": 5,
       "arc_role": "build",
-      "vo_line": "So Flight Fourteen's satellites add up to roughly twenty-six terabits. At full capacity, Starship is designed to carry sixty.",
+      "vo_line": "Flight Fourteen's satellites add up to roughly twenty-six terabits. Fully loaded, Starship is designed to carry sixty.",
       "location": "loc_payload_bay",
       "through_line_state": "the stack grows from half full to packed to the ceiling",
       "shots": [
