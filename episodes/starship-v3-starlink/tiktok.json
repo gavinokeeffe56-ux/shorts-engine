@@ -9,8 +9,8 @@
   "dataset": {
     "name": "Internet capacity per launch",
     "units": "terabits per second (Tbps), downlink",
-    "source": "SpaceX via NASASpaceflight, Light Reading",
-    "note": "design specs · Falcon 9 figure estimated",
+    "source": "SpaceX specs via NASASpaceflight",
+    "note": "Falcon 9 estimated",
     "source_url": "https://www.nasaspaceflight.com/2026/09/starship-flight-14-orbit/",
     "file": "data.csv"
   },
