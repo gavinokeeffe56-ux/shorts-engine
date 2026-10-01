@@ -77,6 +77,26 @@ def probe(path):
     return float(j["format"]["duration"]), int(s["width"]), int(s["height"])
 
 
+try:
+    import cv2
+    _FACE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+except Exception:  # opencv missing: stock_blocks.sh installs opencv-python-headless
+    cv2 = _FACE = None
+
+
+def has_face(path, t):
+    """Real people on camera (officials, astronauts talking) are skipped: no faces in our b-roll."""
+    if _FACE is None:
+        return False
+    tmp = path + f".f{t:.1f}.png"
+    subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-y", "-ss", f"{t:.2f}", "-i", path, "-frames:v", "1",
+                    "-vf", "scale=480:-2", tmp])
+    img = cv2.imread(tmp, cv2.IMREAD_GRAYSCALE) if os.path.exists(tmp) else None
+    if img is None:
+        return False
+    return len(_FACE.detectMultiScale(img, 1.1, 6, minSize=(24, 24))) > 0
+
+
 def frame_ok(path, t):
     raw = subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", path, "-frames:v", "1",
                           "-vf", "scale=32:18", "-f", "rawvideo", "-pix_fmt", "gray", "-"], capture_output=True).stdout
@@ -84,12 +104,14 @@ def frame_ok(path, t):
         return False
     mean = sum(raw) / len(raw)
     sd = (sum((b - mean) ** 2 for b in raw) / len(raw)) ** 0.5
-    return mean > 25 and sd > 12
+    return 25 < mean < 225 and sd > 12  # not black, not blown out, not flat
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--query", action="append", required=True)
+    ap.add_argument("--query", action="append", default=[])
+    ap.add_argument("--id", action="append", default=[], help="use these nasa_ids directly (hand-picked)")
+    ap.add_argument("--avoid-id", action="append", default=[])
     ap.add_argument("--out", required=True)
     ap.add_argument("--shots", type=int, default=5)
     ap.add_argument("--shot-seconds", type=float, default=2.0)
@@ -103,10 +125,24 @@ def main():
     avoid = set()
     if a.avoid_file and os.path.exists(a.avoid_file):
         avoid = {l.strip() for l in open(a.avoid_file) if l.strip()}
+    avoid |= set(a.avoid_id)
+    if not a.query and not a.id:
+        ap.error("give --query or --id")
 
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     tmp = tempfile.mkdtemp()
     cands, seen = [], set()
+    for i in a.id:  # hand-picked: still checked for copyright / excluded credits
+        seen.add(i)
+        try:
+            d = get(f"{API}/search?" + urllib.parse.urlencode({"nasa_id": i}))["collection"]["items"][0]["data"][0]
+        except Exception:
+            print(f"skip {i}: not found", file=sys.stderr); continue
+        text = " ".join(str(d.get(k, "")) for k in ("description", "title", "photographer", "secondary_creator")).lower()
+        if any(w in text for w in BAD_WORDS) or any(x.lower() in text for x in a.exclude_credit):
+            print(f"skip {i}: rights/credit", file=sys.stderr); continue
+        cands.append({"nasa_id": i, "title": d.get("title", ""), "center": d.get("center", ""),
+                      "date": d.get("date_created", "")[:10], "score": 99})
     for q in a.query:
         for c in search(q):
             if c["nasa_id"] in seen or c["nasa_id"] in avoid:
@@ -145,6 +181,8 @@ def main():
                 break
             t = dur * (0.15 + 0.7 * (k + 0.5) / 6)
             if t + a.shot_seconds > dur or not frame_ok(src, t + a.shot_seconds / 2):
+                continue
+            if any(has_face(src, t + f * a.shot_seconds) for f in (0.1, 0.5, 0.9)):
                 continue
             seg = os.path.join(tmp, f"shot{len(shots)}.mp4")
             vf = (f"scale={a.width}:{a.height}:force_original_aspect_ratio=increase,"

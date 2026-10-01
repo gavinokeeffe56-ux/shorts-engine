@@ -4,7 +4,9 @@
 # Usage (sandbox, background):
 #   COMMIT=<sha> EP=<episode dir> SEED=<yyyy-mm-dd> UPLOADS='3=<put url> 6=<put url>' bash stock_blocks.sh
 #   (UPLOADS value "skip" builds without uploading; STOCK_URL overrides the stock.json location)
-# Reads episodes/<EP>/faceless/stock.json: {"blocks": {"3": {"queries": ["..."], "shows": "...", "line": "..."}}}
+# Reads episodes/<EP>/faceless/stock.json:
+#   {"blocks": {"3": {"queries": ["..."], "ids": [optional hand-picked nasa_ids], "avoid_ids": [rejected ones],
+#                     "shows": "...", "line": "..."}}}
 # Prints per block: "BLOCK n OK|FAILED", the PUT status, the credits json, then STOCK_QA_B64=<small strip>.
 set -uo pipefail
 cd /home/user
@@ -12,12 +14,16 @@ RAW=https://raw.githubusercontent.com/gavinokeeffe56-ux/shorts-engine/$COMMIT
 curl -fsSL "$RAW/tools/stock_block.py" -o stock_block.py || { echo "no stock_block.py"; exit 1; }
 curl -fsSL "${STOCK_URL:-$RAW/episodes/$EP/faceless/stock.json}" -o stock.json || { echo "no stock.json"; exit 1; }
 curl -fsSL "$RAW/stock_used.txt" -o stock_used.txt 2>/dev/null || : > stock_used.txt
+pip install -q opencv-python-headless >/dev/null 2>&1 || echo "WARN no opencv: face filter off"
 mkdir -p work/stock && rm -f /tmp/sq_*.png
 built=()
 for pair in $UPLOADS; do
   n=${pair%%=*}; url=${pair#*=}; nn=$(printf %02d "$n"); out=work/stock/block$nn.mp4
-  mapfile -t qs < <(python3 -c "import json; [print(q) for q in json.load(open('stock.json'))['blocks']['$n']['queries']]")
-  args=(); for q in "${qs[@]}"; do args+=(--query "$q"); done
+  mapfile -t qs < <(python3 -c "
+import json; b=json.load(open('stock.json'))['blocks']['$n']
+for k,f in (('queries','--query'),('ids','--id'),('avoid_ids','--avoid-id')):
+    for v in b.get(k,[]): print(f); print(v)")
+  args=("${qs[@]}")
   if ! python3 stock_block.py "${args[@]}" --out "$out" --avoid-file stock_used.txt --seed "${SEED:-0}"; then
     echo "BLOCK $n FAILED"; continue
   fi
