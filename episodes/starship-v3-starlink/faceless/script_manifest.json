@@ -65,7 +65,7 @@
     {
       "n": 3,
       "arc_role": "build",
-      "vo_line": "Each V three is designed for about one terabit per second of downlink. SpaceX says that's more than ten times an older V two Mini.",
+      "vo_line": "Each V three is designed for roughly one terabit per second. SpaceX says that's more than ten times an older V two Mini.",
       "location": "loc_payload_bay",
       "through_line_state": "one big flat satellite lifted out of the half-filled stack for inspection",
       "shots": [
