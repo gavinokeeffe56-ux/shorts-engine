@@ -54,7 +54,7 @@ def impact():
     return boom + hit
 
 
-def bed(seconds=64, bpm=96):
+def bed(seconds=90, bpm=124):
     n = int(seconds * SR); t = np.arange(n) / SR
     beat = 60 / bpm; bar = beat * 4
     chords = [(57, 60, 64), (53, 57, 60), (48, 52, 55), (55, 59, 62)]  # Am F C G (midi)

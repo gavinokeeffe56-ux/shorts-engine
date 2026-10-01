@@ -1,0 +1,58 @@
+{
+  "style": "Colorful 3D (Higgsfield explainer preset 30948d66-76b1-4c8e-884a-1854e08e91df)",
+  "assets": {
+    "i1": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_b2df35c5-7131-4c59-b962-b1ef39cbe41a.png"
+    },
+    "i2": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_22634580-279a-4dd8-898e-b67a4f64115d.png"
+    },
+    "i4": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_c057a877-0367-41d5-9854-b61d0ea1db7b.png"
+    },
+    "i5": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_b9588f92-1fe4-4322-a3ab-a4392844c835.png"
+    },
+    "i6": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_26f00550-1497-4c5e-80f9-bc8fe6fc9820.png"
+    },
+    "i8": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_8e85079c-4fb2-4864-8fac-8398c172e806.png"
+    },
+    "i10": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_e4f54370-029d-4884-954e-69fd2172e955.png"
+    },
+    "i11": {
+      "kind": "image",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023343_85322188-db43-40c3-a5c7-cefd321dd6f0.png",
+      "motion": "drift"
+    },
+    "c0": {
+      "kind": "video",
+      "seconds": 5,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023537_d9f7cd54-8f03-4ae5-941a-ee0ab4ab6278.mp4"
+    },
+    "c1": {
+      "kind": "video",
+      "seconds": 5,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023537_0d3b85d6-26d2-4379-aac2-d99eb00114bf.mp4"
+    },
+    "c2": {
+      "kind": "video",
+      "seconds": 5,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023537_90b1ce59-c718-4a9a-8a9a-05ab0ce56bbc.mp4"
+    },
+    "c3": {
+      "kind": "video",
+      "seconds": 5,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv/hf_20261001_023549_e546f397-4b3d-45af-bdc2-493c9483c99e.mp4"
+    }
+  }
+}

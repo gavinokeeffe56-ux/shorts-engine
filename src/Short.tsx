@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  AbsoluteFill, Audio, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
+  AbsoluteFill, Audio, Img, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
   interpolate, spring, Easing, continueRender, delayRender,
 } from 'remotion';
 
@@ -44,6 +44,7 @@ export type Timeline = {
   sfx: {t: number; name: string; vol: number}[];
   endCard: {start: number; question: string; prompt: string; follow: string};
   hookClip?: {src: string; end: number};
+  shots?: {start: number; end: number; src: string; kind: string; motion: string; offset: number; missing?: boolean}[];
 };
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
@@ -102,6 +103,15 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
   const chartStart = T.hookClip ? T.hookClip.end : 0;
   const chartOpacity = cardOn ? 1 - clamp01((t - cardBeat!.t) / 0.4) : clamp01((t - chartStart) / 0.5);
   const endOn = t >= T.endCard.start;
+  const hasShots = !!(T.shots && T.shots.length);
+  // chart shows (as a glass card over the visuals) only during segments that use it
+  const chartSegs = T.segments.filter((s) => s.beats.some((b) => b.target || b.overview || b.connector || b.pan !== undefined));
+  const chartWin = chartSegs.find((s) => t >= s.start - 0.2 && t < s.end + 0.35);
+  const chartVis = !hasShots ? 1 : chartWin ? ease((t - (chartWin.start - 0.2)) / 0.35) * (1 - clamp01((t - chartWin.end) / 0.35)) : 0;
+  // punch-in on emphasised words
+  const allWords = T.segments.flatMap((s) => s.words);
+  const lastEmph = [...allWords].reverse().find((w) => w.emph && w.start <= t);
+  const punch = lastEmph ? Math.max(0, 1 - (t - lastEmph.start) / 0.45) * clamp01((t - lastEmph.start) / 0.08) : 0;
   const currentTarget = lastWith('target')?.target;
 
   // counter animation
@@ -136,7 +146,16 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
 
   return (
     <AbsoluteFill style={{backgroundColor: C.bg, fontFamily: FONT}}>
-      <Stars t={t} cam={cam} />
+      {hasShots ? <ShotLayer T={T} t={t} punch={punch} /> : <Stars t={t} cam={cam} />}
+      {hasShots && t < 3 && (
+        <div style={{position: 'absolute', top: 150, right: 60, color: C.ink2, fontSize: 22, fontWeight: 700, letterSpacing: 3,
+          opacity: 0.75 * (1 - clamp01((t - 2.4) / 0.6))}}>AI VISUALS</div>
+      )}
+      {hasShots && chartVis > 0 && (
+        <div style={{position: 'absolute', left: RECT.x0 - 120, right: 1080 - RECT.x1 - 50, top: RECT.y0 - 70, height: RECT.y1 - RECT.y0 + 180,
+          borderRadius: 36, background: 'rgba(10,12,20,0.72)', backdropFilter: 'blur(18px)', border: '2px solid rgba(255,255,255,0.08)',
+          opacity: chartVis, transform: `scale(${lerp(0.94, 1, chartVis)})`}} />
+      )}
       {T.hookClip && t < T.hookClip.end + 0.6 && (
         <AbsoluteFill style={{opacity: 1 - clamp01((t - T.hookClip.end) / 0.6)}}>
           <OffthreadVideo src={staticFile(T.hookClip.src)} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
@@ -146,7 +165,7 @@ export const Short: React.FC<{timeline: Timeline}> = ({timeline: T}) => {
       )}
 
       {/* ---------- chart ---------- */}
-      <svg width={1080} height={1920} style={{position: 'absolute', opacity: chartOpacity * (endOn ? 0.25 : 1)}}>
+      <svg width={1080} height={1920} style={{position: 'absolute', opacity: chartOpacity * chartVis * (endOn ? 0.25 : 1)}}>
         <defs>
           <clipPath id="plot"><rect x={RECT.x0 - 140} y={RECT.y0 - 80} width={RECT.x1 - RECT.x0 + 240} height={RECT.y1 - RECT.y0 + 110} /></clipPath>
         </defs>
@@ -377,3 +396,28 @@ const Bars: React.FC<{T: Timeline; beats: Beat[]; past: Beat[]; t: number; frame
       </g>
     );
   };
+
+const ShotLayer: React.FC<{T: Timeline; t: number; punch: number}> = ({T, t, punch}) => {
+  const shots = T.shots!;
+  const sh = shots.find((x) => t >= x.start && t < x.end) ?? shots[shots.length - 1];
+  const p = clamp01((t - sh.start) / Math.max(sh.end - sh.start, 0.1));
+  const m = sh.motion;
+  const sc = (m === 'pull' ? lerp(1.14, 1.02, p) : m === 'push' ? lerp(1.02, 1.14, p) : 1.12) * (1 + 0.06 * punch);
+  const tx = m === 'panL' ? lerp(50, -50, p) : m === 'panR' ? lerp(-50, 50, p) : m === 'drift' ? lerp(-20, 20, p) : 0;
+  const ty = m === 'drift' ? lerp(20, -20, p) : 0;
+  const style: React.CSSProperties = {width: '100%', height: '100%', objectFit: 'cover',
+    transform: `translate(${tx}px, ${ty}px) scale(${sc})`};
+  return (
+    <AbsoluteFill style={{backgroundColor: C.bg, overflow: 'hidden'}}>
+      {sh.missing ? (
+        <AbsoluteFill style={{background: 'linear-gradient(160deg,#1b2a4a,#3b1f2b)', ...style, justifyContent: 'center', alignItems: 'center',
+          color: '#ffffff55', fontSize: 40, fontWeight: 800}}>{sh.src.split('/').pop()}</AbsoluteFill>
+      ) : sh.kind === 'video' ? (
+        <OffthreadVideo key={sh.src + sh.start} src={staticFile(sh.src)} muted startFrom={Math.round(sh.offset * 30)} style={style} />
+      ) : (
+        <Img src={staticFile(sh.src)} style={style} />
+      )}
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,10,16,.70) 0%, rgba(8,10,16,.10) 28%, rgba(8,10,16,.05) 55%, rgba(8,10,16,.70) 100%)'}} />
+    </AbsoluteFill>
+  );
+};

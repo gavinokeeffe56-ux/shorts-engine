@@ -38,6 +38,31 @@ if [ -n "${HOOK_URL:-}" ]; then
     -c:v libx264 -crf 18 -pix_fmt yuv420p "public/ep/$SLUG/hook.mp4"
 fi
 
+EP_DIR=$(dirname "$EPISODE")
+if [ -f "$EP_DIR/assets.json" ]; then
+  log "visual assets"
+  mkdir -p "public/ep/$SLUG/assets"
+  python3 - "$EP_DIR/assets.json" "public/ep/$SLUG/assets" <<'PY'
+import json, subprocess, sys, os
+assets = json.load(open(sys.argv[1]))["assets"]; out = sys.argv[2]
+for aid, a in assets.items():
+    if a["kind"] == "video":
+        raw = f"{out}/{aid}_raw.mp4"; dst = f"{out}/{aid}.mp4"
+        if not os.path.exists(dst):
+            subprocess.run(["curl", "-sSfL", "-o", raw, a["url"]], check=True)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-an", "-vf",
+                            "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30",
+                            "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", dst], check=True)
+    else:
+        raw = f"{out}/{aid}_raw"; dst = f"{out}/{aid}.jpg"
+        if not os.path.exists(dst):
+            subprocess.run(["curl", "-sSfL", "-o", raw, a["url"]], check=True)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-vf",
+                            "scale=1188:2112:force_original_aspect_ratio=increase,crop=1188:2112", "-q:v", "3", dst], check=True)
+print("assets:", len(assets))
+PY
+fi
+
 log "build + render"
 REMOTION_BROWSER=/nonexistent AUDIO_DIR="$VOICE_DIR" bash tools/render.sh "$EPISODE"
 

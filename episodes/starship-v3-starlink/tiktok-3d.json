@@ -1,0 +1,172 @@
+{
+  "slug": "starship-v3-starlink-3d",
+  "series": "Upload Knowledge",
+  "layout": "tiktok",
+  "platform": "tiktok",
+  "title": "Starship flew half full and still did 10x",
+  "voice": "am_michael",
+  "speed": 1.2,
+  "dataset": {
+    "name": "Internet capacity per launch",
+    "units": "terabits per second (Tbps), downlink",
+    "source": "SpaceX specs via NASASpaceflight",
+    "note": "Falcon 9 estimated",
+    "source_url": "https://www.nasaspaceflight.com/2026/09/starship-flight-14-orbit/",
+    "file": "data.csv"
+  },
+  "chart": {
+    "type": "bars",
+    "valueSuffix": " Tbps"
+  },
+  "segments": [
+    {
+      "text": "Starship just launched less than half full, and it still carried about ^ten ^times the internet capacity of a Falcon~9 launch.",
+      "beats": [
+        {
+          "at": 0,
+          "headline": "Half full. ~10×."
+        }
+      ],
+      "shots": [
+        "c0"
+      ]
+    },
+    {
+      "text": "On {September 28|September twenty-eighth}, Flight~14 reached orbit for the first time and released {26|twenty-six} new Starlink~V3 satellites.",
+      "beats": [
+        {
+          "atWord": "Flight 14",
+          "label": "Sept 28 · Flight 14",
+          "counter": 26,
+          "prefix": "",
+          "suffix": " satellites"
+        }
+      ],
+      "shots": [
+        "i1",
+        "i2",
+        "c1"
+      ]
+    },
+    {
+      "text": "Each V3 is designed for about {1 terabit|one terabit} per second of downlink. SpaceX says that's more than ^ten ^times an older V2~Mini.",
+      "beats": [
+        {
+          "atWord": "Each",
+          "label": "One Starlink V3",
+          "counter": 1,
+          "prefix": "",
+          "suffix": " Tbps",
+          "chip": "Downlink · SpaceX design spec"
+        }
+      ],
+      "shots": [
+        "i4",
+        "i5"
+      ]
+    },
+    {
+      "text": "A Falcon~9 carries up to about {29|twenty-nine} of those smaller V2~Minis, adding only a few terabits per launch.",
+      "beats": [
+        {
+          "atWord": "A",
+          "target": "Falcon 9 · ~29 V2 Minis",
+          "label": "Falcon 9 launch",
+          "counter": 2.6,
+          "prefix": "~",
+          "suffix": " Tbps",
+          "chip": "Estimate"
+        }
+      ],
+      "shots": [
+        "i6",
+        "i11"
+      ]
+    },
+    {
+      "text": "Flight 14's {26|twenty-six} satellites? About {26 terabits|twenty-six terabits}.",
+      "beats": [
+        {
+          "atWord": "Flight",
+          "target": "Flight 14 · 26 V3s",
+          "label": "Starship Flight 14",
+          "counter": 26,
+          "prefix": "",
+          "suffix": " Tbps"
+        }
+      ],
+      "shots": [
+        "i11",
+        "i2"
+      ]
+    },
+    {
+      "text": "And a full Starship is designed to carry {60|sixty}. That's about {60 terabits|sixty terabits} in a single launch.",
+      "beats": [
+        {
+          "atWord": "And",
+          "target": "Full Starship · 60 V3s",
+          "label": "Full Starship (target)",
+          "counter": 60,
+          "prefix": "",
+          "suffix": " Tbps",
+          "chip": "SpaceX target"
+        }
+      ],
+      "shots": [
+        "c2",
+        "i11"
+      ]
+    },
+    {
+      "text": "It wasn't flawless. The ship lost an engine on the way up, and SpaceX brought it down early, about three hours after liftoff. It exploded after splashing down.",
+      "beats": [
+        {
+          "at": 0,
+          "label": "Flight 14",
+          "counter": 3,
+          "prefix": "~",
+          "suffix": "-hour flight",
+          "chip": "Engine lost on ascent"
+        }
+      ],
+      "shots": [
+        "i8",
+        "c3"
+      ]
+    },
+    {
+      "text": "But roughly ten times the capacity per launch changes how fast the network can grow.",
+      "beats": [
+        {
+          "at": 0,
+          "big": "~10×",
+          "bigSub": "capacity per launch vs. Falcon 9 (from SpaceX specs)"
+        }
+      ],
+      "shots": [
+        "i10",
+        "i5"
+      ]
+    },
+    {
+      "text": "Less than half full: about ten times. Full, SpaceX says: more than ^twenty. Which is wild, because...",
+      "beats": [
+        {
+          "at": 0,
+          "card": true,
+          "cardLine": "Less than half full: ~10×."
+        },
+        {
+          "atWord": "Full",
+          "cardAccent": "Full: 20×+"
+        }
+      ],
+      "shots": [
+        "c0"
+      ]
+    }
+  ],
+  "style": "colorful-3d",
+  "endCard": null
+}

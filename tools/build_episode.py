@@ -143,6 +143,54 @@ def external_segment(whisper, path, toks):
     return audio, words, f"whisper-aligned ({matched}/{len(sp)} words matched)"
 
 
+MOTIONS = ["push", "panL", "pull", "panR", "drift"]
+
+
+def build_shots(ep, ep_dir, segs, out_dir, slug, total, max_len=2.8):
+    """Background shot timeline: each segment's listed assets split its time; long holds are
+    re-cut with a different camera move so the picture changes every ~2-3 s."""
+    apath = os.path.join(ep_dir, ep.get("assets_file", "assets.json"))
+    if not os.path.exists(apath) or not any(s_.get("shots") for s_ in ep["segments"]):
+        return []
+    assets = json.load(open(apath))["assets"]
+    shots, mi = [], 0
+    for si, seg in enumerate(ep["segments"]):
+        ids = seg.get("shots") or []
+        if not ids:
+            continue
+        t0 = 0.0 if si == 0 else segs[si]["start"]
+        t1 = segs[si + 1]["start"] if si + 1 < len(segs) else total
+        span = t1 - t0
+        n = max(len(ids), int(np.ceil(span / max_len)))
+        # each asset gets consecutive shots (a re-cut with a new camera move); spare shots go to clips first
+        k = [n // len(ids)] * len(ids)
+        extra = n - sum(k)
+        order = sorted(range(len(ids)), key=lambda i: assets[ids[i]]["kind"] != "video")
+        for i in order[:extra]:
+            k[i] += 1
+        seq = [aid for aid, kk in zip(ids, k) for _ in range(kk)]
+        dur = span / len(seq)
+        used, cnt = {}, {a_: seq.count(a_) for a_ in set(seq)}
+        for j, aid in enumerate(seq):
+            a = assets[aid]
+            ext = "mp4" if a["kind"] == "video" else "jpg"
+            rel = f"ep/{slug}/assets/{aid}.{ext}"
+            occ = used.get(aid, 0)
+            used[aid] = occ + 1
+            offset = occ * dur
+            if a["kind"] == "video":
+                room = max(a.get("seconds", 5.0) - dur, 0.0)
+                offset = room * occ / (cnt[aid] - 1) if cnt[aid] > 1 else 0.0
+                motion = ["push", "pull", "drift"][mi % 3]
+            else:
+                motion = a.get("motion") or MOTIONS[mi % len(MOTIONS)]
+            shots.append({"start": t0 + j * dur, "end": t0 + (j + 1) * dur, "src": rel, "kind": a["kind"],
+                          "motion": motion, "offset": round(offset, 3),
+                          "missing": not os.path.exists(os.path.join(out_dir, "assets", f"{aid}.{ext}"))})
+            mi += 1
+    return shots
+
+
 def make_captions(words, max_words=3, max_chars=18):
     caps, cur = [], []
     def flush():
@@ -236,7 +284,7 @@ def main(ep_path, audio_dir=None):
         t += g
 
     end_start = t
-    end_len = ep.get("endCard", {}).get("seconds", 2.5)
+    end_len = ep.get("endCard", {}).get("seconds", 2.5) if ep.get("endCard") else 0.25
     total = end_start + end_len
     pieces.append(np.zeros(int(end_len * SR), np.float32))
     narration = np.concatenate(pieces)
@@ -275,7 +323,8 @@ def main(ep_path, audio_dir=None):
         "chart": ep["chart"], "dataset": ep["dataset"], "points": pts,
         "segments": segs, "captions": make_captions(all_words),
         "speech": speech, "sfx": sfx,
-        "endCard": {**ep.get("endCard", {}), "start": end_start},
+        "endCard": {**(ep.get("endCard") or {}), "start": end_start if ep.get("endCard") else total + 99},
+        "shots": build_shots(ep, ep_dir, segs, out_dir, slug, total),
         **({"hookClip": {"src": f"ep/{slug}/hook.mp4", "end": segs[0]["end"] + 0.2}}
            if os.path.exists(os.path.join(out_dir, "hook.mp4")) else {}),
     }
