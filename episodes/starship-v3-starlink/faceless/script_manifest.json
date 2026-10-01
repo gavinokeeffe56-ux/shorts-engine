@@ -46,7 +46,7 @@
     {
       "n": 2,
       "arc_role": "build",
-      "vo_line": "On September twenty-eighth, SpaceX's Flight Fourteen reached orbit for the first time and released twenty-six new Starlink V three internet satellites.",
+      "vo_line": "On September twenty-eighth, Flight Fourteen reached orbit for the first time, releasing twenty-six Starlink V three satellites.",
       "location": "loc_launch_pad",
       "through_line_state": "the half-filled stack rides up inside the steel ship",
       "shots": [
@@ -65,7 +65,7 @@
     {
       "n": 3,
       "arc_role": "build",
-      "vo_line": "Each V three is designed for roughly one terabit per second. SpaceX says that's more than ten times an older V two Mini.",
+      "vo_line": "Each V three targets about one terabit per second, which SpaceX says is over ten times a V two Mini.",
       "location": "loc_payload_bay",
       "through_line_state": "one big flat satellite lifted out of the half-filled stack for inspection",
       "shots": [
@@ -104,7 +104,7 @@
     {
       "n": 5,
       "arc_role": "build",
-      "vo_line": "So Flight Fourteen's satellites add up to roughly twenty-six terabits. At full capacity, Starship is designed to carry sixty of them.",
+      "vo_line": "So Flight Fourteen's satellites add up to roughly twenty-six terabits. At full capacity, Starship is designed to carry sixty.",
       "location": "loc_payload_bay",
       "through_line_state": "the stack grows from half full to packed to the ceiling",
       "shots": [
@@ -162,7 +162,7 @@
     {
       "n": 8,
       "arc_role": "payoff",
-      "vo_line": "Fully loaded, that's about sixty terabits per launch, which SpaceX says is more than twenty times a Falcon Nine. Which is wild, because",
+      "vo_line": "Fully loaded, roughly sixty terabits, over twenty times a Falcon Nine, SpaceX says. Which is wild, because",
       "location": "loc_orbit_high",
       "through_line_state": "the packed stack beside the slim rocket's tiny stack, then back to the half-filled bay",
       "shots": [
