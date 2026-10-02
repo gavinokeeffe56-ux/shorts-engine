@@ -1,0 +1,21 @@
+metric,value,unit,source_url,status
+crew13_launch_time,2026-10-01 11:10 EDT (15:10 UTC),datetime,https://www.nasa.gov/news-release/nasas-spacex-crew-13-launches-to-international-space-station/,CONFIRMED
+crew13_docking_time,2026-10-01 19:05 EDT (23:05 UTC),datetime,https://www.nasa.gov/blogs/spacestation/2026/10/01/dragon-docks-bringing-spacex-crew-13-to-station/,CONFIRMED
+crew13_transit_actual,7h55m,duration,https://www.nasa.gov/blogs/spacestation/2026/10/01/dragon-docks-bringing-spacex-crew-13-to-station/,CONFIRMED
+crew13_transit_planned_prelaunch,7h50m,duration,https://www.nasa.gov/news-release/nasas-spacex-crew-13-launches-to-international-space-station/,CONFIRMED (plan only; superseded by 7h55m actual)
+crew13_launch_site,SLC-40 Cape Canaveral Space Force Station,text,https://www.nasa.gov/news-release/nasas-spacex-crew-13-launches-to-international-space-station/,CONFIRMED
+crew13_vehicle,Falcon 9 / Crew Dragon Grace (2nd flight),text,https://www.space.com/space-exploration/human-spaceflight/spacex-crew-13-astronaut-mission-iss-launch,CONFIRMED (name Grace not in NASA posts; Space.com x2)
+crew13_crew_count,4,people,https://www.nasa.gov/blogs/spacestation/2026/10/01/dragon-docks-bringing-spacex-crew-13-to-station/,CONFIRMED
+crew13_docking_port,Harmony forward,text,https://www.nasa.gov/blogs/spacestation/2026/10/01/dragon-docks-bringing-spacex-crew-13-to-station/,CONFIRMED
+prev_fastest_us_crewed_crew11,14h43m,duration,https://www.space.com/space-exploration/launches-spacecraft/spacex-crew-13-astronaut-mission-docks-iss-fastest-trip-us-spacecraft,CONFIRMED
+prev_fastest_us_spacecraft_crs31_cargo,12h33m,duration,https://www.space.com/space-exploration/launches-spacecraft/spacex-crew-13-astronaut-mission-docks-iss-fastest-trip-us-spacecraft,SINGLE-SOURCE
+typical_crew_dragon_transit,15-24,hours,https://www.space.com/space-exploration/human-spaceflight/spacex-crew-13-astronaut-mission-iss-launch,SINGLE-SOURCE
+crew1_transit,27.5,hours,https://en.wikipedia.org/wiki/SpaceX_Crew-1,SINGLE-SOURCE (computed from launch/docking times)
+demo2_transit,19,hours,https://en.wikipedia.org/wiki/Crew_Dragon_Demo-2,SINGLE-SOURCE (computed; soft capture ~14:16 UTC)
+alltime_fastest_crewed_soyuz_ms17,3h03m,duration,https://www.nasaspaceflight.com/2020/10/soyuz-ms17-ultrafast-journey-to-iss/,CONFIRMED (14 Oct 2020; Space.com Crew-13 article wrongly says May 2020)
+soyuz_ms17_orbits,2,orbits,https://www.space.com/soyuz-makes-fastest-space-station-crew-flight-record,CONFIRMED
+iss_altitude,250 (about 400 km),miles,https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-the-international-space-station-grades-5-8/,CONFIRMED
+iss_speed,17500 (about 28000 km/h; ~5 miles/s derived),mph,https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-the-international-space-station-grades-5-8/,CONFIRMED
+iss_orbit_period,90,minutes,https://www.space.com/16748-international-space-station.html,CONFIRMED
+iss_orbits_per_day,16,orbits,https://www.space.com/16748-international-space-station.html,CONFIRMED (derived 1440/90)
+plane_windows_per_day,1,per day per site,https://www.smithsonianmag.com/air-space-magazine/how-things-work-shuttle-launch-windows-3142572/,SINGLE-SOURCE (technically 2 plane crossings; 1 usable)

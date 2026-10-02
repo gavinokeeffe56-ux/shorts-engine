@@ -1,0 +1,20 @@
+{
+  "blocks": {
+    "3": {
+      "queries": [
+        "earth views from space station",
+        "earth from international space station"
+      ],
+      "shows": "Earth seen from the International Space Station in orbit (station hardware may be in frame)",
+      "line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour."
+    },
+    "5": {
+      "queries": [
+        "rocket launch",
+        "liftoff"
+      ],
+      "shows": "a rocket on the pad / lifting off, unnamed (generic launch beat)",
+      "line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path."
+    }
+  }
+}

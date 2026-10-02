@@ -1,0 +1,167 @@
+{
+  "topic": "The space station is only about 250 miles up, yet reaching it takes hours: why Crew-13's 7 h 55 min trip was the fastest by a US spacecraft",
+  "genre": "education",
+  "animation_mode": "fully_animated",
+  "channel_type": "Explainer",
+  "style": "Colorful 3D",
+  "through_line": {
+    "name": "the little white crew capsule",
+    "asset": "prop_capsule",
+    "progression": "the capsule rides the rocket up, falls short going straight up, then chases the station around the planet, each chase shorter than the last",
+    "resolution": "the capsule clicks onto the station and the loop returns to it closing in from below"
+  },
+  "arc": {
+    "hook": 1,
+    "build": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "turn": 6,
+    "payoff": 7
+  },
+  "blocks": [
+    {
+      "n": 1,
+      "arc_role": "hook",
+      "vo_line": "The space station is closer than you think. Two hundred fifty miles up, yet reaching it can take a full day.",
+      "location": "loc_orbit_high",
+      "through_line_state": "the capsule closes in on the station from below",
+      "shots": [
+        "MEDIUM, slow push-in: the little capsule races up from below toward the big station, thrusters puffing",
+        "EXTREME CLOSE-UP, static: the capsule's nose cone flips open with a snap, revealing a docking ring",
+        "WIDE, gentle drift: the station sweeps over the curved planet, the tiny capsule trailing just behind it",
+        "CLOSE-UP, low angle: the docking ring meets the station port and locks with a heavy clunk",
+        "OVERHEAD, static: the joined capsule and station glide together above swirling clouds"
+      ],
+      "assets_used": [
+        "loc_orbit_high",
+        "prop_capsule",
+        "prop_station"
+      ]
+    },
+    {
+      "n": 2,
+      "arc_role": "build",
+      "vo_line": "On October first, NASA's Crew Thirteen made it in seven hours fifty-five minutes, the fastest station trip by any American spacecraft.",
+      "location": "loc_launch_pad",
+      "through_line_state": "the capsule sits on top of the slim rocket and rides it up",
+      "shots": [
+        "WIDE, static: the slim white rocket stands on the seaside pad with the capsule on top, steam rolling out",
+        "CLOSE-UP, low angle: the engines ignite in a bright orange burst and the pad shakes",
+        "MEDIUM, crane up: the rocket climbs past the tower on a thick column of flame",
+        "EXTREME CLOSE-UP, static: the capsule pops free from the rocket's tip with a spring-like snap",
+        "HIGH ANGLE WIDE, slow push-in: the capsule arcs over the horizon as the sky darkens into space"
+      ],
+      "assets_used": [
+        "loc_launch_pad",
+        "prop_white_rocket",
+        "prop_capsule"
+      ]
+    },
+    {
+      "n": 3,
+      "arc_role": "build",
+      "vo_line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour.",
+      "location": "loc_orbit_limb",
+      "through_line_state": "the capsule watches the station streak past along the planet's edge",
+      "shots": [
+        "CLOSE-UP, gentle drift: the station's solar wings tilt and catch a flash of sunlight",
+        "WIDE, static: the station streaks along the glowing edge of the planet, leaving a soft trail",
+        "EXTREME CLOSE-UP, push-in: the planet's surface rushes by beneath a solar wing",
+        "MEDIUM, orbit: the capsule hangs behind as the station pulls away with a whoosh",
+        "HIGH ANGLE WIDE, static: the station completes a full loop of the planet and snaps back into view"
+      ],
+      "assets_used": [
+        "loc_orbit_limb",
+        "prop_station",
+        "prop_capsule"
+      ]
+    },
+    {
+      "n": 4,
+      "arc_role": "build",
+      "vo_line": "So a rocket can't just go straight up. It has to match that speed, then chase the station around the planet.",
+      "location": "loc_network_globe",
+      "through_line_state": "the capsule falls back when thrown straight up, then curves into orbit and gives chase",
+      "shots": [
+        "WIDE, static: the whole planet turns slowly while the slim rocket shoots straight up from it like a dart",
+        "CLOSE-UP, low angle: the capsule stalls at the top of its climb and drops back with a bounce",
+        "MEDIUM, gentle drift: a second rocket leans over and curves sideways around the planet",
+        "EXTREME CLOSE-UP, static: the capsule's thrusters fire and it slides onto a glowing ring-shaped track",
+        "OVERHEAD, slow push-in: the capsule chases the station around the ring, the gap shrinking"
+      ],
+      "assets_used": [
+        "loc_network_globe",
+        "prop_capsule",
+        "prop_white_rocket",
+        "prop_station"
+      ]
+    },
+    {
+      "n": 5,
+      "arc_role": "build",
+      "vo_line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path.",
+      "location": "loc_launch_pad",
+      "through_line_state": "the capsule waits on the rocket as the station's track slides overhead",
+      "shots": [
+        "LOW ANGLE MEDIUM, static: the rocket and capsule wait on the pad as a glowing track sweeps across the sky above",
+        "EXTREME CLOSE-UP, push-in: a round dial on the tower clicks around to a single lit mark",
+        "HIGH ANGLE WIDE, gentle drift: the coastline rotates until the pad slides directly under the glowing track",
+        "CLOSE-UP, static: the track and the pad line up and a green light snaps on",
+        "MEDIUM, crane up: the engines light and the rocket leaps off the pad"
+      ],
+      "assets_used": [
+        "loc_launch_pad",
+        "prop_capsule",
+        "prop_white_rocket"
+      ]
+    },
+    {
+      "n": 6,
+      "arc_role": "turn",
+      "vo_line": "The rocket wasn't faster. SpaceX said the station was in an opportune spot, the shortest chase the company has ever flown.",
+      "location": "loc_orbit_limb",
+      "through_line_state": "the capsule reaches orbit with the station already just ahead",
+      "shots": [
+        "MEDIUM, low angle: the capsule pops up over the planet's glowing edge and the station is already right ahead",
+        "EXTREME CLOSE-UP, static: the capsule's nose cone swings open with a click",
+        "WIDE, gentle drift: only a short gap separates capsule and station along the curve of the planet",
+        "CLOSE-UP, slow push-in: the capsule's thrusters puff once and it glides forward",
+        "OVERHEAD, static: the capsule slots onto the station port with a stamp-like clunk"
+      ],
+      "assets_used": [
+        "loc_orbit_limb",
+        "prop_capsule",
+        "prop_station"
+      ]
+    },
+    {
+      "n": 7,
+      "arc_role": "payoff",
+      "vo_line": "Still, the all-time crew record belongs to a Russian Soyuz: three hours, three minutes, in twenty twenty. Which is wild, because",
+      "location": "loc_orbit_high",
+      "through_line_state": "the capsule laps the planet twice and docks, then returns to closing in from below",
+      "shots": [
+        "CLOSE-UP, gentle drift: the capsule whips around the planet once, leaving a bright looping trail",
+        "HIGH ANGLE WIDE, static: a second loop of trail wraps the planet and ends at the station",
+        "EXTREME CLOSE-UP, push-in: the docking ring locks shut with a sharp clunk",
+        "MEDIUM, orbit: the station turns slowly with the capsule attached, solar wings glinting",
+        "LOW ANGLE WIDE, static: the capsule floats just below the station above the curved planet, settling into the opening view"
+      ],
+      "assets_used": [
+        "loc_orbit_high",
+        "prop_station",
+        "prop_capsule"
+      ]
+    }
+  ],
+  "sources": [
+    "https://www.nasa.gov/blogs/spacestation/2026/10/01/dragon-docks-bringing-spacex-crew-13-to-station/",
+    "https://www.nasa.gov/news-release/nasas-spacex-crew-13-launches-to-international-space-station/",
+    "https://www.space.com/space-exploration/launches-spacecraft/spacex-crew-13-astronaut-mission-docks-iss-fastest-trip-us-spacecraft",
+    "https://www.nasaspaceflight.com/2020/10/soyuz-ms17-ultrafast-journey-to-iss/",
+    "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-the-international-space-station-grades-5-8/"
+  ]
+}
