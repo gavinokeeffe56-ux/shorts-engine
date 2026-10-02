@@ -3,7 +3,8 @@ Pick the top unchecked item unless vidIQ trends suggest a better one. Rotate for
 Format keys: timeline-scatter, bar-race, before-after, counter, map
 
 - [x] Shuttle paradox: reuse made orbit pricier (timeline-scatter) — CSIS launch cost
-- [ ] Starship Flight 14 + Starlink V3: what changes, in numbers (trending, timeline/bar) — SpaceX, FCC filings, McDowell
+- [x] Starship Flight 14 + Starlink V3: what changes, in numbers (trending, timeline/bar) — SpaceX, FCC filings, McDowell
+- [x] Crew-13: fastest US trip to the ISS, why 250 miles takes hours (hybrid AI + NASA footage) — NASA
 - [ ] Why astronauts see flashes of light: cosmic rays, explained with numbers (diagram/counter) — NASA
 - [ ] How many satellites are in orbit, 1957→today (counter/bar) — UCS / Jonathan McDowell / OWID
 - [ ] Transistors per chip since 1971 (timeline) — OWID Moore's law data
