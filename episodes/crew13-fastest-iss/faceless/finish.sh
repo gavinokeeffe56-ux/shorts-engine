@@ -9,12 +9,18 @@ B=https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv
 S=https://d2ol7oe51mr4n9.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv
 rm -rf work/blocks work/voices work/output; mkdir -p work/blocks work/voices work/output
 curl -fsSL "$REPO/script_manifest.json" -o script_manifest.json
+# real-footage blocks carry 48 kHz silence, AI blocks 32 kHz audio: the concat needs one rate, so remux the silence at 32 kHz (video untouched)
+mkdir -p stockfix
+for p in 03=920a1cec-be65-4e9f-b4c8-8310414ae620 05=455c0423-91b1-410a-aa78-3502bf8bca89; do
+  curl -fsSL "$S/${p#*=}.mp4" -o stockfix/src${p%%=*}.mp4
+  ffmpeg -nostdin -loglevel error -y -i stockfix/src${p%%=*}.mp4 -f lavfi -t 10 -i anullsrc=r=32000:cl=stereo -map 0:v -map 1:a -c:v copy -c:a aac -shortest stockfix/block${p%%=*}.mp4
+done
 cat > clips.txt <<EOT
 $B/hf_20261002_042611_3b41ce6c-d683-4776-897e-306a0f86c3ca.mp4
 $B/hf_20261002_042611_3b6bfefc-7261-4195-b912-c83b3204e43f.mp4
-$S/920a1cec-be65-4e9f-b4c8-8310414ae620.mp4
+/home/user/stockfix/block03.mp4
 $B/hf_20261002_042611_5cf63ed7-b8a3-4de8-98f0-2b91db33ea65.mp4
-$S/455c0423-91b1-410a-aa78-3502bf8bca89.mp4
+/home/user/stockfix/block05.mp4
 $B/hf_20261002_042611_7d4e2dbf-d823-4d8f-8646-803c4f02497f.mp4
 $B/hf_20261002_042611_37f1c79e-04bb-439c-9796-4553facab51c.mp4
 EOT
