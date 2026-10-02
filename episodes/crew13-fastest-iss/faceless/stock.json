@@ -3,7 +3,7 @@
     "3": {
       "queries": [],
       "shows": "Earth seen from the International Space Station in orbit (station hardware may be in frame)",
-      "line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour.",
+      "line": "Distance was never the problem. The station circles Earth about every ninety minutes, moving at roughly seventeen thousand five hundred miles an hour.",
       "ids": [
         "jsc2022m000172_Earth_in_4K_Expedition_65_Edition",
         "jsc2023m000111_Earth_in_4K_Space_Station_Expedition_67_68_Edition",
@@ -16,7 +16,7 @@
     "5": {
       "queries": [],
       "shows": "Earth turning beneath the International Space Station as it flies its path (no launch footage: NASA shuttle/launch clips failed QA)",
-      "line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path.",
+      "line": "And there's essentially one shot a day, the brief moment when Earth's spin carries the launch pad right under the station's orbital path.",
       "ids": [
         "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4",
         "Earth Views from the International Space Station",

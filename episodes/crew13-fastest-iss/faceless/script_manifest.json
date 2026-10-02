@@ -25,7 +25,7 @@
     {
       "n": 1,
       "arc_role": "hook",
-      "vo_line": "The space station is closer than you think. Two hundred fifty miles up, yet reaching it can take a full day.",
+      "vo_line": "The space station is closer than you think. It's just two hundred fifty miles up, yet reaching it can take a full day.",
       "location": "loc_orbit_high",
       "through_line_state": "the capsule closes in on the station from below",
       "shots": [
@@ -63,7 +63,7 @@
     {
       "n": 3,
       "arc_role": "build",
-      "vo_line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour.",
+      "vo_line": "Distance was never the problem. The station circles Earth about every ninety minutes, moving at roughly seventeen thousand five hundred miles an hour.",
       "location": "loc_orbit_limb",
       "through_line_state": "the capsule watches the station streak past along the planet's edge",
       "shots": [
@@ -82,7 +82,7 @@
     {
       "n": 4,
       "arc_role": "build",
-      "vo_line": "So a rocket can't just go straight up. It has to match that speed, then chase the station around the planet.",
+      "vo_line": "So a rocket can't just go straight up. It first has to match that sideways speed, then chase the station around the planet.",
       "location": "loc_network_globe",
       "through_line_state": "the capsule falls back when thrown straight up, then curves into orbit and gives chase",
       "shots": [
@@ -102,7 +102,7 @@
     {
       "n": 5,
       "arc_role": "build",
-      "vo_line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path.",
+      "vo_line": "And there's essentially one shot a day, the brief moment when Earth's spin carries the launch pad right under the station's orbital path.",
       "location": "loc_launch_pad",
       "through_line_state": "the capsule waits on the rocket as the station's track slides overhead",
       "shots": [
@@ -122,7 +122,7 @@
     {
       "n": 6,
       "arc_role": "turn",
-      "vo_line": "The rocket wasn't faster. SpaceX said the station was in an opportune spot, the shortest chase the company has ever flown.",
+      "vo_line": "The rocket wasn't any faster. SpaceX said the station was in an opportune spot, the shortest chase the company has ever flown.",
       "location": "loc_orbit_limb",
       "through_line_state": "the capsule reaches orbit with the station already just ahead",
       "shots": [
