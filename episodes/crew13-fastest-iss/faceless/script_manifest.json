@@ -82,7 +82,7 @@
     {
       "n": 4,
       "arc_role": "build",
-      "vo_line": "So a rocket cannot just climb straight up. It has to match that sideways velocity, then chase the station around the planet.",
+      "vo_line": "A rocket cannot simply climb straight up. It has to match that sideways velocity, then chase the station around the planet.",
       "location": "loc_network_globe",
       "through_line_state": "the capsule falls back when thrown straight up, then curves into orbit and gives chase",
       "shots": [
