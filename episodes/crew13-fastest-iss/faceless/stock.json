@@ -1,20 +1,35 @@
 {
   "blocks": {
     "3": {
-      "queries": [
-        "earth views from space station",
-        "earth from international space station"
-      ],
+      "queries": [],
       "shows": "Earth seen from the International Space Station in orbit (station hardware may be in frame)",
-      "line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour."
+      "line": "Distance was never the problem. The station circles Earth every ninety minutes, moving at seventeen thousand five hundred miles an hour.",
+      "ids": [
+        "jsc2022m000172_Earth_in_4K_Expedition_65_Edition",
+        "jsc2023m000111_Earth_in_4K_Space_Station_Expedition_67_68_Edition",
+        "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4"
+      ],
+      "avoid_ids": [
+        "jsc2021m000225-VF_Russian_Trio_Returns_To_Earth_From_The_International_Space_Station",
+        "Earth Views from the International Space Station"
+      ]
     },
     "5": {
-      "queries": [
-        "rocket launch",
-        "liftoff"
+      "queries": [],
+      "shows": "a space shuttle on the pad / lifting off on a mission to the International Space Station (generic launch-to-station beat, vehicle not named in the line)",
+      "line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path.",
+      "ids": [
+        "GRC-2023-CM-0250",
+        "ksc_111609_sts129_launch",
+        "ksc_051410_sts132_launch",
+        "ksc_101509_sts129_rollout",
+        "ksc_042310_sts132_rollout"
       ],
-      "shows": "a rocket on the pad / lifting off, unnamed (generic launch beat)",
-      "line": "And there's essentially one shot a day, the moment Earth's spin carries the launch pad right under the station's path."
+      "avoid_ids": [
+        "KSC-20220628-VP-MMS01-0001-RocketLab_Capstone_Live_Launch_Coverage_ROCKET_VIEWS_ONLY-3306978",
+        "MAF_20191204_SLSAssembly-B-roll-UHD",
+        "KSC_SLS_ART II Timelapse Rollout 2 to Pad 16-9"
+      ]
     }
   }
 }
