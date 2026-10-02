@@ -82,7 +82,7 @@
     {
       "n": 4,
       "arc_role": "build",
-      "vo_line": "A rocket cannot simply climb straight up. It has to match that sideways velocity, then chase the station around the planet.",
+      "vo_line": "A rocket cannot simply climb straight up. It must first match that enormous sideways velocity, then gradually chase the station around the planet.",
       "location": "loc_network_globe",
       "through_line_state": "the capsule falls back when thrown straight up, then curves into orbit and gives chase",
       "shots": [
@@ -102,7 +102,7 @@
     {
       "n": 5,
       "arc_role": "build",
-      "vo_line": "And there's essentially one opportunity a day, the moment Earth's rotation carries the launch pad right under the station's orbital path.",
+      "vo_line": "And there's essentially one opportunity a day, the brief moment Earth's rotation carries the launch pad directly underneath the station's orbital path.",
       "location": "loc_launch_pad",
       "through_line_state": "the capsule waits on the rocket as the station's track slides overhead",
       "shots": [
