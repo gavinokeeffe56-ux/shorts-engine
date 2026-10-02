@@ -25,7 +25,7 @@
     {
       "n": 1,
       "arc_role": "hook",
-      "vo_line": "The space station is closer than you think. It's just two hundred fifty miles up, yet reaching it can take a full day.",
+      "vo_line": "The space station is closer than you think. Roughly two hundred fifty miles overhead, yet astronauts can spend a full day reaching it.",
       "location": "loc_orbit_high",
       "through_line_state": "the capsule closes in on the station from below",
       "shots": [
@@ -82,7 +82,7 @@
     {
       "n": 4,
       "arc_role": "build",
-      "vo_line": "So a rocket can't just go straight up. It first has to match that sideways speed, then chase the station around the planet.",
+      "vo_line": "So a rocket cannot just climb straight up. It has to match that sideways velocity, then chase the station around the planet.",
       "location": "loc_network_globe",
       "through_line_state": "the capsule falls back when thrown straight up, then curves into orbit and gives chase",
       "shots": [
@@ -102,7 +102,7 @@
     {
       "n": 5,
       "arc_role": "build",
-      "vo_line": "And there's essentially one shot a day, the brief moment when Earth's spin carries the launch pad right under the station's orbital path.",
+      "vo_line": "And there's essentially one opportunity a day, the moment Earth's rotation carries the launch pad right under the station's orbital path.",
       "location": "loc_launch_pad",
       "through_line_state": "the capsule waits on the rocket as the station's track slides overhead",
       "shots": [

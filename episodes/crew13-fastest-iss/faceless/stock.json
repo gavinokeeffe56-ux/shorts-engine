@@ -15,17 +15,17 @@
     },
     "5": {
       "queries": [],
-      "shows": "Earth turning beneath the International Space Station as it flies its path (no launch footage: NASA shuttle/launch clips failed QA)",
-      "line": "And there's essentially one shot a day, the brief moment when Earth's spin carries the launch pad right under the station's orbital path.",
+      "shows": "Earth turning beneath the International Space Station as it flies its orbital path",
+      "line": "And there's essentially one opportunity a day, the moment Earth's rotation carries the launch pad right under the station's orbital path.",
       "ids": [
         "jsc2021m000138_4K_Earth_Views_Extended_Cut_for_Earth_Day_ 2021_210422-4KMP4",
-        "Earth Views from the International Space Station",
-        "jsc2022m000251_Expedition_67_Space_Station_Flyover_of_Hurricane_Ian_220928"
+        "Earth Views from the International Space Station"
       ],
       "avoid_ids": [
         "KSC-20220628-VP-MMS01-0001-RocketLab_Capstone_Live_Launch_Coverage_ROCKET_VIEWS_ONLY-3306978",
         "MAF_20191204_SLSAssembly-B-roll-UHD",
-        "KSC_SLS_ART II Timelapse Rollout 2 to Pad 16-9"
+        "KSC_SLS_ART II Timelapse Rollout 2 to Pad 16-9",
+        "jsc2022m000251_Expedition_67_Space_Station_Flyover_of_Hurricane_Ian_220928"
       ]
     }
   }
