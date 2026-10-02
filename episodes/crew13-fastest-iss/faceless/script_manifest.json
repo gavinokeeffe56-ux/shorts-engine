@@ -106,7 +106,7 @@
       "location": "loc_launch_pad",
       "through_line_state": "the capsule waits on the rocket as the station's track slides overhead",
       "shots": [
-        "LOW ANGLE MEDIUM, static: the rocket and capsule wait on the pad as a glowing track sweeps across the sky above",
+        "LOW ANGLE MEDIUM, static: the rocket and capsule wait on the pad as the tiny station sweeps a glowing track across the sky above",
         "EXTREME CLOSE-UP, push-in: a round dial on the tower clicks around to a single lit mark",
         "HIGH ANGLE WIDE, gentle drift: the coastline rotates until the pad slides directly under the glowing track",
         "CLOSE-UP, static: the track and the pad line up and a green light snaps on",
@@ -114,6 +114,7 @@
       ],
       "assets_used": [
         "loc_launch_pad",
+        "prop_station",
         "prop_capsule",
         "prop_white_rocket"
       ]
@@ -125,7 +126,7 @@
       "location": "loc_orbit_limb",
       "through_line_state": "the capsule reaches orbit with the station already just ahead",
       "shots": [
-        "MEDIUM, low angle: the capsule pops up over the planet's glowing edge and the station is already right ahead",
+        "MEDIUM, low angle: the capsule pops off the rocket's upper stage over the planet's glowing edge and the station is already right ahead",
         "EXTREME CLOSE-UP, static: the capsule's nose cone swings open with a click",
         "WIDE, gentle drift: only a short gap separates capsule and station along the curve of the planet",
         "CLOSE-UP, slow push-in: the capsule's thrusters puff once and it glides forward",
@@ -134,6 +135,7 @@
       "assets_used": [
         "loc_orbit_limb",
         "prop_capsule",
+        "prop_white_rocket",
         "prop_station"
       ]
     },
