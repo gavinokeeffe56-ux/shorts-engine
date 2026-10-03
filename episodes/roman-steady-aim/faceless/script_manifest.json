@@ -44,7 +44,7 @@
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "The Nancy Grace Roman Space Telescope launched this past August and is heading for a spot about one million miles from Earth.",
+   "vo_line": "Roman, short for the Nancy Grace Roman Space Telescope, launched this past August, heading for a spot about one million miles from Earth.",
    "location": "loc_launch_pad",
    "through_line_state": "the telescope rides the rocket up and pops free",
    "shots": [
