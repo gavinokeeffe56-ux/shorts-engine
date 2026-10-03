@@ -44,7 +44,7 @@
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "Roman reached Florida by barge in June, launched in August, and is now heading about one million miles from Earth.",
+   "vo_line": "The Nancy Grace Roman Space Telescope launched this past August, heading for a spot about one million miles from Earth.",
    "location": "loc_launch_pad",
    "through_line_state": "the telescope rides the rocket up and pops free",
    "shots": [

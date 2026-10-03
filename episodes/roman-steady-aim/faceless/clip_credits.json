@@ -1,0 +1,25 @@
+{
+ "source": "NASA Image and Video Library (public domain)",
+ "blocks": {
+  "4": [
+   {
+    "nasa_id": "NASAsRomanSpaceTelescopeSystemsAssemble_1080",
+    "title": "NASA's Roman Space Telescope Systems Assemble",
+    "center": "GSFC",
+    "date": "2024-10-02"
+   },
+   {
+    "nasa_id": "NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080",
+    "title": "NASA's Roman Space Telescope Hardware Highlights Spring 2024",
+    "center": "GSFC",
+    "date": "2024-12-13"
+   },
+   {
+    "nasa_id": "KSC-20260621-MH-SNW01-0001-Roman_Space_Telescope_Arrival_GSFC_Broll_Trimmed-M21913",
+    "title": "Roman Space Telescope Arrival at PHSF",
+    "center": "KSC",
+    "date": "2026-06-21"
+   }
+  ]
+ }
+}
