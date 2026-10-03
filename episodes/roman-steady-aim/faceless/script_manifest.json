@@ -122,10 +122,10 @@
    "location": "loc_deep_space",
    "through_line_state": "the telescope slides a tiny disc over a blazing star and a planet appears",
    "shots": [
-    "WIDE, static: a blazing star floods the view, the telescope a small silhouette in front of it",
+    "LOW ANGLE MEDIUM, gentle drift: the telescope turns to face a blazing star that floods the view",
     "CLOSE-UP, slow push-in: a small round disc slides out of the telescope and snaps over the star",
-    "EXTREME CLOSE-UP, static: the glare drops away and a tiny dot pops into view beside the disc",
-    "LOW ANGLE MEDIUM, gentle drift: the telescope holds still, the disc perfectly centered over the star",
+    "WIDE, static: the glare drops away and the space around the star goes dark",
+    "EXTREME CLOSE-UP, static: a tiny dot pops into view beside the disc",
     "HIGH ANGLE WIDE, static: the little planet circles the hidden star, twinkling"
    ],
    "assets_used": [

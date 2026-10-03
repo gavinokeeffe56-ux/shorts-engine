@@ -1,27 +1,27 @@
 {
  "blocks": {
-  "2": {
-   "queries": [
-    "roman space telescope launch high speed footage"
-   ],
-   "ids": [
-    "KSC-20260830-MH-CSH01-0001-Roman_Space_Telescope_Launch_High_Speed_Footage",
-    "KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage"
-   ],
-   "avoid_ids": [],
-   "shows": "the actual launch of the Nancy Grace Roman Space Telescope on a Falcon Heavy from Kennedy Space Center, Aug. 30, 2026",
-   "line": "The Nancy Grace Roman Space Telescope launched this August, bound for a parking spot about one million miles from Earth."
-  },
   "4": {
    "queries": [],
    "ids": [
-    "KSC-20260731-MH-FMX01-0001-Roman_Space_Telescope_PHSF_Broll-M26246",
-    "KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913",
-    "RomansSpacecraftIntegratedPayloadAssemblyTimelapse_1080"
+    "RomansSpacecraftIntegratedPayloadAssemblyTimelapse_1080",
+    "NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080",
+    "NASAsRomanSpaceTelescopeSystemsAssemble_1080",
+    "KSC-20260621-MH-SNW01-0001-Roman_Space_Telescope_Arrival_GSFC_Broll_Trimmed-M21913",
+    "Moving_Roman_-_Propulsion4k"
    ],
    "avoid_ids": [],
-   "shows": "the real Roman Space Telescope observatory hardware in a clean room before launch",
+   "shows": "the real Roman Space Telescope hardware being assembled in a clean room before launch",
    "line": "Roman's main mirror is the same width as Hubble's, yet each image covers at least one hundred times more sky."
+  },
+  "6": {
+   "queries": [],
+   "ids": [
+    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Ships from JPL",
+    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Instrument Overview Video"
+   ],
+   "avoid_ids": [],
+   "shows": "the real Roman Coronagraph Instrument hardware in a JPL clean room",
+   "line": "Why so steady? Its coronagraph is designed to block a star's glare and reveal planets one hundred million times fainter."
   }
  }
 }
