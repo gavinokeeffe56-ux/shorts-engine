@@ -8,7 +8,7 @@ in=$1; out=$2; l1=$3; l2=${4:-}; d=${5:-2.8}
 font=$(fc-list | grep -iE 'Montserrat.*(ExtraBold|Black)' | head -1 | cut -d: -f1)
 [ -n "$font" ] || font=$(fc-list | grep -iE 'Montserrat.*Bold|Metropolis.*(Black|Bold)' | head -1 | cut -d: -f1)
 [ -n "$font" ] || font=$(fc-list | grep -i bold | head -1 | cut -d: -f1)
-read -r W H < <(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=' ' "$in")
+IFS=, read -r W H < <(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "$in")
 n1=${#l1}; n2=${#l2}; n=$(( n1 > n2 ? n1 : n2 ))
 fs=$(( H * 50 / 1000 )); fit=$(python3 -c "print(int($W*0.90/(0.64*max($n,1))))")
 [ "$fit" -lt "$fs" ] && fs=$fit
