@@ -16,16 +16,20 @@
    "shows": "the real Roman Space Telescope hardware being assembled in a clean room before launch",
    "line": "Roman's main mirror is the same width as Hubble's, yet each image covers at least one hundred times more sky."
   },
-  "6": {
+  "2": {
    "queries": [],
    "ids": [
-    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Ships from JPL",
-    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Instrument Overview Video",
-    "RomansSpacecraftIntegratedPayloadAssemblyTimelapse_1080"
+    "KSC-20260621-MH-SER01-0001-Roman_Space_Telescope_Arrival_Timelapse_GSFC-M21344",
+    "KSC-20260621-MH-KLS01-0001-Nancy_Grace_Roman_Space_Telescope_Arrival--M21344",
+    "KSC-20260622-RV-FMX01_Roman_Arrival_Support_Timelapse-WON_M21344"
    ],
    "avoid_ids": [],
-   "shows": "the real Roman Coronagraph Instrument in a JPL clean room and the instruments being integrated into the Roman observatory",
-   "line": "Why so steady? Its coronagraph is designed to block a star's glare and reveal planets one hundred million times fainter."
+   "shows": "the Roman Space Telescope arriving by barge at Kennedy Space Center, Florida, in June 2026 and being offloaded",
+   "line": "Roman reached Florida by barge in June, launched in August, and is now heading about one million miles from Earth."
   }
+ },
+ "rejected": {
+  "6": "re-rolled once; frames showed a person and on-screen title graphics, so block 6 is AI",
+  "2-launch": "NASA launch clips were skipped by the rights/credit filter, so no launch footage is used"
  }
 }
