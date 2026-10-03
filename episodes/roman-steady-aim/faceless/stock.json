@@ -9,7 +9,10 @@
     "KSC-20260621-MH-SNW01-0001-Roman_Space_Telescope_Arrival_GSFC_Broll_Trimmed-M21913",
     "Moving_Roman_-_Propulsion4k"
    ],
-   "avoid_ids": [],
+   "avoid_ids": [
+    "RomansSpacecraftIntegratedPayloadAssemblyTimelapse_1080",
+    "Moving_Roman_-_Propulsion4k"
+   ],
    "shows": "the real Roman Space Telescope hardware being assembled in a clean room before launch",
    "line": "Roman's main mirror is the same width as Hubble's, yet each image covers at least one hundred times more sky."
   },
@@ -17,10 +20,11 @@
    "queries": [],
    "ids": [
     "JPL-20240521-ROMCORf-0001-Roman Coronagraph Ships from JPL",
-    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Instrument Overview Video"
+    "JPL-20240521-ROMCORf-0001-Roman Coronagraph Instrument Overview Video",
+    "RomansSpacecraftIntegratedPayloadAssemblyTimelapse_1080"
    ],
    "avoid_ids": [],
-   "shows": "the real Roman Coronagraph Instrument hardware in a JPL clean room",
+   "shows": "the real Roman Coronagraph Instrument in a JPL clean room and the instruments being integrated into the Roman observatory",
    "line": "Why so steady? Its coronagraph is designed to block a star's glare and reveal planets one hundred million times fainter."
   }
  }
