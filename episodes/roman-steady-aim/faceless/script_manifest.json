@@ -44,7 +44,7 @@
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "The Nancy Grace Roman Space Telescope launched this past August and is still heading for a spot about one million miles from Earth.",
+   "vo_line": "The Nancy Grace Roman Space Telescope launched this past August and is heading for a spot about one million miles from Earth.",
    "location": "loc_launch_pad",
    "through_line_state": "the telescope rides the rocket up and pops free",
    "shots": [
@@ -136,7 +136,7 @@
   {
    "n": 7,
    "arc_role": "payoff",
-   "vo_line": "Coronagraph tests captured stars in a neighboring galaxy, and NASA expects to release Roman's first images by early twenty twenty-seven. Wild, because",
+   "vo_line": "Its tests captured stars in another galaxy, and NASA expects to release Roman's first images by early twenty twenty-seven. Wild, because",
    "location": "loc_hills",
    "through_line_state": "the telescope returns to holding its beam on the coin",
    "shots": [
