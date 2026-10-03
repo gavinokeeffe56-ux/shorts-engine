@@ -63,7 +63,7 @@
   {
    "n": 3,
    "arc_role": "build",
-   "vo_line": "In September, engineers tested its aim. It held steady within one hundred-thousandth of a degree, up to eight hours in coronagraph mode.",
+   "vo_line": "In September, engineers tested its aim. It can hold steady within one hundred-thousandth of a degree, up to eight hours in coronagraph mode.",
    "location": "loc_deep_space",
    "through_line_state": "the telescope wobbles, then locks rock steady on the coin target",
    "shots": [
@@ -136,7 +136,7 @@
   {
    "n": 7,
    "arc_role": "payoff",
-   "vo_line": "The coronagraph's first tests captured stars in a neighboring galaxy, and NASA expects to release first images by early twenty twenty-seven. Wild, because",
+   "vo_line": "Early coronagraph tests captured stars in a neighboring galaxy, and NASA expects to release Roman's first images by early twenty twenty-seven. Wild, because",
    "location": "loc_hills",
    "through_line_state": "the telescope returns to holding its beam on the coin",
    "shots": [
