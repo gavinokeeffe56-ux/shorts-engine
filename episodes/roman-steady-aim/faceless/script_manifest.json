@@ -118,7 +118,7 @@
   {
    "n": 6,
    "arc_role": "turn",
-   "vo_line": "Every image needs that steadiness. Its coronagraph demo is designed to block starlight and reveal planets one hundred million times fainter.",
+   "vo_line": "Every image needs that. Its coronagraph demo is designed to block starlight and reveal planets one hundred million times fainter.",
    "location": "loc_deep_space",
    "through_line_state": "the telescope slides a tiny disc over a blazing star and a planet appears",
    "shots": [
