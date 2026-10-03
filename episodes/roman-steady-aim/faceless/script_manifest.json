@@ -25,7 +25,7 @@
   {
    "n": 1,
    "arc_role": "hook",
-   "vo_line": "NASA's new Roman telescope barely moves at all. That's like keeping a laser on a dime from about one hundred fifty miles.",
+   "vo_line": "NASA's new Roman telescope barely wobbles at all. That's like keeping a laser on a dime from about one hundred fifty miles.",
    "location": "loc_hills",
    "through_line_state": "the telescope holds a thin beam dead still on a far-away coin",
    "shots": [
@@ -63,7 +63,7 @@
   {
    "n": 3,
    "arc_role": "build",
-   "vo_line": "In September, engineers tested its aim. It stayed steady to within one hundred-thousandth of a degree for eight hours at a time.",
+   "vo_line": "In September, engineers tested its aim. It held steady within one hundred-thousandth of a degree, up to eight hours in coronagraph mode.",
    "location": "loc_deep_space",
    "through_line_state": "the telescope wobbles, then locks rock steady on the coin target",
    "shots": [
@@ -82,7 +82,7 @@
   {
    "n": 4,
    "arc_role": "build",
-   "vo_line": "Roman's main mirror is the same width as Hubble's, yet each image covers at least one hundred times more sky.",
+   "vo_line": "This is the real Roman before launch. Its mirror matches Hubble's width, yet each image covers at least one hundred times more sky.",
    "location": "loc_orbit_high",
    "through_line_state": "the telescope opens wide and takes in a huge patch of sky",
    "shots": [
@@ -118,7 +118,7 @@
   {
    "n": 6,
    "arc_role": "turn",
-   "vo_line": "Why so steady? Its coronagraph is designed to block a star's glare and reveal planets one hundred million times fainter.",
+   "vo_line": "Every image needs that steadiness. Its coronagraph demo is designed to block a star's glare and reveal planets one hundred million times fainter.",
    "location": "loc_deep_space",
    "through_line_state": "the telescope slides a tiny disc over a blazing star and a planet appears",
    "shots": [
@@ -136,7 +136,7 @@
   {
    "n": 7,
    "arc_role": "payoff",
-   "vo_line": "The coronagraph's first test captured stars in a neighboring galaxy, and NASA expects first images by early twenty twenty-seven. Which is wild, because",
+   "vo_line": "The coronagraph's first tests captured stars in a neighboring galaxy, and NASA expects to release first images by early twenty twenty-seven. Wild, because",
    "location": "loc_hills",
    "through_line_state": "the telescope returns to holding its beam on the coin",
    "shots": [
