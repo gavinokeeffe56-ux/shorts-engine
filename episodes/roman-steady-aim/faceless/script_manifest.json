@@ -1,0 +1,162 @@
+{
+ "topic": "NASA's Roman Space Telescope held its aim to better than one hundred-thousandth of a degree in its first in-space pointing tests, and why its coronagraph needs that",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Colorful 3D",
+ "through_line": {
+  "name": "the chunky silver space telescope",
+  "asset": "prop_telescope",
+  "progression": "the telescope launches, steadies itself, opens its wide eye, locks onto guide stars and finally hides a star to reveal a planet",
+  "resolution": "the telescope returns to the opening view, holding its beam on the coin"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "turn": 6,
+  "payoff": 7
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "NASA's new Roman telescope barely moves at all. That's like keeping a laser on a dime from about one hundred fifty miles.",
+   "location": "loc_hills",
+   "through_line_state": "the telescope holds a thin beam dead still on a far-away coin",
+   "shots": [
+    "CLOSE-UP, slow push-in: a thin bright beam lands on the small silver coin standing on a hilltop post and the coin flashes",
+    "WIDE, static: the beam stretches across rolling hills from the telescope hovering far away in the sky",
+    "EXTREME CLOSE-UP, static: the telescope's round barrel door swings open with a snap",
+    "LOW ANGLE MEDIUM, gentle drift: wind whips the grass around the post while the beam stays locked on the coin",
+    "HIGH ANGLE WIDE, static: the whole valley with the beam drawn straight from telescope to coin"
+   ],
+   "assets_used": [
+    "loc_hills",
+    "prop_telescope",
+    "prop_coin"
+   ]
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "The Nancy Grace Roman Space Telescope launched this August, bound for a parking spot about one million miles from Earth.",
+   "location": "loc_launch_pad",
+   "through_line_state": "the telescope rides the rocket up and pops free",
+   "shots": [
+    "LOW ANGLE WIDE, static: the slim white rocket stands on the seaside pad with steam rolling out",
+    "CLOSE-UP, static: the engines ignite in a bright orange burst and the pad shakes",
+    "MEDIUM, crane up: the rocket climbs past the tower on a thick column of flame",
+    "EXTREME CLOSE-UP, static: the rocket's nose splits open with a pop and the telescope slides out",
+    "HIGH ANGLE WIDE, slow push-in: the telescope drifts away above the curved horizon as the sky darkens"
+   ],
+   "assets_used": [
+    "loc_launch_pad",
+    "prop_white_rocket",
+    "prop_telescope"
+   ]
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "In September, engineers tested its aim. It stayed steady to within one hundred-thousandth of a degree for eight hours at a time.",
+   "location": "loc_deep_space",
+   "through_line_state": "the telescope wobbles, then locks rock steady on the coin target",
+   "shots": [
+    "MEDIUM, gentle drift: the telescope floats among stars, wobbling slightly from side to side",
+    "EXTREME CLOSE-UP, static: small thrusters puff once and the wobble stops with a click",
+    "WIDE, static: a thin beam from the telescope reaches a tiny far-off coin and holds on it",
+    "CLOSE-UP, slow push-in: the coin glows steadily under the unmoving dot of light",
+    "OVERHEAD, static: the telescope sits perfectly still while the stars slowly wheel around it"
+   ],
+   "assets_used": [
+    "loc_deep_space",
+    "prop_telescope",
+    "prop_coin"
+   ]
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "Roman's main mirror is the same width as Hubble's, yet each image covers at least one hundred times more sky.",
+   "location": "loc_orbit_high",
+   "through_line_state": "the telescope opens wide and takes in a huge patch of sky",
+   "shots": [
+    "CLOSE-UP, low angle: the telescope's barrel door lifts and the round mirror inside catches the light",
+    "WIDE, gentle drift: the telescope turns above the curved planet toward a field of stars",
+    "EXTREME CLOSE-UP, push-in: starlight sweeps across the mirror's surface",
+    "MEDIUM, static: a small square window of stars pops open in front of the telescope, then a far bigger one snaps open around it",
+    "HIGH ANGLE WIDE, static: the big window fills with a sea of stars with a soft chime"
+   ],
+   "assets_used": [
+    "loc_orbit_high",
+    "prop_telescope"
+   ]
+  },
+  {
+   "n": 5,
+   "arc_role": "build",
+   "vo_line": "Roman has no separate guider. Instead, eighteen detectors in its main camera each track a guide star, checking about four times every second.",
+   "location": "loc_orbit_limb",
+   "through_line_state": "the telescope's camera tiles each lock onto a star",
+   "shots": [
+    "EXTREME CLOSE-UP, slow push-in: a grid of square tiles inside the telescope lights up one by one",
+    "MEDIUM, static: the telescope faces a cluster of bright stars along the planet's glowing edge",
+    "CLOSE-UP, gentle drift: a single star blinks rapidly inside one tile like a ticking light",
+    "WIDE, static: the telescope drifts a little, then nudges back into place with a soft thud",
+    "OVERHEAD, static: every tile holds its own star, all pulsing together"
+   ],
+   "assets_used": [
+    "loc_orbit_limb",
+    "prop_telescope"
+   ]
+  },
+  {
+   "n": 6,
+   "arc_role": "turn",
+   "vo_line": "Why so steady? Its coronagraph is designed to block a star's glare and reveal planets one hundred million times fainter.",
+   "location": "loc_deep_space",
+   "through_line_state": "the telescope slides a tiny disc over a blazing star and a planet appears",
+   "shots": [
+    "WIDE, static: a blazing star floods the view, the telescope a small silhouette in front of it",
+    "CLOSE-UP, slow push-in: a small round disc slides out of the telescope and snaps over the star",
+    "EXTREME CLOSE-UP, static: the glare drops away and a tiny dot pops into view beside the disc",
+    "LOW ANGLE MEDIUM, gentle drift: the telescope holds still, the disc perfectly centered over the star",
+    "HIGH ANGLE WIDE, static: the little planet circles the hidden star, twinkling"
+   ],
+   "assets_used": [
+    "loc_deep_space",
+    "prop_telescope"
+   ]
+  },
+  {
+   "n": 7,
+   "arc_role": "payoff",
+   "vo_line": "The coronagraph's first test captured stars in a neighboring galaxy, and NASA expects first images by early twenty twenty-seven. Which is wild, because",
+   "location": "loc_hills",
+   "through_line_state": "the telescope returns to holding its beam on the coin",
+   "shots": [
+    "MEDIUM, slow push-in: a glowing swirl of stars rises over the hills at dusk",
+    "EXTREME CLOSE-UP, static: the telescope's barrel door opens with a clunk and light pours in",
+    "HIGH ANGLE WIDE, gentle drift: the telescope glides over the valley toward the hilltop post",
+    "LOW ANGLE CLOSE-UP, static: the coin on its post tilts up and catches a glint",
+    "WIDE, static: the thin beam lands on the coin again and holds, settling into the opening view"
+   ],
+   "assets_used": [
+    "loc_hills",
+    "prop_coin",
+    "prop_telescope"
+   ]
+  }
+ ],
+ "sources": [
+  "https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/",
+  "https://www.nasa.gov/news-release/nasas-dark-universe-seeking-nancy-grace-roman-space-telescope-launches/",
+  "https://science.nasa.gov/mission/roman-space-telescope/why-the-roman-space-telescope/",
+  "https://www.jpl.nasa.gov/missions/the-roman-coronagraph-instrument/"
+ ]
+}

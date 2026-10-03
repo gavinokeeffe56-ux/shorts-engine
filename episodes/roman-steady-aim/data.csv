@@ -1,0 +1,16 @@
+fact,value,unit,source,status
+pointing stability,better than 1/100000,degree,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+stable duration wide field instrument,0.5,hours,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+stable duration coronagraph,8,hours,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+laser on a dime analogy distance (current),150,miles,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+laser on a dime analogy distance (goal after tuning),230,miles,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed (goal)
+guide star position reports,about 4,per second,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+wide field instrument detectors,18,detectors,https://www.nasa.gov/news-release/nasas-dark-universe-seeking-nancy-grace-roman-space-telescope-launches/,confirmed
+fine guidance tests with wide field instrument,2026-09-15 to 2026-09-21,date,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+coronagraph tests (stars in the Large Magellanic Cloud),2026-09-22 and 2026-09-27,date,https://science.nasa.gov/blogs/roman/2026/09/30/nasa-checks-roman-guidance-system-takes-first-coronagraph-observation/,confirmed
+launch,2026-08-30 07:26 EDT,date,https://www.nasa.gov/news-release/nasas-dark-universe-seeking-nancy-grace-roman-space-telescope-launches/,confirmed
+destination Sun-Earth L2 distance,about 1000000,miles,https://www.nasa.gov/news-release/nasas-dark-universe-seeking-nancy-grace-roman-space-telescope-launches/,confirmed
+primary mirror diameter,2.4,metres,https://science.nasa.gov/mission/roman-space-telescope/why-the-roman-space-telescope/,confirmed
+field of view vs Hubble,at least 100,times,https://science.nasa.gov/mission/roman-space-telescope/why-the-roman-space-telescope/,confirmed
+coronagraph design contrast (planet vs star),100000000,times fainter,https://www.jpl.nasa.gov/missions/the-roman-coronagraph-instrument/,confirmed (design goal)
+first images expected,by early 2027,date,https://www.nasa.gov/news-release/nasas-dark-universe-seeking-nancy-grace-roman-space-telescope-launches/,confirmed
