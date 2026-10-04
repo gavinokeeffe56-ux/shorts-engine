@@ -100,7 +100,7 @@
   {
    "n": 5,
    "arc_role": "build",
-   "vo_line": "Ships lay them across entire oceans, some resting miles below the surface. Together they stretch more than nine hundred thousand miles.",
+   "vo_line": "Ships lay them across oceans, some resting miles below the surface. Together they stretch more than nine hundred thousand miles.",
    "location": "loc_ocean",
    "through_line_state": "the cable spools off the back of a ship and sinks into the deep",
    "shots": [
