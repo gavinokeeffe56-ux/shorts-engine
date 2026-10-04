@@ -1,0 +1,166 @@
+{
+ "topic": "Why almost all data between continents travels through garden-hose-thick fibre-optic cables on the seabed, and how they work",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Colorful 3D",
+ "through_line": {
+  "name": "the black seabed cable with a glowing glass core",
+  "asset": "prop_cable",
+  "progression": "the cable is compared with a hose, opened to show its glass strands, fades, gets boosted by repeaters, is laid by a ship and finally outshines a satellite beam",
+  "resolution": "the cable returns to the garden and lies beside the hose as in the opening view"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "turn": 6,
+  "payoff": 7
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "Your internet runs through a garden hose. Around ninety-nine percent of data between continents travels in seabed cables about that thick.",
+   "location": "loc_garden",
+   "through_line_state": "the cable lies beside a garden hose, exactly as thick",
+   "shots": [
+    "CLOSE-UP, static: a garden hose whips across the lawn and blasts a jet of bright light out of its nozzle",
+    "LOW ANGLE WIDE, gentle drift: the beam of light arcs over the garden fence toward the sea",
+    "EXTREME CLOSE-UP, static: the black seabed cable drops beside the hose with a thud, the same thickness",
+    "OVERHEAD, slow push-in: hose and cable lie side by side on the grass, the cable's cut end glowing",
+    "MEDIUM, static: the cable snakes away across the lawn and dives off the garden's edge into the water with a splash"
+   ],
+   "assets_used": [
+    "loc_garden",
+    "prop_cable",
+    "prop_hose"
+   ]
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "Inside are glass fibres about as thin as a human hair. Lasers flash data through them as pulses of light.",
+   "location": "loc_seabed",
+   "through_line_state": "the cable's cut end opens to show hair-thin glowing glass strands",
+   "shots": [
+    "MEDIUM, gentle drift: the cable settles onto the sandy seabed, puffing up a cloud of sand",
+    "EXTREME CLOSE-UP, slow push-in: the cable's cut end peels open layer by layer with a snap, revealing a few thin glowing glass strands",
+    "LOW ANGLE WIDE, static: the cable runs off across the sea floor into the blue distance",
+    "CLOSE-UP, static: rapid pulses of light race along one glass strand like a string of sparks",
+    "HIGH ANGLE MEDIUM, static: the layers close back around the strands and the whole cable glows from within"
+   ],
+   "assets_used": [
+    "loc_seabed",
+    "prop_cable"
+   ]
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "So why not just beam it through satellites instead? Hold that thought, because light fading in glass is the first problem.",
+   "location": "loc_orbit",
+   "through_line_state": "seen from orbit, the cable's glowing line across the ocean dims as it goes",
+   "shots": [
+    "WIDE, slow orbit: a small satellite swings over the round planet and a dish on it snaps open",
+    "CLOSE-UP, static: the satellite sends a thin beam down toward the ocean",
+    "HIGH ANGLE WIDE, gentle drift: far below, the cable is a glowing line crossing the blue ocean between two coasts",
+    "EXTREME CLOSE-UP, static: the light pulse inside the cable grows dimmer and dimmer as it travels",
+    "MEDIUM, static: the cable's glow fades out halfway across with a soft fizzle"
+   ],
+   "assets_used": [
+    "loc_orbit",
+    "prop_small_satellite",
+    "prop_cable"
+   ]
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "So roughly every forty-five miles, a repeater boosts the light. Its power arrives from shore, thousands of volts through the cable itself.",
+   "location": "loc_seabed",
+   "through_line_state": "a repeater clamps into the cable and the dim light comes out bright again",
+   "shots": [
+    "CLOSE-UP, static: a torpedo-shaped metal repeater clunks into place in the middle of the cable on the sea floor",
+    "EXTREME CLOSE-UP, slow push-in: a dim pulse of light enters the repeater and shoots out the other side bright",
+    "HIGH ANGLE WIDE, gentle drift: a long row of repeaters along the cable light up one after another into the distance",
+    "LOW ANGLE MEDIUM, static: a crackle of electric sparks runs along the cable's skin from the shore side",
+    "OVERHEAD, static: the whole cable glows strong and steady across the sand"
+   ],
+   "assets_used": [
+    "loc_seabed",
+    "prop_cable",
+    "prop_repeater"
+   ]
+  },
+  {
+   "n": 5,
+   "arc_role": "build",
+   "vo_line": "Ships lay them across entire oceans, some resting miles below the surface. Together they stretch more than nine hundred thousand miles.",
+   "location": "loc_ocean",
+   "through_line_state": "the cable spools off the back of a ship and sinks into the deep",
+   "shots": [
+    "LOW ANGLE MEDIUM, static: a chunky cable ship crashes through a wave, spray flying",
+    "CLOSE-UP, static: a giant spool on the deck spins and the cable pays out over the stern",
+    "HIGH ANGLE WIDE, crane up: the ship crosses the open ocean trailing the cable into the water behind it",
+    "EXTREME CLOSE-UP, gentle drift: the cable sinks down through darkening blue water",
+    "WIDE, static: the cable lands on the deep sea floor with a soft thump of sand"
+   ],
+   "assets_used": [
+    "loc_ocean",
+    "prop_cable",
+    "prop_ship"
+   ]
+  },
+  {
+   "n": 6,
+   "arc_role": "turn",
+   "vo_line": "Now, those satellites. One Atlantic cable was built for two hundred fifty terabits a second, Google says, far more than any single satellite.",
+   "location": "loc_orbit_edge",
+   "through_line_state": "the cable carries a flood of light while the satellite's beam stays a thin thread",
+   "shots": [
+    "CLOSE-UP, gentle drift: the small satellite drifts along the glowing edge of the planet sending down one thin thread of light",
+    "WIDE, static: below it the cable across the ocean swells into a thick bright river of light",
+    "EXTREME CLOSE-UP, slow push-in: countless pulses of light pour through the cable's glass strands",
+    "HIGH ANGLE MEDIUM, static: the thin thread and the thick river run side by side, and the river surges with a whoosh",
+    "LOW ANGLE WIDE, static: the satellite sails on while the cable below blazes from coast to coast"
+   ],
+   "assets_used": [
+    "loc_orbit_edge",
+    "prop_small_satellite",
+    "prop_cable"
+   ]
+  },
+  {
+   "n": 7,
+   "arc_role": "payoff",
+   "vo_line": "That is why the oceans are mostly wired, not beamed. So the next time a video loads from another continent, remember:",
+   "location": "loc_garden",
+   "through_line_state": "the cable surfaces back in the garden and lies beside the hose again",
+   "shots": [
+    "MEDIUM, static: the cable bursts up out of the water at the garden's edge with a splash",
+    "EXTREME CLOSE-UP, static: its glowing cut end slides across the grass",
+    "HIGH ANGLE WIDE, gentle drift: the cable curls through the garden toward the hose",
+    "LOW ANGLE CLOSE-UP, static: the cable stops next to the hose with a soft thud",
+    "CLOSE-UP, static: hose and cable rest side by side, the hose nozzle glowing gently, settling into the opening view"
+   ],
+   "assets_used": [
+    "loc_garden",
+    "prop_hose",
+    "prop_cable"
+   ]
+  }
+ ],
+ "sources": [
+  "https://www.itu.int/en/mediacentre/Pages/PR-2024-11-29-advisory-body-submarine-cable-resilience.aspx",
+  "https://www2.telegeography.com/submarine-cable-faqs-frequently-asked-questions",
+  "https://www.iscpc.org/news/media-enquiries/",
+  "https://www.un.org/depts/los/global_reporting/WOA_RPROC/Chapter_19.pdf",
+  "https://cloud.google.com/blog/products/infrastructure/googles-dunant-subsea-cable-is-now-ready-for-service/",
+  "https://hackaday.com/2023/08/08/under-the-sea-optical-repeaters-for-submarine-cables/"
+ ]
+}

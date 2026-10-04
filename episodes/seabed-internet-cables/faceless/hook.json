@@ -1,0 +1,21 @@
+{
+ "hooks": [
+  {
+   "type": "contradiction",
+   "line": "Your internet runs through a garden hose.",
+   "chosen": true
+  },
+  {
+   "type": "stakes",
+   "line": "Almost every overseas message crosses the sea floor."
+  },
+  {
+   "type": "question",
+   "line": "Why is the internet under the ocean?"
+  }
+ ],
+ "hook_title": [
+  "NOT SATELLITES",
+  "THE SEA FLOOR"
+ ]
+}

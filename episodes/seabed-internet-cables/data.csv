@@ -1,0 +1,14 @@
+fact,value,unit,source_url,status
+Share of international data on submarine cables (ITU),>99,percent,https://www.itu.int/en/mediacentre/Pages/PR-2024-11-29-advisory-body-submarine-cable-resilience.aspx,CONFIRMED
+Share of intercontinental data connectivity (ICPC),>99,percent,https://www.iscpc.org/publications/icpc-viewpoints/charting-submarine-cables-is-critical-for-maritime-safety-and-infrastructure-protection/,CONFIRMED
+Deep-sea cable diameter (garden hose),17-20,mm,https://www.un.org/depts/los/global_reporting/WOA_RPROC/Chapter_19.pdf,CONFIRMED
+Garden hose comparison (TeleGeography),as wide as a garden hose,n/a,https://www2.telegeography.com/submarine-cable-faqs-frequently-asked-questions,CONFIRMED
+Fibre thickness,about a human hair (125 micrometres),n/a,https://www2.telegeography.com/submarine-cable-faqs-frequently-asked-questions,CONFIRMED
+Repeater spacing,40-100 (typ ~70),km,https://www.kentik.com/blog/diving-deep-into-submarine-cables-undersea-lifelines-of-internet-connectivity/,CONFIRMED
+Repeater spacing spoken (45 miles = 72 km),45,miles,derived,DERIVED
+Power feed voltage from shore,10-15 (up to 18),kV,https://hackaday.com/2023/08/08/under-the-sea-optical-repeaters-for-submarine-cables/,CONFIRMED
+Total length in service (TeleGeography),>1.5 million,km,https://www2.telegeography.com/submarine-cable-faqs-frequently-asked-questions,CONFIRMED
+Total length spoken (1.5M km = 932000 miles),>900000,miles,derived,DERIVED
+Dunant design capacity (Google; transatlantic; in service 2021),250,Tbps,https://cloud.google.com/blog/products/infrastructure/googles-dunant-subsea-cable-is-now-ready-for-service/,SINGLE-SOURCE (owner; attributed)
+TAT-8 in service (first transoceanic fibre-optic cable),1988,year,https://ethw.org/Milestones:Trans-Atlantic_Telephone_Fiber-Optic_Submarine_Cable_(TAT-8)%2C_1988,CONFIRMED
+TAT-8 capacity,40000,telephone circuits,https://ethw.org/Milestones:Trans-Atlantic_Telephone_Fiber-Optic_Submarine_Cable_(TAT-8)%2C_1988,CONFIRMED
