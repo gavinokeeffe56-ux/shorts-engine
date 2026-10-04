@@ -8,7 +8,7 @@ REPO=https://raw.githubusercontent.com/gavinokeeffe56-ux/shorts-engine/${COMMIT:
 B=https://d8j0ntlcm91z4.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv
 S=https://d2ol7oe51mr4n9.cloudfront.net/user_3IcIh3SFQBb0AyeqhfSzBumbxwv
 rm -rf work/blocks work/voices work/output; mkdir -p work/blocks work/voices work/output
-curl -fsSL "$REPO/script_manifest.json" -o script_manifest.json
+curl -fsSL "$REPO/${MANIFEST:-script_manifest.json}" -o script_manifest.json
 cat > clips.txt <<EOT
 $B/hf_20261004_042544_beb73ce8-a07f-4345-99ac-81056f57c8b8.mp4
 $B/hf_20261004_042415_f2a2d4d0-753d-41ea-9577-3f971675b5e9.mp4
@@ -27,6 +27,9 @@ $B/hf_20261004_044219_31faaca3-0523-4553-b06b-c7b7d455650f.mp3
 $B/hf_20261004_042427_5c7b640e-4501-43ff-a282-86f7146943c8.mp3
 $B/hf_20261004_044759_f15c652e-5d17-4c27-94dd-1c2ba3e61804.mp3
 EOT
+# optional alternate block 1 (hook retry): CLIP1 / VOICE1 are file names under $B
+[ -n "${CLIP1:-}" ] && sed -i "1s#.*#$B/$CLIP1#" clips.txt
+[ -n "${VOICE1:-}" ] && sed -i "1s#.*#$B/$VOICE1#" voices.txt
 # QC of the AI blocks: size, audio stream, scene cuts
 for u in $(grep '^http' clips.txt); do f=/tmp/qc.mp4; curl -fsSL "$u" -o $f; echo "QC ${u: -12} $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 $f) audio=$(ffprobe -v error -select_streams a -show_entries stream=codec_name,sample_rate -of csv=p=0 $f | tr '\n' ' ') cuts=$(ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=p=0 -f lavfi "movie=$f,select=gt(scene\,0.3)" | wc -l)"; done
 # light instrumental bed (our own synthesized track), ducked under the voice by the assembler
