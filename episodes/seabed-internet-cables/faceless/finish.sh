@@ -25,7 +25,7 @@ $B/hf_20261004_042427_a0bf60ca-df69-4d66-9645-02ccb8b12631.mp3
 $B/hf_20261004_042427_71648c56-9d6d-4289-a57f-cdb1af7e5e8e.mp3
 $B/hf_20261004_044219_31faaca3-0523-4553-b06b-c7b7d455650f.mp3
 $B/hf_20261004_042427_5c7b640e-4501-43ff-a282-86f7146943c8.mp3
-$B/hf_20261004_043642_9d12427e-dfca-4b6e-980e-4128403b6471.mp3
+$B/hf_20261004_044759_f15c652e-5d17-4c27-94dd-1c2ba3e61804.mp3
 EOT
 # QC of the AI blocks: size, audio stream, scene cuts
 for u in $(grep '^http' clips.txt); do f=/tmp/qc.mp4; curl -fsSL "$u" -o $f; echo "QC ${u: -12} $(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 $f) audio=$(ffprobe -v error -select_streams a -show_entries stream=codec_name,sample_rate -of csv=p=0 $f | tr '\n' ' ') cuts=$(ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=p=0 -f lavfi "movie=$f,select=gt(scene\,0.3)" | wc -l)"; done
