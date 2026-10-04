@@ -6,6 +6,7 @@ Format keys: timeline-scatter, bar-race, before-after, counter, map
 - [x] Starship Flight 14 + Starlink V3: what changes, in numbers (trending, timeline/bar) — SpaceX, FCC filings, McDowell
 - [x] Crew-13: fastest US trip to the ISS, why 250 miles takes hours (hybrid AI + NASA footage) — NASA
 - [x] Roman Space Telescope: first pointing test, a laser on a dime from 150 miles (hybrid AI + NASA footage) — NASA
+- [x] Why the internet runs under the ocean: garden-hose-thick seabed cables carry about 99% of data between continents (all-AI, tech) — ITU, TeleGeography, ICPC, Google
 - [ ] Why astronauts see flashes of light: cosmic rays, explained with numbers (diagram/counter) — NASA
 - [ ] How many satellites are in orbit, 1957→today (counter/bar) — UCS / Jonathan McDowell / OWID
 - [ ] Transistors per chip since 1971 (timeline) — OWID Moore's law data

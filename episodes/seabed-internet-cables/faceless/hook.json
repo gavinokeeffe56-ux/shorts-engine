@@ -17,5 +17,22 @@
  "hook_title": [
   "NOT SATELLITES",
   "THE SEA FLOOR"
- ]
+ ],
+ "scores": {
+  "A_garden_hose": {
+   "hook": 31,
+   "sustain": 100,
+   "overall": 46,
+   "kept": true
+  },
+  "B_overseas_message": {
+   "hook": 29,
+   "sustain": 100,
+   "overall": 45,
+   "title": [
+    "NOT SATELLITES",
+    "HOSE-THIN CABLES"
+   ]
+  }
+ }
 }
