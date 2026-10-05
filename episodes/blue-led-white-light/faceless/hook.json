@@ -3,11 +3,13 @@
   {
    "type": "contradiction",
    "line": "Your LED bulb is secretly blue.",
-   "chosen": true
+   "variant": "A"
   },
   {
    "type": "stakes",
-   "line": "One missing color stalled lighting for thirty years."
+   "line": "This color took around thirty years to make.",
+   "variant": "B",
+   "chosen": true
   },
   {
    "type": "question",
@@ -15,7 +17,25 @@
   }
  ],
  "hook_title": [
-  "30 YEARS",
-  "FOR ONE COLOR"
- ]
+  "YOUR LED BULB",
+  "IS SECRETLY BLUE"
+ ],
+ "scores": {
+  "A_secretly_blue": {
+   "hook": 27,
+   "sustain": 99,
+   "overall": 46,
+   "title": [
+    "30 YEARS",
+    "FOR ONE COLOR"
+   ]
+  },
+  "B_thirty_years": {
+   "hook": 30,
+   "sustain": 98,
+   "overall": 46,
+   "kept": true
+  }
+ },
+ "notes": "The assembler centres speech in each 10 s block, so block 1 needs a take of about 9.2-9.4 s (about 24-28 words, fast delivery, 00:07-00:09 bracket) for the first sentence to finish by about 2.6 s."
 }
