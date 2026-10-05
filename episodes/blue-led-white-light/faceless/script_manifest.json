@@ -111,9 +111,9 @@
     "LOW ANGLE WIDE, slow push-in: the robot arm bounces up and down as the medal settles flat"
    ],
    "assets_used": [
+    "prop_crystal",
     "loc_lab",
-    "prop_led",
-    "prop_crystal"
+    "prop_led"
    ]
   },
   {
