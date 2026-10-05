@@ -25,7 +25,7 @@
   {
    "n": 1,
    "arc_role": "hook",
-   "vo_line": "Your white LED bulb is secretly blue. And that blue light took scientists around thirty years to work out how to make.",
+   "vo_line": "Your white LED bulb is secretly blue. And that one color took scientists around thirty years to work out how to make.",
    "location": "loc_room",
    "through_line_state": "the blue LED bursts out of a white bulb and blazes on its own",
    "shots": [
@@ -33,7 +33,7 @@
     "LOW ANGLE WIDE, gentle drift: the blue LED hovers under the ceiling lamp, flooding the room with blue light",
     "EXTREME CLOSE-UP, slow push-in: the blue LED's dome pulses brighter and brighter",
     "HIGH ANGLE MEDIUM, static: pieces of the white shell bounce and clatter onto the table",
-    "MEDIUM, static: the blue LED drops onto the table with a clunk and keeps glowing"
+    "LOW ANGLE CLOSE-UP, static: the blue LED drops onto the table with a clunk and keeps glowing"
    ],
    "assets_used": [
     "loc_room",
@@ -44,7 +44,7 @@
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "Red and green LEDs arrived decades earlier, but blue refused to work. How blue becomes white is coming, after the hard part.",
+   "vo_line": "Red and green LEDs arrived decades earlier, but blue refused to work. How it becomes white is coming, after the hard part.",
    "location": "loc_lab",
    "through_line_state": "the blue LED sits dark between a glowing red one and a glowing green one",
    "shots": [
@@ -106,13 +106,14 @@
    "shots": [
     "CLOSE-UP, static: the blue LED slams into the middle socket and bursts into bright blue light",
     "WIDE, gentle drift: blue light sweeps across the whole lab, the red and green LEDs glowing on either side",
-    "EXTREME CLOSE-UP, static: the blue dome glows steady and strong",
+    "EXTREME CLOSE-UP, static: inside the blue dome the clean crystal chip glows steady and strong",
     "HIGH ANGLE MEDIUM, static: a shiny gold medal drops onto the workbench beside the three LEDs and spins",
-    "LOW ANGLE MEDIUM, slow push-in: the robot arm bounces up and down as the medal settles flat"
+    "LOW ANGLE WIDE, slow push-in: the robot arm bounces up and down as the medal settles flat"
    ],
    "assets_used": [
     "loc_lab",
-    "prop_led"
+    "prop_led",
+    "prop_crystal"
    ]
   },
   {
@@ -148,8 +149,8 @@
     "MEDIUM, slow push-in: the bulb glows calm and white under the lamp, a faint blue shimmer inside, settling into the opening view"
    ],
    "assets_used": [
-    "loc_room",
     "prop_bulb",
+    "loc_room",
     "prop_led"
    ]
   }
