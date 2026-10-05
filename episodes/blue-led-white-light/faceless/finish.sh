@@ -25,9 +25,9 @@ cat > voices.txt <<EOT
 /home/user/v1.mp3
 $B/hf_20261005_041242_8dc27741-e636-48a3-9c55-f818ba3669b6.mp3
 $B/hf_20261005_040939_9e2b49d5-2a21-41aa-b7a6-a9febe8355d3.mp3
-$B/hf_20261005_040939_6822dc41-338d-4056-844f-39cd1806ea55.mp3
+$B/hf_20261005_043748_06842a2b-232f-46be-bb62-988217aba1be.mp3
 $B/hf_20261005_040939_60aa1cea-101d-4d0d-80c8-9856cc774fa2.mp3
-$B/hf_20261005_040939_1d6575a3-d029-4d77-bc00-ba218e91d1b8.mp3
+$B/hf_20261005_043748_8bf0f21f-2a95-40c0-a7e2-a37cdafafe81.mp3
 $B/hf_20261005_040939_f8808531-f0e8-4ad6-86a5-e89e34749418.mp3
 EOT
 # optional alternate block 1 (hook retry): CLIP1 / VOICE1 are file names under $B
@@ -45,7 +45,7 @@ python3 ${HF_WORKFLOWS}/faceless-video/scripts/validate_motion_script.py --scrip
   --duration-seconds 70 --words-min 20 --words-max 28${RETRY:+ --duration-retry-blocks $RETRY}
 chmod +x ${HF_WORKFLOWS}/faceless-video/scripts/*.sh ${HF_WORKFLOWS}/video-montage/scripts/*.sh 2>/dev/null || true
 bash ${HF_WORKFLOWS}/faceless-video/scripts/finish_video.sh --blocks 7 --clips-file clips.txt --voices-file voices.txt \
-  --script script_manifest.json --language en --music /home/user/bed.wav --out work/output/final_clean.mp4
+  --script script_manifest.json --language en ${SOFT:+--accept-soft-blocks $SOFT} --music /home/user/bed.wav --out work/output/final_clean.mp4
 python3 -c "import json; d=json.load(open('work/output/final_clean.mp4.assembly.json')); print('SIDECAR', d['blocks'], len(d['per_block']))"
 # captions look for v_00N.wav; the assembler writes voiceNN.wav
 for i in 0 1 2 3 4 5 6; do n=$(printf %02d $((i+1))); [ -e work/voices/v_00$i.wav ] || { [ -e work/voices/voice$n.wav ] && ln -s voice$n.wav work/voices/v_00$i.wav; } || true; done
