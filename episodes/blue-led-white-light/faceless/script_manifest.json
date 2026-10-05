@@ -1,0 +1,164 @@
+{
+ "topic": "Why white LED bulbs are really blue LEDs under a coating, and why the blue LED took about thirty years to make",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Colorful 3D",
+ "through_line": {
+  "name": "the chunky blue LED",
+  "asset": "prop_led",
+  "progression": "the blue LED bursts out of a bulb, sits dark between red and green, is opened to show a cracked crystal, gets a clean crystal, lights up, is coated yellow and turns white",
+  "resolution": "the LED sits back inside the white bulb in the ceiling lamp as in the opening view"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "turn": 6,
+  "payoff": 7
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "Your white LED bulb is secretly blue. And that blue light took scientists around thirty years to work out how to make.",
+   "location": "loc_room",
+   "through_line_state": "the blue LED bursts out of a white bulb and blazes on its own",
+   "shots": [
+    "CLOSE-UP, static: a white light bulb's shell pops off with a bang and flies apart, a blazing blue LED bursting out from inside",
+    "LOW ANGLE WIDE, gentle drift: the blue LED hovers under the ceiling lamp, flooding the room with blue light",
+    "EXTREME CLOSE-UP, slow push-in: the blue LED's dome pulses brighter and brighter",
+    "HIGH ANGLE MEDIUM, static: pieces of the white shell bounce and clatter onto the table",
+    "MEDIUM, static: the blue LED drops onto the table with a clunk and keeps glowing"
+   ],
+   "assets_used": [
+    "loc_room",
+    "prop_led",
+    "prop_bulb"
+   ]
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "Red and green LEDs arrived decades earlier, but blue refused to work. How blue becomes white is coming, after the hard part.",
+   "location": "loc_lab",
+   "through_line_state": "the blue LED sits dark between a glowing red one and a glowing green one",
+   "shots": [
+    "MEDIUM, static: a red LED snaps into a socket on the workbench and lights up, then a green one snaps in beside it and lights up",
+    "EXTREME CLOSE-UP, static: the blue LED drops into the third socket with a click and stays dark",
+    "HIGH ANGLE WIDE, gentle drift: three sockets in a row on the workbench, two glowing and the middle one dark",
+    "CLOSE-UP, slow push-in: the dark LED flickers once, sputters a puff of smoke and goes out",
+    "LOW ANGLE MEDIUM, static: the robot arm taps the dark LED twice and nothing happens"
+   ],
+   "assets_used": [
+    "loc_lab",
+    "prop_led"
+   ]
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "An LED's color depends on its crystal. Blue needed gallium nitride, so hard to grow cleanly that many researchers gave up.",
+   "location": "loc_lab",
+   "through_line_state": "the blue LED opens to show a cracked, cloudy crystal inside",
+   "shots": [
+    "EXTREME CLOSE-UP, slow push-in: the dark LED's dome lifts off with a pop, showing a small crystal chip inside",
+    "MEDIUM, static: the robot arm lifts the crystal chip up under the lamp",
+    "CLOSE-UP, static: cracks race across the crystal and it crumbles with a crunch",
+    "OVERHEAD, gentle drift: a tray of cracked cloudy crystals slides across the workbench and stops",
+    "LOW ANGLE WIDE, static: the robot arm droops and the lab lamp dims"
+   ],
+   "assets_used": [
+    "loc_lab",
+    "prop_crystal",
+    "prop_led"
+   ]
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "Then in nineteen eighty-six, researchers in Japan grew it on sapphire, over a thin buffer layer that kept the crystal clean.",
+   "location": "loc_chamber",
+   "through_line_state": "a clean crystal grows layer by layer and the blue LED waits beside it",
+   "shots": [
+    "WIDE, static: the round door of a glowing growth chamber swings shut with a clang",
+    "CLOSE-UP, static: a clear sapphire disc spins on a pedestal as a thin soft layer settles over it",
+    "EXTREME CLOSE-UP, slow push-in: a clean crystal grows upward layer by layer, sparkling",
+    "HIGH ANGLE MEDIUM, gentle drift: the finished crystal shines clear and flawless on the disc",
+    "LOW ANGLE CLOSE-UP, static: the crystal lifts off the disc and slots into the waiting LED with a snap"
+   ],
+   "assets_used": [
+    "loc_chamber",
+    "prop_crystal",
+    "prop_led"
+   ]
+  },
+  {
+   "n": 5,
+   "arc_role": "build",
+   "vo_line": "The first bright blue LEDs followed in the early nineties. Three scientists later shared the Nobel Prize in Physics for it.",
+   "location": "loc_lab",
+   "through_line_state": "the blue LED finally lights up between the red and the green",
+   "shots": [
+    "CLOSE-UP, static: the blue LED slams into the middle socket and bursts into bright blue light",
+    "WIDE, gentle drift: blue light sweeps across the whole lab, the red and green LEDs glowing on either side",
+    "EXTREME CLOSE-UP, static: the blue dome glows steady and strong",
+    "HIGH ANGLE MEDIUM, static: a shiny gold medal drops onto the workbench beside the three LEDs and spins",
+    "LOW ANGLE MEDIUM, slow push-in: the robot arm bounces up and down as the medal settles flat"
+   ],
+   "assets_used": [
+    "loc_lab",
+    "prop_led"
+   ]
+  },
+  {
+   "n": 6,
+   "arc_role": "turn",
+   "vo_line": "Now the secret: most white bulbs hold a blue LED under a coating that turns some light yellow, making white.",
+   "location": "loc_room",
+   "through_line_state": "the blue LED gets a yellow coating and its light turns white inside the bulb",
+   "shots": [
+    "MEDIUM, static: the blue LED rises off the table glowing blue",
+    "EXTREME CLOSE-UP, static: a thick yellow coating pours over the LED's dome with a splat",
+    "CLOSE-UP, slow push-in: blue light pushes through the yellow coating and comes out white",
+    "LOW ANGLE WIDE, static: the white bulb shell drops over the LED and screws shut with a twist",
+    "HIGH ANGLE MEDIUM, gentle drift: the finished bulb glows white while a blue glint shows at its heart"
+   ],
+   "assets_used": [
+    "loc_room",
+    "prop_led",
+    "prop_bulb"
+   ]
+  },
+  {
+   "n": 7,
+   "arc_role": "payoff",
+   "vo_line": "LEDs give far more light per watt than old bulbs, which wasted most power as heat. So tonight, look up, because",
+   "location": "loc_room",
+   "through_line_state": "the bulb with the blue LED inside screws into the ceiling lamp and lights the room",
+   "shots": [
+    "CLOSE-UP, static: an old glass bulb with a glowing wire steams and fizzles out with a hiss",
+    "LOW ANGLE MEDIUM, crane up: the white LED bulb flies up toward the ceiling lamp",
+    "EXTREME CLOSE-UP, static: the bulb screws into the lamp with a click",
+    "HIGH ANGLE WIDE, static: bright white light floods the cozy room",
+    "MEDIUM, slow push-in: the bulb glows calm and white under the lamp, a faint blue shimmer inside, settling into the opening view"
+   ],
+   "assets_used": [
+    "loc_room",
+    "prop_bulb",
+    "prop_led"
+   ]
+  }
+ ],
+ "sources": [
+  "https://www.nobelprize.org/prizes/physics/2014/popular-information/",
+  "https://www.kva.se/en/news/nobelpriset-i-fysik-2014-2/",
+  "https://www.energy.gov/sites/prod/files/2016/08/f33/led-color-characteristics-factsheet.pdf",
+  "https://www.energystar.gov/products/learn-about-led-lighting",
+  "https://pubs.aip.org/physicstoday/online/10938/Developers-of-blue-LEDs-win-2014-physics-Nobel"
+ ]
+}

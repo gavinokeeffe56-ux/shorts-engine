@@ -1,0 +1,8 @@
+{
+ "hooks": [
+  {"type": "contradiction", "line": "Your white LED bulb is secretly blue.", "chosen": true},
+  {"type": "stakes", "line": "One missing color stalled lighting for thirty years."},
+  {"type": "question", "line": "Why did blue light take thirty years?"}
+ ],
+ "hook_title": ["30 YEARS", "FOR ONE COLOR"]
+}
