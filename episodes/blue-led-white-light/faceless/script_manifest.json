@@ -25,7 +25,7 @@
   {
    "n": 1,
    "arc_role": "hook",
-   "vo_line": "Your white LED bulb is secretly blue. And that one color took scientists around thirty years to work out how to make.",
+   "vo_line": "Your LED bulb is secretly blue. And that one color stumped scientists for around thirty years, even though red and green LEDs had been glowing the whole time.",
    "location": "loc_room",
    "through_line_state": "the blue LED bursts out of a white bulb and blazes on its own",
    "shots": [
@@ -44,7 +44,7 @@
   {
    "n": 2,
    "arc_role": "build",
-   "vo_line": "Red and green LEDs arrived decades earlier, but blue refused to work. How it becomes white is coming, after the hard part.",
+   "vo_line": "Red, green and blue light mix into white, so no blue meant no white LEDs. How your bulb does it comes later.",
    "location": "loc_lab",
    "through_line_state": "the blue LED sits dark between a glowing red one and a glowing green one",
    "shots": [
