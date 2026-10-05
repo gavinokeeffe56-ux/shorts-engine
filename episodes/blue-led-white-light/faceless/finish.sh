@@ -18,9 +18,9 @@ $B/hf_20261005_040850_381879c2-dd4f-454d-9bb4-8246d2e506bb.mp4
 $B/hf_20261005_040850_a479853c-2d7f-4c2c-86a1-694454d36b84.mp4
 $B/${CLIP7:?set CLIP7 to the block 7 file name}
 EOT
-# block 1 voice: the take runs 9.56 s with ~0.2 s of decay after the last word; trim the tail to 9.46 s (silence only) so the speech fits the 9.5 s window and starts early
+# block 1 voice: the take runs 9.56 s with ~0.2 s of decay after the last word; drop 0.16 s of silence from the pause after the first sentence and the silent tail (silence only, no speech) so the speech fits the 9.5 s window and starts early
 curl -fsSL "$B/${VOICE1SRC:-hf_20261005_041242_485af415-b94c-4b94-990a-aaa8ec9bb248.mp3}" -o /home/user/v1_src.mp3
-ffmpeg -nostdin -loglevel error -y -i /home/user/v1_src.mp3 -af "atrim=end=${V1END:-9.46},afade=t=out:st=${V1FADE:-9.40}:d=0.06" -c:a libmp3lame -q:a 2 /home/user/v1.mp3
+ffmpeg -nostdin -loglevel error -y -i /home/user/v1_src.mp3 -af "aselect='not(between(t,${V1CUT_A:-2.62},${V1CUT_B:-2.78}))',asetpts=N/SR/TB,atrim=end=${V1END:-9.30}" -c:a libmp3lame -q:a 2 /home/user/v1.mp3
 cat > voices.txt <<EOT
 /home/user/v1.mp3
 $B/hf_20261005_041242_8dc27741-e636-48a3-9c55-f818ba3669b6.mp3
