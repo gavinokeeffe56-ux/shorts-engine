@@ -27,7 +27,13 @@ for f in hf_20261006_040845_04ca4007-23eb-439e-b2b0-47f31fcc0bc0 hf_20261006_040
   ffmpeg -nostdin -loglevel error -y -i /home/user/src$i.mp3 -af "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.03:stop_periods=-1:stop_duration=0.3:stop_silence=0.25:stop_threshold=-38dB" -ar 44100 /home/user/t$i.wav
   d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 /home/user/t$i.wav)
   af=$(python3 -c "d=$d; t=d/9.3 if d>9.3 else (d/8.0 if d<8.0 else 1.0); t=min(1.12,max(0.84,t)); print('atempo=%.4f'%t)")
+  if [ $i = 1 ]; then
+    # hook block: the assembler centres the speech span in the block, so make the span long and front-loaded:
+    # first sentence lifted 1.10, then a 1.2 s beat (silence only) before the second sentence. First sentence ends near 3.0 s.
+    ffmpeg -nostdin -loglevel error -y -i /home/user/t1.wav -filter_complex "[0:a]atrim=end=${V1SPLIT:-2.88},asetpts=N/SR/TB,atempo=1.10[a];anullsrc=r=44100:cl=mono,atrim=end=${V1GAP:-1.0}[s];[0:a]atrim=start=${V1SPLIT:-2.88},asetpts=N/SR/TB[b];[a][s][b]concat=n=3:v=0:a=1" -ac 1 -c:a libmp3lame -q:a 2 /home/user/v1.mp3
+  else
   ffmpeg -nostdin -loglevel error -y -i /home/user/t$i.wav -af "$af" -c:a libmp3lame -q:a 2 /home/user/v$i.mp3
+  fi
   echo "VOICE $i trimmed=$d filter=$af final=$(ffprobe -v error -show_entries format=duration -of csv=p=0 /home/user/v$i.mp3)"
   i=$((i+1))
 done
