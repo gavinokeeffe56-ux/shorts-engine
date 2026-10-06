@@ -19,14 +19,14 @@ $B/${CLIP6:?}
 $B/${CLIP7:?}
 EOT
 # voices (Holden). Long pauses are shortened to 0.25 s and silent head/tail removed (silence only); a take still over
-# 9.3 s gets a mild tempo lift (max 1.12). Block 1 is lifted 1.08 and padded with tail silence to 9.45 s so the
-# centred speech starts early and the first sentence lands inside the first 3 s.
+# 9.3 s gets a mild tempo lift (max 1.12) and one under 8.1 s a mild slow-down (min 0.90), because the assembler
+# needs 7.8-9.5 s of speech per block.
 i=1
-for f in hf_20261006_040845_04ca4007-23eb-439e-b2b0-47f31fcc0bc0 hf_20261006_040845_dece25d9-ff5a-4ec9-8220-32898eaf55f4 hf_20261006_040845_aff89515-8f37-4647-9f10-6f8fea5f74d2 hf_20261006_040845_32cb61c5-8b12-42fb-9cff-a52c2383211f hf_20261006_040845_a523c81c-7a8d-4f66-914d-593048ddaf97 hf_20261006_040845_6ded1485-6f9f-40bc-9952-50d6a51b3c52 hf_20261006_040852_6b7e8ca6-9c34-46e8-a10b-6d254f2ba6a6; do
+for f in hf_20261006_040845_04ca4007-23eb-439e-b2b0-47f31fcc0bc0 hf_20261006_040845_dece25d9-ff5a-4ec9-8220-32898eaf55f4 hf_20261006_040845_aff89515-8f37-4647-9f10-6f8fea5f74d2 hf_20261006_043426_b20db1a5-52c5-4c43-9c00-3020d8e27c9b hf_20261006_043426_b79d4a6c-dcc2-4afd-a02d-5674a1d31318 hf_20261006_040845_6ded1485-6f9f-40bc-9952-50d6a51b3c52 hf_20261006_043426_8a407743-954c-4d54-b5f1-f33407e1f914; do
   curl -fsSL "$B/$f.mp3" -o /home/user/src$i.mp3
   ffmpeg -nostdin -loglevel error -y -i /home/user/src$i.mp3 -af "silenceremove=start_periods=1:start_threshold=-38dB:start_silence=0.03:stop_periods=-1:stop_duration=0.3:stop_silence=0.25:stop_threshold=-38dB" -ar 44100 /home/user/t$i.wav
   d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 /home/user/t$i.wav)
-  if [ $i = 1 ]; then af="atempo=1.08,apad=whole_dur=9.45"; else af=$(python3 -c "d=$d; t=min(1.12,max(1.0,d/9.3)); print('atempo=%.4f'%t)"); fi
+  af=$(python3 -c "d=$d; t=d/9.3 if d>9.3 else (d/8.1 if d<8.1 else 1.0); t=min(1.12,max(0.90,t)); print('atempo=%.4f'%t)")
   ffmpeg -nostdin -loglevel error -y -i /home/user/t$i.wav -af "$af" -c:a libmp3lame -q:a 2 /home/user/v$i.mp3
   echo "VOICE $i trimmed=$d filter=$af final=$(ffprobe -v error -show_entries format=duration -of csv=p=0 /home/user/v$i.mp3)"
   i=$((i+1))
