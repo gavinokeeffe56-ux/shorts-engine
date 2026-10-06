@@ -1,0 +1,11 @@
+item,value,source
+tokens rule of thumb,1 token ~ 4 characters of English (~3/4 of a word); 100 tokens ~ 75 words,https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+gpt2 vocabulary size,50257,tiktoken get_encoding('gpt2').n_vocab (https://github.com/openai/tiktoken)
+cl100k_base vocabulary size,100277,tiktoken get_encoding('cl100k_base').n_vocab
+o200k_base vocabulary size,200019,tiktoken get_encoding('o200k_base').n_vocab
+' strawberry' (inside a sentence) in cl100k_base,1 token: id 73700,tiktoken computed 2026-10-06
+' strawberry' (inside a sentence) in o200k_base,1 token: id 101830,tiktoken computed 2026-10-06
+'strawberry' (no leading space) in cl100k_base,3 tokens: str|aw|berry,tiktoken computed 2026-10-06
+'strawberry' (no leading space) in o200k_base,3 tokens: st|raw|berry,tiktoken computed 2026-10-06
+byte pair encoding,vocabulary built by repeatedly merging the most frequent adjacent symbol pair,https://arxiv.org/abs/1508.07909
+strawberry miscount,several popular chatbots answered two Rs in 2024,https://techcrunch.com/2024/08/27/why-ai-cant-spell-strawberry/

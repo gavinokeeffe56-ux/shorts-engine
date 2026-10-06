@@ -1,0 +1,168 @@
+{
+ "topic": "Why chatbots miscounted the letters in strawberry: they read tokens (numbered chunks), not letters",
+ "genre": "education",
+ "animation_mode": "fully_animated",
+ "channel_type": "Explainer",
+ "style": "Colorful 3D",
+ "through_line": {
+  "name": "the giant strawberry",
+  "asset": "prop_strawberry",
+  "progression": "the strawberry is pressed into a cube, chopped into chunks, swapped for cubes in drawers, rebuilt from merged chunks, replaced by a row of cubes, and turned whole into a single cube",
+  "resolution": "a fresh strawberry rests under the machine's funnel beside one glowing cube, as in the opening"
+ },
+ "arc": {
+  "hook": 1,
+  "build": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "turn": 6,
+  "payoff": 7
+ },
+ "blocks": [
+  {
+   "n": 1,
+   "arc_role": "hook",
+   "vo_line": "To a chatbot, strawberry is just one number. It helps explain why popular ones once insisted the word has two Rs, when it has three.",
+   "location": "loc_factory",
+   "through_line_state": "a giant strawberry slams into the machine and is pressed into one glowing cube",
+   "shots": [
+    "CLOSE-UP, static: a giant glossy strawberry drops from above and slams into the machine's funnel with a bang, juice droplets flying",
+    "LOW ANGLE WIDE, gentle drift: the whole machine shakes and puffs steam on the factory floor as its press stamps down hard",
+    "EXTREME CLOSE-UP, slow push-in: the output chute door snaps open and a single glowing yellow cube pops out",
+    "HIGH ANGLE MEDIUM, static: the cube bounces twice along the conveyor belt and skids to a stop",
+    "LOW ANGLE CLOSE-UP, static: the cube sits pulsing with light on the belt while steam curls past"
+   ],
+   "assets_used": [
+    "loc_factory",
+    "prop_strawberry",
+    "prop_machine",
+    "prop_cube"
+   ]
+  },
+  {
+   "n": 2,
+   "arc_role": "build",
+   "vo_line": "Before a chatbot reads anything, software chops your text into chunks called tokens. In English, one token averages about four characters.",
+   "location": "loc_factory",
+   "through_line_state": "strawberries ride the belt and a blade chops each one into a few chunks",
+   "shots": [
+    "MEDIUM, lateral drift: a row of strawberries rides the conveyor belt toward a big chopping blade",
+    "EXTREME CLOSE-UP, static: the blade slams down with a thunk and a strawberry splits into chunks",
+    "HIGH ANGLE WIDE, slow crane down: chopped chunks stream along the belt in a long neat line",
+    "CLOSE-UP, static: four small chunks slide together and click into one tidy group",
+    "LOW ANGLE MEDIUM, slow push-in: the groups of chunks tip off the belt end into a waiting cart one after another"
+   ],
+   "assets_used": [
+    "loc_factory",
+    "prop_strawberry",
+    "prop_machine"
+   ]
+  },
+  {
+   "n": 3,
+   "arc_role": "build",
+   "vo_line": "Each chunk becomes an ID number from a fixed list, often around a hundred thousand entries long. So where do the letters go?",
+   "location": "loc_vault",
+   "through_line_state": "each strawberry chunk is dropped into a drawer and comes back as a plain cube",
+   "shots": [
+    "WIDE, slow push-in: a towering hall of thousands of small drawers, a cart of strawberry chunks rolling in",
+    "CLOSE-UP, static: one drawer shoots open with a clack and a strawberry chunk drops inside",
+    "LOW ANGLE MEDIUM, gentle drift: drawers pop open and shut in a wave up the wall",
+    "EXTREME CLOSE-UP, static: a drawer slides out again holding a plain glowing cube instead of the chunk",
+    "HIGH ANGLE MEDIUM, slow orbit: cubes rain down a chute into a tray while the last strawberry chunk vanishes into its drawer"
+   ],
+   "assets_used": [
+    "loc_vault",
+    "prop_strawberry",
+    "prop_cube"
+   ]
+  },
+  {
+   "n": 4,
+   "arc_role": "build",
+   "vo_line": "The list is built by counting. Letter pairs seen together most often get merged, over and over, until common words are single chunks.",
+   "location": "loc_vault",
+   "through_line_state": "strawberry chunks snap together in pairs until one whole strawberry is a single piece",
+   "shots": [
+    "CLOSE-UP, static: two small strawberry chunks slide toward each other on a counter and snap together with a click",
+    "HIGH ANGLE WIDE, gentle drift: across the hall floor, dozens of chunk pairs snap together in a rippling wave",
+    "EXTREME CLOSE-UP, slow push-in: a joined pair snaps onto a third chunk, growing bigger",
+    "LOW ANGLE MEDIUM, static: the last piece locks on with a heavy clunk and a whole strawberry stands complete",
+    "OVERHEAD CLOSE-UP, static: the whole strawberry drops into a single open drawer that slams shut"
+   ],
+   "assets_used": [
+    "loc_vault",
+    "prop_strawberry"
+   ]
+  },
+  {
+   "n": 5,
+   "arc_role": "build",
+   "vo_line": "So the chatbot only ever works with those numbers, and it writes back the same way: predicting one token at a time.",
+   "location": "loc_factory",
+   "through_line_state": "no strawberry in sight: the machine pushes out one cube at a time into a growing row",
+   "shots": [
+    "LOW ANGLE CLOSE-UP, static: the machine's chute door flips open and one glowing cube shoots out",
+    "WIDE LATERAL, gentle drift: a row of cubes grows along the belt, each new cube landing after the last",
+    "EXTREME CLOSE-UP, static: a cube lands and clacks tight against its neighbour",
+    "HIGH ANGLE MEDIUM, slow push-in: the machine pauses, rattles, then pops out exactly one more cube",
+    "MEDIUM, slow orbit: the long line of cubes glides away down the belt past a lone strawberry stalk left on the floor"
+   ],
+   "assets_used": [
+    "loc_factory",
+    "prop_machine",
+    "prop_cube",
+    "prop_strawberry"
+   ]
+  },
+  {
+   "n": 6,
+   "arc_role": "turn",
+   "vo_line": "Here is where the letters went. Inside a sentence, one popular tokenizer turns strawberry into a single ID: no letters, only a number.",
+   "location": "loc_vault",
+   "through_line_state": "a whole strawberry goes into one drawer and comes out as one cube with nothing inside",
+   "shots": [
+    "MEDIUM, static: a whole strawberry rolls along the counter and hops into one open drawer",
+    "EXTREME CLOSE-UP, static: the drawer slams shut with a bang and its handle glows",
+    "LOW ANGLE WIDE, slow crane up: the wall of drawers lights up in a ripple spreading from that one drawer",
+    "CLOSE-UP, slow push-in: the drawer slides open and a single glowing cube rises out, no strawberry left",
+    "OVERHEAD MEDIUM, static: the cube splits open in two halves, showing it is solid and empty of seeds or fruit"
+   ],
+   "assets_used": [
+    "loc_vault",
+    "prop_strawberry",
+    "prop_cube"
+   ]
+  },
+  {
+   "n": 7,
+   "arc_role": "payoff",
+   "vo_line": "The model has to learn spelling from patterns in its training text, not by looking. Which sounds impossible once you remember that",
+   "location": "loc_factory",
+   "through_line_state": "the cube and a fresh strawberry sit side by side at the machine, back where it began",
+   "shots": [
+    "HIGH ANGLE CLOSE-UP, static: hundreds of glowing cubes pour through the machine's funnel in a rattling stream",
+    "MEDIUM LATERAL, gentle drift: the machine hums and lays cubes down in a neat row along the belt",
+    "EXTREME CLOSE-UP, static: one cube taps a fresh strawberry resting on the belt with a soft clink",
+    "LOW ANGLE WIDE, slow crane up: the belt carries the cube and the strawberry side by side through the bright factory",
+    "CLOSE-UP, slow push-in: the strawberry settles under the machine's funnel, the cube glowing calmly beside it"
+   ],
+   "assets_used": [
+    "loc_factory",
+    "prop_machine",
+    "prop_cube",
+    "prop_strawberry"
+   ]
+  }
+ ],
+ "sources": [
+  "https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them",
+  "https://github.com/openai/tiktoken",
+  "https://arxiv.org/abs/1508.07909",
+  "https://techcrunch.com/2024/08/27/why-ai-cant-spell-strawberry/",
+  "https://platform.openai.com/tokenizer"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "hooks": [
+  {
+   "type": "number that sounds wrong",
+   "line": "To a chatbot, strawberry is just one number.",
+   "variant": "A",
+   "chosen": true
+  },
+  {
+   "type": "contradiction",
+   "line": "AI chatbots don't read letters at all."
+  },
+  {
+   "type": "question",
+   "line": "Why did chatbots miscount the Rs in strawberry?"
+  }
+ ],
+ "hook_title": [
+  "WRITES ESSAYS",
+  "MISCOUNTS R'S"
+ ]
+}
