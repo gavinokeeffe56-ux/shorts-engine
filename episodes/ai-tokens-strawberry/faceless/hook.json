@@ -18,5 +18,14 @@
  "hook_title": [
   "WRITES ESSAYS",
   "MISCOUNTS R'S"
- ]
+ ],
+ "scores": {
+  "A_one_number": {
+   "hook": 26,
+   "sustain": 100,
+   "overall": 46,
+   "kept": true
+  }
+ },
+ "notes": "Voice Holden (Grady takes ran 11-13 s for these lines). First sentence ends at 2.7 s: sentence one lifted 1.10 and a 1.3 s beat added after it so the centred speech starts at 0.34 s. No hook retry: balance after the video was under 250."
 }

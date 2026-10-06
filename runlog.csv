@@ -1,6 +1,7 @@
 date,slug,format,title,status,views_48h,avg_view_pct
 2026-09-29,shuttle-paradox,timeline-scatter,The reusable spaceship that made space MORE expensive,draft,,
-2026-10-02,crew13-fastest-iss,hybrid-ai-nasa,250 miles up. So why does it take 8 hours?,scheduled,,,voice=Holden,hook_score=27,sustain=100,overall=43,credits=118,real_blocks=3+5
-2026-10-03,roman-steady-aim,hybrid-ai-nasa,Steady as a laser on a dime from 150 miles away,scheduled,,,voice=Holden,hook_score=25,sustain=97,overall=43,credits=147,real_blocks=4
-2026-10-04,seabed-internet-cables,all-ai,99% of ocean-crossing data rides a garden hose,scheduled,,,category=tech,voice=Holden,hook_score=31,sustain=100,overall=46,hook_retry=29,credits=180,real_blocks=none
+2026-10-02,crew13-fastest-iss,hybrid-ai-nasa,250 miles up. So why does it take 8 hours?,scheduled,146,,voice=Holden,hook_score=27,sustain=100,overall=43,credits=118,real_blocks=3+5
+2026-10-03,roman-steady-aim,hybrid-ai-nasa,Steady as a laser on a dime from 150 miles away,scheduled,139,,voice=Holden,hook_score=25,sustain=97,overall=43,credits=147,real_blocks=4
+2026-10-04,seabed-internet-cables,all-ai,99% of ocean-crossing data rides a garden hose,scheduled,75,,category=tech,voice=Holden,hook_score=31,sustain=100,overall=46,hook_retry=29,credits=180,real_blocks=none
 2026-10-06,blue-led-white-light,all-ai,Your LED bulb is secretly blue (it took 30 years),scheduled,,,category=tech,voice=Holden,hook_score=30,sustain=98,overall=46,hook_retry=27,credits=207,real_blocks=none
+2026-10-07,ai-tokens-strawberry,all-ai,Why AI miscounted the Rs in strawberry,scheduled,,,category=ai,voice=Holden,hook_score=26,sustain=100,overall=46,credits=162,real_blocks=none

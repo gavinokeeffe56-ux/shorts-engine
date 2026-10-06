@@ -8,6 +8,7 @@ Format keys: timeline-scatter, bar-race, before-after, counter, map
 - [x] Roman Space Telescope: first pointing test, a laser on a dime from 150 miles (hybrid AI + NASA footage) — NASA
 - [x] Why the internet runs under the ocean: garden-hose-thick seabed cables carry about 99% of data between continents (all-AI, tech) — ITU, TeleGeography, ICPC, Google
 - [x] Why your LED bulb is secretly blue: the blue LED took about 30 years, white = blue LED + phosphor (all-AI, tech) — NobelPrize.org, KVA, US DOE, Energy Star
+- [x] Why chatbots miscounted the Rs in strawberry: they read tokens (numbered chunks), not letters (all-AI, ai) — OpenAI tokenizer docs / tiktoken, Sennrich et al. BPE
 - [ ] Why astronauts see flashes of light: cosmic rays, explained with numbers (diagram/counter) — NASA
 - [ ] How many satellites are in orbit, 1957→today (counter/bar) — UCS / Jonathan McDowell / OWID
 - [ ] Transistors per chip since 1971 (timeline) — OWID Moore's law data
