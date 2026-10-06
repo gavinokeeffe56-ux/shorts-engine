@@ -1,0 +1,185 @@
+[
+ {
+  "index": 1,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "77456da5-9ed4-44ba-9a84-a668711f1329"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    },
+    {
+     "role": "image_references",
+     "value": "f9c97794-20a7-4ae1-b780-6eb580a78127"
+    },
+    {
+     "role": "image_references",
+     "value": "ba6c24b9-af3c-4fa6-9978-3ac26eb7445a"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (toy-like factory hall with a lime-green conveyor belt). @Image2 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face). @Image3 = THE MACHINE (chunky orange-and-blue press machine with a yellow funnel and a front chute door, no face). @Image4 = THE CUBE (plain glossy glowing yellow cube, blank, no face).\nSHOT 1 — 0.0s to 2.0s — CLOSE-UP, static: a giant glossy strawberry drops from above and slams into the machine's funnel with a bang, juice droplets flying.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — LOW ANGLE WIDE, gentle drift: the whole machine shakes and puffs steam on the factory floor as its press stamps down hard.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — EXTREME CLOSE-UP, slow push-in: the output chute door snaps open and a single glowing yellow cube pops out.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — HIGH ANGLE MEDIUM, static: the cube bounces twice along the conveyor belt and skids to a stop.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — LOW ANGLE CLOSE-UP, static: the cube sits pulsing with light on the belt while steam curls past.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: a heavy wet slam, a steam hiss, a press stamp thud, a pop, two bouncy clacks, factory hum — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 2,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "77456da5-9ed4-44ba-9a84-a668711f1329"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    },
+    {
+     "role": "image_references",
+     "value": "f9c97794-20a7-4ae1-b780-6eb580a78127"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (toy-like factory hall with a lime-green conveyor belt). @Image2 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face). @Image3 = THE MACHINE (chunky orange-and-blue press machine with a yellow funnel and a front chute door, no face).\nSHOT 1 — 0.0s to 2.0s — MEDIUM, lateral drift: a row of strawberries rides the conveyor belt toward a big chopping blade.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — EXTREME CLOSE-UP, static: the blade slams down with a thunk and a strawberry splits into chunks.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — HIGH ANGLE WIDE, slow crane down: chopped chunks stream along the belt in a long neat line.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — CLOSE-UP, static: four small chunks slide together and click into one tidy group.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — LOW ANGLE MEDIUM, slow push-in: the groups of chunks tip off the belt end into a waiting cart one after another.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: conveyor rumble, a blade thunk, soft clicks, chunks tumbling into a cart, factory hum — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 3,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "0bf57aae-cf9c-4dc0-9044-e47423ff25bd"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    },
+    {
+     "role": "image_references",
+     "value": "ba6c24b9-af3c-4fa6-9978-3ac26eb7445a"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (hall with walls of thousands of small candy-colored drawers and a sky-blue counter). @Image2 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face). @Image3 = THE CUBE (plain glossy glowing yellow cube, blank, no face).\nSHOT 1 — 0.0s to 2.0s — WIDE, slow push-in: a towering hall of thousands of small drawers, a cart of strawberry chunks rolling in.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — CLOSE-UP, static: one drawer shoots open with a clack and a strawberry chunk drops inside.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — LOW ANGLE MEDIUM, gentle drift: drawers pop open and shut in a wave up the wall.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — EXTREME CLOSE-UP, static: a drawer slides out again holding a plain glowing cube instead of the chunk.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — HIGH ANGLE MEDIUM, slow orbit: cubes rain down a chute into a tray while the last strawberry chunk vanishes into its drawer.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: cart wheels rolling, drawer clacks in a wave, a soft chime, cubes rattling down a chute, quiet hall ambience — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 4,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "0bf57aae-cf9c-4dc0-9044-e47423ff25bd"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (hall with walls of thousands of small candy-colored drawers and a sky-blue counter). @Image2 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face).\nSHOT 1 — 0.0s to 2.0s — CLOSE-UP, static: two small strawberry chunks slide toward each other on a counter and snap together with a click.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — HIGH ANGLE WIDE, gentle drift: across the hall floor, dozens of chunk pairs snap together in a rippling wave.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — EXTREME CLOSE-UP, slow push-in: a joined pair snaps onto a third chunk, growing bigger.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — LOW ANGLE MEDIUM, static: the last piece locks on with a heavy clunk and a whole strawberry stands complete.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — OVERHEAD CLOSE-UP, static: the whole strawberry drops into a single open drawer that slams shut.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: clicks of pieces snapping together, a rippling clatter, a heavy clunk, a drawer slam, quiet hall ambience — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 5,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "77456da5-9ed4-44ba-9a84-a668711f1329"
+    },
+    {
+     "role": "image_references",
+     "value": "f9c97794-20a7-4ae1-b780-6eb580a78127"
+    },
+    {
+     "role": "image_references",
+     "value": "ba6c24b9-af3c-4fa6-9978-3ac26eb7445a"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (toy-like factory hall with a lime-green conveyor belt). @Image2 = THE MACHINE (chunky orange-and-blue press machine with a yellow funnel and a front chute door, no face). @Image3 = THE CUBE (plain glossy glowing yellow cube, blank, no face). @Image4 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face).\nSHOT 1 — 0.0s to 2.0s — LOW ANGLE CLOSE-UP, static: the machine's chute door flips open and one glowing cube shoots out.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — WIDE LATERAL, gentle drift: a row of cubes grows along the belt, each new cube landing after the last.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — EXTREME CLOSE-UP, static: a cube lands and clacks tight against its neighbour.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — HIGH ANGLE MEDIUM, slow push-in: the machine pauses, rattles, then pops out exactly one more cube.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — LOW ANGLE WIDE, slow orbit: the long line of cubes glides away down the belt past a lone strawberry stalk left on the floor.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: a chute flap, cubes clacking down one by one, a machine rattle, a pop, factory hum — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 6,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "0bf57aae-cf9c-4dc0-9044-e47423ff25bd"
+    },
+    {
+     "role": "image_references",
+     "value": "ba6c24b9-af3c-4fa6-9978-3ac26eb7445a"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (hall with walls of thousands of small candy-colored drawers and a sky-blue counter). @Image2 = THE CUBE (plain glossy glowing yellow cube, blank, no face). @Image3 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face).\nSHOT 1 — 0.0s to 2.0s — MEDIUM, static: a whole strawberry rolls along the counter and hops into one open drawer.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — EXTREME CLOSE-UP, static: the drawer slams shut with a bang and its handle glows.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — LOW ANGLE WIDE, slow crane up: the wall of drawers lights up in a ripple spreading from that one drawer.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — CLOSE-UP, slow push-in: the drawer slides open and a single glowing cube rises out, no strawberry left.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — OVERHEAD MEDIUM, static: the cube splits open in two halves, showing it is solid and empty of seeds or fruit.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: a soft roll and hop, a drawer bang, a rising shimmer, a drawer sliding open, a clean crack as the cube splits, quiet hall ambience — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ },
+ {
+  "index": 7,
+  "params": {
+   "model": "minimax_h3",
+   "duration": 10,
+   "resolution": "2K",
+   "aspect_ratio": "9:16",
+   "declined_preset_id": "24bae836-2c4a-48e0-89b6-49fcc0b21612",
+   "medias": [
+    {
+     "role": "image_references",
+     "value": "77456da5-9ed4-44ba-9a84-a668711f1329"
+    },
+    {
+     "role": "image_references",
+     "value": "ba6c24b9-af3c-4fa6-9978-3ac26eb7445a"
+    },
+    {
+     "role": "image_references",
+     "value": "f9c97794-20a7-4ae1-b780-6eb580a78127"
+    },
+    {
+     "role": "image_references",
+     "value": "8b5b1f1b-2ae5-4199-a1ce-5a6de2e207b8"
+    }
+   ],
+   "prompt": "Style: colorful stylized 3D cartoon: deliberately rounded chunky character proportions with oversized sparkling expressive eyes, wide warm smiles and clear readable silhouettes, glossy toy-like clean surfaces, soft near-shadowless studio lighting, cartoonish high-gloss CGI never photoreal, ULTRA-VIVID high-saturation candy palette turned up bold and punchy (cherry red, sky blue, sunny yellow, lime green, orange at full intensity — never muted, never pastel), cozy storybook environments with rounded friendly shapes under a bright blue sky with fluffy clouds, safe friendly upbeat mood with adventure but no real danger, lively springy comedic motion accents (sweat drops, surprise marks, whoosh effects); lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs) — the visual style is EXACTLY as in the reference images, same rendering, same surface treatment. No faces on objects: the strawberry, the machine, the cube and the drawers have NO eyes and NO mouths.\nPALETTE LOCK: vivid high-saturation candy primaries of the reference images, turned up bold — no muted or pastel drift, no new colors.\nA single 10-second scene of FIVE hard-cut shots. Do NOT open the video on any reference image or show a sheet/swatch — stage everything fresh, matching objects, room, colors and background to their references. No characters, no people. Motion starts on frame 1 (no opening freeze).\nREFERENCES (look, identity, palette): @Image1 = LOCATION (toy-like factory hall with a lime-green conveyor belt). @Image2 = THE CUBE (plain glossy glowing yellow cube, blank, no face). @Image3 = THE MACHINE (chunky orange-and-blue press machine with a yellow funnel and a front chute door, no face). @Image4 = THE STRAWBERRY (big glossy red strawberry, an ordinary fruit with no face).\nSHOT 1 — 0.0s to 2.0s — HIGH ANGLE CLOSE-UP, static: hundreds of glowing cubes pour through the machine's funnel in a rattling stream.\nHARD CUT.\nSHOT 2 — 2.0s to 4.0s — MEDIUM LATERAL, gentle drift: the machine hums and lays cubes down in a neat row along the belt.\nHARD CUT.\nSHOT 3 — 4.0s to 6.0s — EXTREME CLOSE-UP, static: one cube taps a fresh strawberry resting on the belt with a soft clink.\nHARD CUT.\nSHOT 4 — 6.0s to 8.0s — LOW ANGLE WIDE, slow crane up: the belt carries the cube and the strawberry side by side through the bright factory.\nHARD CUT.\nSHOT 5 — 8.0s to 10.0s — CLOSE-UP, slow push-in: the strawberry settles under the machine's funnel, the cube glowing calmly beside it.\nFive hard-cut shots at 2.0s, 4.0s, 6.0s and 8.0s, no dissolves, no fades. lively springy motion with comedic accents, dynamic but gentle camera (push-ins, orbits, crane pull-backs), continuous motion within each shot, never freezes.\nAUDIO: cubes rattling in a stream, a machine hum, a soft clink, conveyor rumble, calm factory ambience — no voice, no narration, no music.\nNEGATIVE: opening on a reference image, a sheet/swatch or a static first frame, leading freeze, dissolves or fades, NEW or foreign colors, style drift, people, hands, characters, faces or eyes on objects, talking, lip-sync, on-screen text, numbers, letters, logos, labels, captions, photorealism, watermark."
+  }
+ }
+]
