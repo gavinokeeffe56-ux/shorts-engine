@@ -2,7 +2,7 @@
  "hooks": [
   {
    "type": "number that sounds wrong",
-   "line": "To a chatbot, strawberry is just one number.",
+   "line": "To a chatbot, strawberry can be one number.",
    "variant": "A",
    "chosen": true
   },

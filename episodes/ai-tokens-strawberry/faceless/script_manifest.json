@@ -25,7 +25,7 @@
   {
    "n": 1,
    "arc_role": "hook",
-   "vo_line": "To a chatbot, strawberry is just one number. It helps explain why popular ones once insisted the word has two Rs, when it has three.",
+   "vo_line": "To a chatbot, strawberry can be one number. It helps explain why popular ones once insisted the word has two Rs, when it has three.",
    "location": "loc_factory",
    "through_line_state": "a giant strawberry slams into the machine and is pressed into one glowing cube",
    "shots": [
@@ -64,7 +64,7 @@
   {
    "n": 3,
    "arc_role": "build",
-   "vo_line": "Each chunk becomes an ID number from a fixed list, often around a hundred thousand entries long. So where do the letters go?",
+   "vo_line": "Each chunk becomes an ID number from a fixed list, often a hundred thousand entries or more. So where do the letters go?",
    "location": "loc_vault",
    "through_line_state": "each strawberry chunk is dropped into a drawer and comes back as a plain cube",
    "shots": [
