@@ -109,7 +109,7 @@
     "WIDE LATERAL, gentle drift: a row of cubes grows along the belt, each new cube landing after the last",
     "EXTREME CLOSE-UP, static: a cube lands and clacks tight against its neighbour",
     "HIGH ANGLE MEDIUM, slow push-in: the machine pauses, rattles, then pops out exactly one more cube",
-    "MEDIUM, slow orbit: the long line of cubes glides away down the belt past a lone strawberry stalk left on the floor"
+    "LOW ANGLE WIDE, slow orbit: the long line of cubes glides away down the belt past a lone strawberry stalk left on the floor"
    ],
    "assets_used": [
     "loc_factory",
@@ -132,9 +132,9 @@
     "OVERHEAD MEDIUM, static: the cube splits open in two halves, showing it is solid and empty of seeds or fruit"
    ],
    "assets_used": [
+    "prop_cube",
     "loc_vault",
-    "prop_strawberry",
-    "prop_cube"
+    "prop_strawberry"
    ]
   },
   {
@@ -151,9 +151,9 @@
     "CLOSE-UP, slow push-in: the strawberry settles under the machine's funnel, the cube glowing calmly beside it"
    ],
    "assets_used": [
-    "loc_factory",
-    "prop_machine",
     "prop_cube",
+    "prop_machine",
+    "loc_factory",
     "prop_strawberry"
    ]
   }
